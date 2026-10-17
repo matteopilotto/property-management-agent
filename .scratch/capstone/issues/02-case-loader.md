@@ -1,6 +1,6 @@
 # 02 Case loader and decision-point views
 
-Status: ready-for-agent
+Status: done
 Track: A (agent core)
 Blocked by: 01
 
