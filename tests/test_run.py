@@ -79,19 +79,25 @@ class CaseStub(BaseLlm):
                 ),
             ]
         else:
+            reasoning = {
+                "facts": ["Event 1: request received."],
+                "conflicts": [],
+                "missing": ["Who caused the fault."],
+                "options_rejected": ["act: liability unknown."],
+                "uncertainty": "Medium.",
+            }
+            case_id = responses[0]["case_id"]
+            if case_id == "json-string":  # seen from Claude in eval run fix-1
+                reasoning = json.dumps(reasoning)
+            elif case_id == "free-text":
+                reasoning = "Event 1: request received."
             parts = [
                 call(
                     "submit_decision",
                     next_move="escalate",
                     summary="Liability is unclear; the property manager decides.",
                     answer_to_question=None,
-                    reasoning={
-                        "facts": ["Event 1: request received."],
-                        "conflicts": [],
-                        "missing": ["Who caused the fault."],
-                        "options_rejected": ["act: liability unknown."],
-                        "uncertainty": "Medium.",
-                    },
+                    reasoning=reasoning,
                 )
             ]
         yield LlmResponse(
@@ -211,3 +217,37 @@ def test_live_eval_runs_one_decision_point(tmp_path, monkeypatch):
     assert result["next_move"] in {"act", "ask", "wait", "escalate"}
     assert result["tokens"]["input"] > 0
     assert result["cost_usd"] > 0
+
+
+def test_malformed_reasoning_is_rendered_not_fatal(tmp_path, stub_agent):
+    cases = tmp_path / "cases"
+    for name in ("json-string", "free-text"):
+        shutil.copytree(CASES / "049", cases / name)
+    out = tmp_path / "ANSWERS"
+
+    results = asyncio.run(run_cases(cases, out, 2, "enforce", agent=stub_agent))
+
+    assert [(r["id"], r["error"]) for r in results] == [
+        ("free-text", None),
+        ("json-string", None),
+    ]
+    for name in ("json-string", "free-text"):
+        assert {p.name for p in (out / name).iterdir()} == FILES
+        reasoning = (out / name / "REASONING.md").read_text()
+        assert "## Facts\n\n- Event 1: request received." in reasoning
+
+
+def test_a_rendering_crash_still_writes_every_file(tmp_path, monkeypatch, stub_agent):
+    cases = tmp_path / "cases"
+    shutil.copytree(CASES / "049", cases / "049")
+    out = tmp_path / "ANSWERS"
+
+    def broken(*_):
+        raise ValueError("render bug")
+
+    monkeypatch.setattr("pm_agent.render.answer_markdown", broken)
+    [result] = asyncio.run(run_cases(cases, out, 1, "enforce", agent=stub_agent))
+
+    assert {p.name for p in (out / "049").iterdir()} == FILES
+    assert "render bug" in result["error"]
+    assert (out / "049" / "ANSWER.md").read_text().startswith(f"# Case 049: {FAILURE}")

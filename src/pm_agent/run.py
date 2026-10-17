@@ -82,6 +82,8 @@ async def run_case(
         error = "the agent stopped without an accepted submit_decision"
     if error is not None:
         decision = None
+    if decision is not None:
+        decision = {**decision, "reasoning": _reasoning(decision.get("reasoning"))}
     result = {
         "id": case_id,
         "case_path": str(case_path),
@@ -107,12 +109,19 @@ async def run_case(
         (out_dir / "input.md").write_text(
             f"Case not shown: {error}\n", encoding="utf-8"
         )
-    (out_dir / "ANSWER.md").write_text(
-        render.answer_markdown(result, case_view), encoding="utf-8"
-    )
-    (out_dir / "REASONING.md").write_text(
-        render.reasoning_markdown(result), encoding="utf-8"
-    )
+    try:
+        answer = render.answer_markdown(result, case_view)
+        reasoning = render.reasoning_markdown(result)
+    except Exception as exc:  # noqa: BLE001 - a rendering bug must not lose the case
+        error = f"rendering failed: {type(exc).__name__}: {exc}"
+        result["error"] = error if result["error"] is None else result["error"]
+        raw = json.dumps(result, indent=2, ensure_ascii=False)
+        answer = (
+            f"# Case {case_id}: {render.FAILURE}\n\n{error}\n\n```json\n{raw}\n```\n"
+        )
+        reasoning = f"# Case {case_id}: reasoning\n\n{render.FAILURE}: {error}\n"
+    (out_dir / "ANSWER.md").write_text(answer, encoding="utf-8")
+    (out_dir / "REASONING.md").write_text(reasoning, encoding="utf-8")
     (out_dir / "result.json").write_text(
         json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8"
     )
@@ -125,6 +134,26 @@ async def run_case(
 
 
 ACTION_KEYS = ("seq", "tool", "args", "status", "would_status", "rule", "reason")
+REASONING_LISTS = ("facts", "conflicts", "missing", "options_rejected")
+
+
+def _reasoning(value) -> dict:
+    """Claude sometimes sends reasoning as a JSON string or free text, not an object."""
+    if isinstance(value, str):
+        try:
+            value = json.loads(value)
+        except ValueError:
+            value = {"facts": [value]}
+    if not isinstance(value, dict):
+        value = {} if value is None else {"facts": [str(value)]}
+    return {
+        **value,
+        **{
+            key: [value[key]]
+            for key in REASONING_LISTS
+            if isinstance(value.get(key), str)
+        },
+    }
 
 
 async def _run_agent(
