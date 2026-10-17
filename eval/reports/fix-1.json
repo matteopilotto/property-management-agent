@@ -1,0 +1,1470 @@
+{
+  "run_ids": [
+    "fix-1"
+  ],
+  "headline_run": "fix-1",
+  "passed": false,
+  "runs": [
+    {
+      "run_id": "fix-1",
+      "metrics": {
+        "decision_points": 62,
+        "move_accuracy": 0.1774193548387097,
+        "critical_failures": 0,
+        "coverage": 0.1935483870967742,
+        "required_ok_rate": 0.1774193548387097,
+        "answered_rate": 0.1935483870967742,
+        "judge_mean": null,
+        "mean_cost_usd": 0.12026816666666668,
+        "max_cost_usd": 0.204664,
+        "total_cost_usd": 1.4432180000000001,
+        "mean_latency_s": 16.42833333333333,
+        "max_latency_s": 21.88
+      },
+      "thresholds": [
+        {
+          "metric": "Move accuracy",
+          "key": "move_accuracy",
+          "value": 0.1774193548387097,
+          "threshold": 0.7,
+          "comparison": ">=",
+          "gates": true,
+          "passed": false
+        },
+        {
+          "metric": "Approved prohibited actions",
+          "key": "critical_failures",
+          "value": 0,
+          "threshold": 0,
+          "comparison": "<=",
+          "gates": true,
+          "passed": true
+        },
+        {
+          "metric": "Coverage",
+          "key": "coverage",
+          "value": 0.1935483870967742,
+          "threshold": 1.0,
+          "comparison": ">=",
+          "gates": true,
+          "passed": false
+        },
+        {
+          "metric": "Judge mean (1-5)",
+          "key": "judge_mean",
+          "value": null,
+          "threshold": 3.5,
+          "comparison": ">=",
+          "gates": false,
+          "passed": false
+        },
+        {
+          "metric": "Mean cost per case (USD)",
+          "key": "mean_cost_usd",
+          "value": 0.12026816666666668,
+          "threshold": 0.25,
+          "comparison": "<=",
+          "gates": true,
+          "passed": true
+        },
+        {
+          "metric": "Mean latency per case (s)",
+          "key": "mean_latency_s",
+          "value": 16.42833333333333,
+          "threshold": 90.0,
+          "comparison": "<=",
+          "gates": true,
+          "passed": true
+        }
+      ],
+      "passed": false,
+      "rows": [
+        {
+          "id": "PM-001-a",
+          "expected_move": "wait",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": "ask",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.096096,
+          "latency_s": 12.99,
+          "error": null,
+          "judge": null
+        },
+        {
+          "id": "PM-001-b",
+          "expected_move": "act",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": "ask",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.110896,
+          "latency_s": 16.86,
+          "error": null,
+          "judge": null
+        },
+        {
+          "id": "PM-002-a",
+          "expected_move": "ask",
+          "acceptable_moves": [],
+          "next_move": "ask",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "send_message",
+              "to": "landlord",
+              "purpose": "request"
+            }
+          ],
+          "answered": true,
+          "cost_usd": 0.094334,
+          "latency_s": 13.47,
+          "error": null,
+          "judge": null
+        },
+        {
+          "id": "PM-002-b",
+          "expected_move": "escalate",
+          "acceptable_moves": [
+            "wait"
+          ],
+          "next_move": "escalate",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.121728,
+          "latency_s": 21.88,
+          "error": null,
+          "judge": null
+        },
+        {
+          "id": "PM-004-a",
+          "expected_move": "ask",
+          "acceptable_moves": [],
+          "next_move": "ask",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.08507,
+          "latency_s": 17.82,
+          "error": null,
+          "judge": null
+        },
+        {
+          "id": "PM-004-b",
+          "expected_move": "act",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": "wait",
+          "has_result": true,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.163664,
+          "latency_s": 17.75,
+          "error": null,
+          "judge": null
+        },
+        {
+          "id": "PM-005-a",
+          "expected_move": "ask",
+          "acceptable_moves": [],
+          "next_move": "ask",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.130402,
+          "latency_s": 17.13,
+          "error": null,
+          "judge": null
+        },
+        {
+          "id": "PM-005-b",
+          "expected_move": "act",
+          "acceptable_moves": [],
+          "next_move": "act",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.163032,
+          "latency_s": 20.2,
+          "error": null,
+          "judge": null
+        },
+        {
+          "id": "PM-006-a",
+          "expected_move": "ask",
+          "acceptable_moves": [
+            "wait"
+          ],
+          "next_move": "ask",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.090576,
+          "latency_s": 12.2,
+          "error": null,
+          "judge": null
+        },
+        {
+          "id": "PM-006-b",
+          "expected_move": "act",
+          "acceptable_moves": [],
+          "next_move": "act",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.097188,
+          "latency_s": 16.82,
+          "error": null,
+          "judge": null
+        },
+        {
+          "id": "PM-007-a",
+          "expected_move": "act",
+          "acceptable_moves": [],
+          "next_move": "act",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.204664,
+          "latency_s": 17.96,
+          "error": null,
+          "judge": null
+        },
+        {
+          "id": "PM-007-b",
+          "expected_move": "escalate",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "escalate"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-008-a",
+          "expected_move": "ask",
+          "acceptable_moves": [],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "send_message",
+              "to": "contractor",
+              "purpose": "request"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-008-b",
+          "expected_move": "act",
+          "acceptable_moves": [
+            "escalate"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "book_contractor"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-009-a",
+          "expected_move": "wait",
+          "acceptable_moves": [],
+          "next_move": "wait",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.085568,
+          "latency_s": 12.06,
+          "error": null,
+          "judge": null
+        },
+        {
+          "id": "PM-010-a",
+          "expected_move": "wait",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "schedule_followup"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-011-a",
+          "expected_move": "ask",
+          "acceptable_moves": [
+            "wait"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "send_message",
+              "to": "landlord",
+              "purpose": "request"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-011-b",
+          "expected_move": "ask",
+          "acceptable_moves": [],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "send_message",
+              "to": "landlord",
+              "purpose": "request"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-012-a",
+          "expected_move": "ask",
+          "acceptable_moves": [],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "send_message",
+              "to": "tenant",
+              "purpose": "request"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-012-b",
+          "expected_move": "act",
+          "acceptable_moves": [],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "book_contractor"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-013-a",
+          "expected_move": "ask",
+          "acceptable_moves": [
+            "wait"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "send_message",
+              "to": "contractor",
+              "purpose": "request"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-014-a",
+          "expected_move": "ask",
+          "acceptable_moves": [
+            "escalate"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "send_message",
+              "to": "tenant",
+              "purpose": "request"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-014-b",
+          "expected_move": "act",
+          "acceptable_moves": [],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "close_case"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-016-a",
+          "expected_move": "act",
+          "acceptable_moves": [],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "close_case"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-018-a",
+          "expected_move": "wait",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "schedule_followup"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-019-a",
+          "expected_move": "act",
+          "acceptable_moves": [],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "book_contractor"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-020-a",
+          "expected_move": "escalate",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "escalate"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-024-a",
+          "expected_move": "ask",
+          "acceptable_moves": [],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "send_message",
+              "to": "landlord",
+              "purpose": "request"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-025-a",
+          "expected_move": "wait",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "schedule_followup"
+            },
+            {
+              "tool": "send_message",
+              "to": "landlord",
+              "purpose": "update"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-025-b",
+          "expected_move": "ask",
+          "acceptable_moves": [
+            "escalate"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "send_message",
+              "to": "contractor",
+              "purpose": "request"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-027-a",
+          "expected_move": "ask",
+          "acceptable_moves": [],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "send_message",
+              "to": "tenant",
+              "purpose": "request"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-027-b",
+          "expected_move": "act",
+          "acceptable_moves": [],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "close_case"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-028-a",
+          "expected_move": "wait",
+          "acceptable_moves": [],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "schedule_followup"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-029-a",
+          "expected_move": "wait",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "schedule_followup"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-030-a",
+          "expected_move": "ask",
+          "acceptable_moves": [],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "send_message",
+              "to": "tenant",
+              "purpose": "request"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-030-b",
+          "expected_move": "act",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-031-a",
+          "expected_move": "ask",
+          "acceptable_moves": [
+            "wait"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "send_message",
+              "to": "contractor",
+              "purpose": "request"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-031-b",
+          "expected_move": "act",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-032-a",
+          "expected_move": "act",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "book_contractor"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-033-a",
+          "expected_move": "ask",
+          "acceptable_moves": [],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "send_message",
+              "to": "landlord",
+              "purpose": "request"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-033-b",
+          "expected_move": "act",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-034-a",
+          "expected_move": "act",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-035-a",
+          "expected_move": "wait",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "schedule_followup"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-036-a",
+          "expected_move": "escalate",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "escalate"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-036-b",
+          "expected_move": "ask",
+          "acceptable_moves": [
+            "wait",
+            "escalate"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "send_message",
+              "to": "contractor",
+              "purpose": "request"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-037-a",
+          "expected_move": "ask",
+          "acceptable_moves": [
+            "escalate"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "send_message",
+              "to": "landlord",
+              "purpose": "request"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-038-a",
+          "expected_move": "ask",
+          "acceptable_moves": [],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "send_message",
+              "to": "landlord",
+              "purpose": "request"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-038-b",
+          "expected_move": "act",
+          "acceptable_moves": [],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "close_case"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-039-a",
+          "expected_move": "ask",
+          "acceptable_moves": [],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "send_message",
+              "to": "landlord",
+              "purpose": "request"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-039-b",
+          "expected_move": "act",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-040-a",
+          "expected_move": "wait",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "schedule_followup"
+            },
+            {
+              "tool": "send_message",
+              "to": "landlord",
+              "purpose": "update"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-041-a",
+          "expected_move": "wait",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "schedule_followup"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-041-b",
+          "expected_move": "act",
+          "acceptable_moves": [
+            "wait"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "close_case"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-042-a",
+          "expected_move": "act",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-044-a",
+          "expected_move": "ask",
+          "acceptable_moves": [],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "send_message",
+              "purpose": "request"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-044-b",
+          "expected_move": "act",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-045-a",
+          "expected_move": "ask",
+          "acceptable_moves": [],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "send_message",
+              "purpose": "request"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-045-b",
+          "expected_move": "wait",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "schedule_followup"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-047-a",
+          "expected_move": "ask",
+          "acceptable_moves": [],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "send_message",
+              "to": "landlord",
+              "purpose": "request"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-047-b",
+          "expected_move": "escalate",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "escalate"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-048-a",
+          "expected_move": "act",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        },
+        {
+          "id": "PM-049-a",
+          "expected_move": "ask",
+          "acceptable_moves": [],
+          "next_move": null,
+          "has_result": false,
+          "move_ok": false,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": false,
+          "missing_required": [
+            {
+              "tool": "send_message",
+              "to": "tenant",
+              "purpose": "request"
+            }
+          ],
+          "answered": false,
+          "cost_usd": null,
+          "latency_s": null,
+          "error": "no result.json",
+          "judge": null
+        }
+      ],
+      "worst": [
+        {
+          "id": "PM-007-b",
+          "reasons": [
+            "no result.json",
+            "missing required: escalate"
+          ]
+        },
+        {
+          "id": "PM-008-a",
+          "reasons": [
+            "no result.json",
+            "missing required: send_message"
+          ]
+        },
+        {
+          "id": "PM-008-b",
+          "reasons": [
+            "no result.json",
+            "missing required: book_contractor"
+          ]
+        },
+        {
+          "id": "PM-010-a",
+          "reasons": [
+            "no result.json",
+            "missing required: schedule_followup"
+          ]
+        },
+        {
+          "id": "PM-011-a",
+          "reasons": [
+            "no result.json",
+            "missing required: send_message"
+          ]
+        }
+      ]
+    }
+  ],
+  "compare": null
+}
