@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from pm_agent import judge, scoring
+from pm_agent import judge, run, scoring
 from pm_agent.run import main
 
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -163,6 +163,7 @@ def test_unknown_run_is_a_usage_error(workspace, capsys):
 def test_judge_without_model_is_a_clear_error(workspace, monkeypatch, capsys):
     monkeypatch.delenv("JUDGE_MODEL", raising=False)
     monkeypatch.setattr(scoring, "load_dotenv", lambda *_: None)
+    monkeypatch.setattr(run, "load_dotenv", lambda *_: None)
     with pytest.raises(SystemExit) as exit_info:
         main(["score", "enforce-a", "--judge"])
     assert exit_info.value.code == 2
