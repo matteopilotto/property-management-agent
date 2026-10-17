@@ -1,0 +1,34 @@
+[project]
+name = "pm-agent"
+version = "0.1.0"
+description = "Maintenance exception handler for letting-agency property management cases"
+requires-python = ">=3.13"
+dependencies = [
+    "google-adk>=2.12",
+    "anthropic",
+    "openai",
+    "pypdf",
+    "arize-phoenix",
+    "arize-phoenix-otel",
+    "openinference-instrumentation-google-adk",
+    "python-dotenv",
+]
+
+[project.scripts]
+pm-agent = "pm_agent.run:main"
+
+[dependency-groups]
+dev = ["ruff", "pytest"]
+
+[build-system]
+requires = ["uv_build>=0.11.23,<0.12"]
+build-backend = "uv_build"
+
+[tool.ruff]
+# Ruff also formats Markdown by default; keep it off the case files and docs.
+include = ["*.py", "*.pyi", "**/pyproject.toml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["live: calls real model APIs; run only with -m live"]
+addopts = "-m 'not live'"

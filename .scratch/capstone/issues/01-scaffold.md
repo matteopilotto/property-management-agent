@@ -1,6 +1,6 @@
 # 01 Scaffold the project and gates
 
-Status: ready-for-agent
+Status: done
 Track: A (agent core)
 Blocked by: none
 

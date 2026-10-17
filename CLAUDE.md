@@ -15,7 +15,9 @@ same commit.
 Gates (when a change introduces a toolchain, add its format, lint, type-check and test
 commands here in that same commit):
 
-- none yet
+- `uv run ruff format --check .`
+- `uv run ruff check .`
+- `uv run pytest`
 
 ## Git workflow
 
