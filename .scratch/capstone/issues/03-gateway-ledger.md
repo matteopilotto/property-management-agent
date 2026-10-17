@@ -1,6 +1,6 @@
 # 03 Action gateway and ledger
 
-Status: ready-for-agent
+Status: done
 Track: A (agent core)
 Blocked by: 01
 
