@@ -126,7 +126,8 @@ def _row(row: dict, result: dict | None) -> str:
         if trace_id
         else "-"
     )
-    verdict = "fail" if reasons else "pass"
+    # Same test as the headline move accuracy; missing required actions show as reasons only.
+    verdict = "pass" if row["move_ok"] and not row["critical"] else "fail"
     cost = scoring._fmt(row["cost_usd"], 4)
     latency = scoring._fmt(row["latency_s"], 1)
     summary = (
