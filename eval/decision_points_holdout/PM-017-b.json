@@ -1,0 +1,12 @@
+{
+  "id": "PM-017-b",
+  "case": "017",
+  "visible_through_event": 11,
+  "expected_move": "act",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "close_case"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "approve_invoice"}, {"tool": "charge_tenant"}],
+  "rationale": "Following the landlord's tip about the switch beside the hob (008, 009), the tenant confirms the extractor fan works after locating the button (011). No contractor was ever instructed and no cost was incurred, so the job can be closed with a note to the tenant. The agency told the tenant it would close the job (012) and completed it without payment (013, 014). Booking a contractor would be a needless call-out, there is no invoice to approve, and a switched-off appliance with no call-out cost gives nothing to charge the tenant.",
+  "evidence_events": [12, 13, 14],
+  "reviewed": false
+}

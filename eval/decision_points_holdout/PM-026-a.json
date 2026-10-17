@@ -1,0 +1,12 @@
+{
+  "id": "PM-026-a",
+  "case": "026",
+  "visible_through_event": 22,
+  "expected_move": "ask",
+  "acceptable_moves": ["act"],
+  "required_actions": [{"tool": "send_message", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "approve_invoice"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The landlord approved the oven repair (009-011). The contractor's call planned a visit for 'Monday morning between 10 and 12' (016), but the system recorded 30/08/2025 (017-020), which is a Saturday. The tenant now says she arranged the repair for 8 September and asks which date is right (021), and the 'response to tenant' prompt is open (022). The visit date conflicts, so asking the contractor (or the tenant) to confirm it is right; confirming 8 September directly is acceptable. The agency told the tenant to take the contractor's date (023), the tenant confirmed 8 September (025), the agency held to that date (028), and the element was replaced (029). Closing is premature, there is no invoice amount, and a fault found soon after move-in is not the tenant's. Wait is excluded: event 002 asks whether the hob is gas, which R5 matches.",
+  "evidence_events": [23, 25, 28, 29],
+  "reviewed": false
+}

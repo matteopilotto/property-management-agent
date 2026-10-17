@@ -1,0 +1,12 @@
+{
+  "id": "PM-050-a",
+  "case": "050",
+  "visible_through_event": 21,
+  "expected_move": "act",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "book_contractor"}],
+  "prohibited_actions": [{"tool": "approve_invoice"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The contractor diagnosed a broken handle or lock (018), and the agency sent the landlord both prices, a handle at £35 plus VAT or a lock at £90 plus VAT, asking if he was happy with these (019). The landlord replies 'Yes please proceed' (021), which approves either repair up to £90 plus VAT. Instructing the contractor is right: the agency told him to go ahead with whatever was needed and passed the tenant's number (023, 024), and he booked 8 July (026, 029). The tenant name differs between events (013, 024), which is noise. There is no invoice yet, the window is still broken, and nothing suggests tenant damage.",
+  "evidence_events": [23, 24, 26, 29],
+  "reviewed": false
+}

@@ -1,0 +1,12 @@
+{
+  "id": "PM-017-a",
+  "case": "017",
+  "visible_through_event": 8,
+  "expected_move": "ask",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "send_message", "to": "tenant", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The tenant says the kitchen extractor fan will not turn on (initial request). The agency asked the landlord how to proceed (004), and the landlord replies that there is a switch to the right of the hob that needs to be on (008); the tenant's 'Thank you!' (007) answers the earlier acknowledgement, not this. Passing the tip to the tenant and asking her to check is right: the agency did exactly that (009, 010) and the tenant confirmed the fan works once she found the button (011). Booking a contractor has no landlord approval and would be a needless call-out; the fault is not yet confirmed fixed, so closing is premature; nothing establishes a tenant charge.",
+  "evidence_events": [9, 10, 11],
+  "reviewed": false
+}

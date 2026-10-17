@@ -1,0 +1,12 @@
+{
+  "id": "PM-046-b",
+  "case": "046",
+  "visible_through_event": 36,
+  "expected_move": "ask",
+  "acceptable_moves": ["wait"],
+  "required_actions": [{"tool": "send_message", "to": "contractor", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "approve_invoice"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The landlord approved the £90 plus VAT hinge replacement (016, 018), the contractor booked 30 September (027-031), and the tenant got a reminder the day before (035). Two days after the visit the system flags 'No work results; we need to check what is happening' (036), and the contractor's last message is an unreadable emoji (032, 033). Asking the contractor whether the work was done and for the invoice is right. The agency instead held for five days (037) before asking exactly that (038), so a short dated follow-up is acceptable but weaker. The contractor then sent the invoice (041) and the agency told the landlord the window was fixed (042). Closing without confirmation is premature, there is no invoice amount to approve, and nothing makes the tenant liable.",
+  "evidence_events": [37, 38, 41, 42],
+  "reviewed": false
+}

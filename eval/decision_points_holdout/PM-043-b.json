@@ -1,0 +1,12 @@
+{
+  "id": "PM-043-b",
+  "case": "043",
+  "visible_through_event": 16,
+  "expected_move": "act",
+  "acceptable_moves": ["ask"],
+  "required_actions": [],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "approve_invoice"}, {"tool": "charge_tenant"}],
+  "rationale": "The landlord approved a simple, low-cost repair (011, 013), the agency chased the contractor (014), and he now confirms he completed the washing machine repair 'on November 4th' (016). The case is in April, so the date is impossible and is noise; the reply answers the chase about this property. Close-out is right: the agency told the landlord the repair was done (017), thanked the contractor and said it would close (018), then closed after final checks (020, 025). Confirming with the tenant that the machine drains, or asking the contractor for details and an invoice first, is acceptable given the odd date. Booking again would duplicate finished work, no invoice amount is visible, and nothing makes the tenant liable. The landlord's name differs between events (003, 013, 017), which is noise.",
+  "evidence_events": [17, 18, 20, 25],
+  "reviewed": false
+}

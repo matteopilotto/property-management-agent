@@ -1,0 +1,12 @@
+{
+  "id": "PM-022-b",
+  "case": "022",
+  "visible_through_event": 16,
+  "expected_move": "wait",
+  "acceptable_moves": ["ask"],
+  "required_actions": [{"tool": "schedule_followup"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "approve_invoice"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The agency's call with the contractor confirms the work is complete, including a lock change (013); the call summary names other properties, which is noise, and the agency's own hold records 'Maya done repair - he will drop new key off and send invoice' (016). With the lock changed, the office needs the new key before the job can close, so a dated follow-up for the key is right; chasing the contractor for the key and invoice is acceptable. The contractor's later email only restates the appointment (018); the key was brought in and copied (020) and the job closed after that (023). Closing before the key arrives leaves the office without a key to a changed lock; booking again duplicates finished work; no invoice amount exists to approve; nothing makes the tenant liable.",
+  "evidence_events": [18, 20, 23],
+  "reviewed": false
+}

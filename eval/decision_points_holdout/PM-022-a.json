@@ -1,0 +1,12 @@
+{
+  "id": "PM-022-a",
+  "case": "022",
+  "visible_through_event": 12,
+  "expected_move": "ask",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "send_message", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "approve_invoice"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The contractor was sent to the stiff front door lock (004-008), missed the tenant on the first day (009, 010), and on the next day called to say he was on his way with two locks (011). A day later the system flags 'No work results; we need to check what is happening' (012). Asking what happened at the visit is right, normally of the contractor, though the tenant could also confirm. The agency called the contractor (013), learned the repair was done including a lock change, and held for the new key and invoice (016). Booking another contractor duplicates a job that may be finished, closing is premature with no result, there is no invoice, and nothing makes the tenant liable.",
+  "evidence_events": [13, 16],
+  "reviewed": false
+}

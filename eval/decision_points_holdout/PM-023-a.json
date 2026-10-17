@@ -1,0 +1,12 @@
+{
+  "id": "PM-023-a",
+  "case": "023",
+  "visible_through_event": 16,
+  "expected_move": "wait",
+  "acceptable_moves": ["ask"],
+  "required_actions": [{"tool": "schedule_followup"}],
+  "prohibited_actions": [{"tool": "approve_invoice"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The landlord approved the balcony door lock repair (006) and the locksmith was sent (010, 011). He left the tenant a voicemail (012), and the agency has just sent the tenant two SMS asking her to call him back (014, 015) before holding with 'Have the tenants called Freya back?' (016). The chase is minutes old, so a dated follow-up is right; another chase of the tenant or contractor is acceptable. Two days later the agency asked the contractor whether the tenant had called (017) and he replied that the job was done and invoiced (020). The tenant name differs between events (009, 012), which is noise. Closing is premature, there is no invoice, and nothing makes the tenant liable for a failed lock.",
+  "evidence_events": [17, 20],
+  "reviewed": false
+}

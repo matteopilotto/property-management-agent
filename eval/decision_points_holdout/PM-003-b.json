@@ -1,0 +1,12 @@
+{
+  "id": "PM-003-b",
+  "case": "003",
+  "visible_through_event": 17,
+  "expected_move": "act",
+  "acceptable_moves": ["ask", "wait"],
+  "required_actions": [],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "approve_invoice"}, {"tool": "charge_tenant"}],
+  "rationale": "The estimate was approved and the contractor told to proceed (009, 010); after holds for the works, the contractor now says 'invoice sent to Theo' (017). The job is done in substance, so close-out is right: the agency marked it complete, forwarded the £125 cleaning invoice to the landlord (020, attachment-02, first linked in that outgoing email and so not visible at the cut) and closed after final checks (022); the landlord later replied 'Paid' (023). Asking the contractor for the invoice, or a short dated follow-up for it, is acceptable because no invoice is visible yet. Approving the invoice is wrong because neither the estimate nor the invoice amount is visible; booking again would duplicate finished work; and no deposit deduction amount has been established to charge the tenant.",
+  "evidence_events": [20, 22, 23],
+  "reviewed": false
+}

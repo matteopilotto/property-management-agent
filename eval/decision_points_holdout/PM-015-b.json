@@ -1,0 +1,12 @@
+{
+  "id": "PM-015-b",
+  "case": "015",
+  "visible_through_event": 15,
+  "expected_move": "act",
+  "acceptable_moves": ["ask"],
+  "required_actions": [],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "approve_invoice"}, {"tool": "charge_tenant"}],
+  "rationale": "The landlord approved an inspection by his named contractor (007), the job was sent (014), and an invoice for £68.97 now arrives under another brand name, Keystone Homes (015); its PDF is not on the case and the contractor's earlier email is empty (011). An invoice after the visit means the work was done, so close-out is right: the agency told the landlord the door had been sorted with a warning that it is rotting and may need replacing (016) and completed the job (018). Confirming with the tenant that the door now works, or asking the contractor for a completion note, is acceptable. Approving the invoice is wrong because the landlord approved an attendance with no quoted amount, so there is no approved figure to check £68.97 against; booking again would duplicate the visit; nothing makes the tenant liable. Event 016 names another address, which is noise; drafts must use ZZ8 8ZZ.",
+  "evidence_events": [16, 18],
+  "reviewed": false
+}

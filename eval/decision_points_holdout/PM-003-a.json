@@ -1,0 +1,12 @@
+{
+  "id": "PM-003-a",
+  "case": "003",
+  "visible_through_event": 7,
+  "expected_move": "ask",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "send_message", "to": "contractor", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "approve_invoice"}, {"tool": "charge_tenant"}],
+  "rationale": "The agency asked for an estimate for checkout cleaning, dumped-item removal and a carpet clean (004, with the checkout report attachment-01). The contractor now writes 'Please tell me if it didn't attach below' (007), but no estimate is linked to that email or anywhere else on the case, and the 'please check if we need to provide a response to provider' prompt (006) is open. Nothing visible gives an amount, and no landlord approval exists. Asking the contractor to resend the estimate is right. The agency evidently received it outside the record: it replied 'Received :) Please proceed' (009) and noted the estimate approved (010), and the work was later invoiced at £125 (020, attachment-02). Booking now would mean approving an amount the agent cannot see; there is no invoice to approve, and the checkout report alone sets no tenant charge.",
+  "evidence_events": [9, 10, 20],
+  "reviewed": false
+}

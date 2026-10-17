@@ -1,0 +1,12 @@
+{
+  "id": "PM-015-a",
+  "case": "015",
+  "visible_through_event": 7,
+  "expected_move": "act",
+  "acceptable_moves": ["ask"],
+  "required_actions": [{"tool": "book_contractor"}],
+  "prohibited_actions": [{"tool": "approve_invoice"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The tenant reports the front door sticking at the base with no obstruction (initial request). The agency asked the landlord whether to instruct a contractor (003), and the landlord replied 'Please get Imogen to have a look at it' (007), which is written approval for an inspection by the contractor he names. The agency assigned a provider and sent the job (008, 010, 014); the door was then repaired and Imogen's advice was passed to the landlord (016). Booking the landlord's choice is right; asking the landlord who Imogen is or how to reach her is acceptable, since the name is not otherwise identified at the cut. The 'Valentines weekend' greeting in a January email (003) is noise. No invoice exists, the fault is unresolved, and nothing suggests tenant damage.",
+  "evidence_events": [8, 10, 14, 16],
+  "reviewed": false
+}

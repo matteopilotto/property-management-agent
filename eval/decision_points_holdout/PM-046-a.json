@@ -1,0 +1,12 @@
+{
+  "id": "PM-046-a",
+  "case": "046",
+  "visible_through_event": 15,
+  "expected_move": "ask",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "send_message", "to": "landlord", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "approve_invoice"}, {"tool": "charge_tenant"}],
+  "rationale": "The landlord agreed only to have a contractor look at the window (007). The contractor now quotes 'hinges are £90 plus VAT' and asks to do them while there (015). That spend needs the landlord's approval, so sending him the quote is right: the agency asked whether he was happy to go ahead at £90 plus VAT (016), he approved (018), and only then was the contractor told to go ahead (020). Instructing the hinge work now would spend without approval, there is no invoice, and rusted hinges are wear, not tenant damage.",
+  "evidence_events": [16, 18, 20],
+  "reviewed": false
+}

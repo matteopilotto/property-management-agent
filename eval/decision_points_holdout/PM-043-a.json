@@ -1,0 +1,12 @@
+{
+  "id": "PM-043-a",
+  "case": "043",
+  "visible_through_event": 13,
+  "expected_move": "wait",
+  "acceptable_moves": ["act", "ask"],
+  "required_actions": [{"tool": "schedule_followup"}],
+  "prohibited_actions": [{"tool": "approve_invoice"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The landlord did not answer the first request for five days (003), so the agency chased by SMS (006). A provider was then assigned and told to repair if simple and cheap, or quote first if parts are needed (008-011). The landlord's written approval now arrives (013), so the contractor already holds a valid instruction within the approved scope and needs time to contact the tenant. A dated follow-up is right; confirming the approval to the contractor (act) or asking him for a visit date (ask) is also reasonable. The agency waited two days, then asked the contractor for an update (014, 015), and he reported the repair done (016). Closing is premature, there is no invoice, and the tenant already drained the machine and cleaned the filter, so nothing points to tenant fault.",
+  "evidence_events": [14, 15, 16],
+  "reviewed": false
+}

@@ -1,0 +1,12 @@
+{
+  "id": "PM-050-b",
+  "case": "050",
+  "visible_through_event": 35,
+  "expected_move": "act",
+  "acceptable_moves": ["ask"],
+  "required_actions": [],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "approve_invoice"}, {"tool": "charge_tenant"}],
+  "rationale": "The landlord approved the handle (£35 plus VAT) or lock (£90 plus VAT) repair (019, 021) and the visit was booked for 8 July (026-030). On 3 July an invoice arrives under another brand, Cedar Solutions (032); the agency asked for it as a PDF (033) and the contractor says it is attached (035), but no invoice file or amount is visible. An invoice means the work is done, so close-out is right: the agency told the landlord the repair was complete, forwarded the invoice (036) and closed after final checks (039, 043). Because the invoice predates the booked visit and nothing else confirms the repair, asking the tenant or contractor to confirm completion first is acceptable. Approving the invoice is wrong with no visible amount; the agency's later note of a '£49.40 incl VAT' quote (037) matches neither approved price. Booking again would duplicate the work, and nothing makes the tenant liable.",
+  "evidence_events": [36, 37, 39, 43],
+  "reviewed": false
+}

@@ -1,0 +1,12 @@
+{
+  "id": "PM-021-a",
+  "case": "021",
+  "visible_through_event": 20,
+  "expected_move": "wait",
+  "acceptable_moves": ["ask"],
+  "required_actions": [{"tool": "schedule_followup"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "approve_invoice"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The landlord approved replacing the conservatory door lock with new keys for the tenants, the landlord and the agency (006, 008, 009). The contractor now reports the cylinder and handles replaced and says he will drop the remaining keys at the office tomorrow (020). The work is done but the office and landlord keys are a promised, open item, so a dated follow-up for the key drop-off is right; asking the contractor to confirm the drop-off or send the invoice is acceptable. The agency moved the job to final checks (022, 023), which included 'Keys return confirmed' (028), before closing (029). Closing before the keys reach the office leaves that item open; booking again would duplicate finished work; no invoice amount is visible; and a snapped key alone does not establish tenant liability.",
+  "evidence_events": [22, 23, 28, 29],
+  "reviewed": false
+}
