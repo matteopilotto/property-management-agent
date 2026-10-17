@@ -1,6 +1,6 @@
 # 12 Static HTML scoreboard (stretch)
 
-Status: ready-for-agent
+Status: done
 Blocked by: 07
 
 ## What

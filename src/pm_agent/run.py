@@ -299,6 +299,17 @@ def main(argv: list[str] | None = None) -> None:
         default=DECISION_POINTS,
         help="folder of decision-point files (default: eval/decision_points)",
     )
+    board = commands.add_parser("board", help="write an offline HTML scoreboard")
+    board.add_argument("run_id", help="a run under runs/")
+    board.add_argument(
+        "--points",
+        type=Path,
+        default=DECISION_POINTS,
+        help="folder of decision-point files (default: eval/decision_points)",
+    )
+    board.add_argument(
+        "--out", type=Path, help="output file (default: runs/<run_id>/board.html)"
+    )
     args = parser.parse_args(argv)
     load_dotenv()
     if args.command == "run":
@@ -315,4 +326,8 @@ def main(argv: list[str] | None = None) -> None:
         raise SystemExit(
             scoring.cli(args.run_ids, args.judge, args.compare, args.points)
         )
+    if args.command == "board":
+        from pm_agent import board
+
+        raise SystemExit(board.cli(args.run_id, args.points, args.out))
     print(f"{args.command}: not implemented")
