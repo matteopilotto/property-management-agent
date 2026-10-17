@@ -1,0 +1,3 @@
+# One agent, every side effect a gated tool call
+
+The system is a single ReAct agent, not a multi-agent pipeline: each case is one bounded investigation, and the hackathon gives no credit for more agents. Every side effect (messaging a party, booking a contractor, charging the tenant, escalating) is a tool call, and an action gateway written in code inspects each one in ADK's `before_tool_callback` before it reaches the ledger. Agency policy (landlord approval before spend, tenant charges always held, invoices above the approved quote held, outbound messages must name the case's own property) therefore holds even when the model ignores its instructions. Rules that live only in the prompt are not trusted to hold.

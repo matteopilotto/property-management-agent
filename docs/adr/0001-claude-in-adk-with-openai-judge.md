@@ -1,0 +1,3 @@
+# Claude inside Google ADK, judged by OpenAI
+
+The agent is built with Google ADK, because the course taught it, but it runs on Claude through ADK's LiteLLM model adapter rather than on Gemini, ADK's native model. Claude was picked for judgement over messy, contradictory case evidence. Evaluation uses an OpenAI model as the LLM judge, so the judge comes from a different model family than both the agent and the Claude-drafted eval labels, which limits self-preference bias. Tracing therefore uses the ADK-level OpenInference instrumentor, not the google-genai instrumentor from the course, because the latter would not see Claude calls.

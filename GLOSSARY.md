@@ -41,8 +41,23 @@ A moment in a case at which only the events up to that moment are known and the 
 _Avoid_: Cutoff, checkpoint, snapshot
 
 **Next Move**:
-The single choice made at a decision point: **act**, **ask**, **wait** or **escalate**.
+The single choice made at a decision point: **act**, **ask**, **wait** or **escalate**. When a decision point involves several actions, the move is the most consequential one, ranked escalate > act > ask > wait.
 _Avoid_: Decision, outcome, resolution
+
+**Act**:
+The agency moves the job forward itself, for example by instructing a contractor, forwarding a quote or invoice to the landlord, confirming a visit or closing the job.
+
+**Ask**:
+The agency requests missing information or a decision from the tenant, landlord or contractor, including chasing a party already asked.
+_Avoid_: Chase, remind (as separate moves)
+
+**Wait**:
+The agency sends nothing now and schedules a dated follow-up with a reason.
+_Avoid_: Hold, pause, no action
+
+**Escalate**:
+The system hands the case to the property manager with a handover note because it should not decide alone.
+_Avoid_: Refer, flag, defer
 
 **Outcome**:
 What actually happened in a case after a decision point, as recorded later in its history. One acceptable answer, not the only one.
