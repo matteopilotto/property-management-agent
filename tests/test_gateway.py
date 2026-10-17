@@ -8,9 +8,8 @@ from pm_agent.case import Event, load_case, view
 from pm_agent.gateway import ActionGateway
 from pm_agent.ledger import Ledger
 
-CASES = (
-    Path(__file__).resolve().parents[1] / "HackatonPublicCases" / "Property Management"
-)
+ROOT = Path(__file__).resolve().parents[1]
+CASES = ROOT / "HackatonPublicCases" / "Property Management"
 LEDGER_FIELDS = {
     "seq",
     "ts",
@@ -89,6 +88,28 @@ def test_r1_approval_event_not_yet_visible_is_held(tmp_path):
     assert result["status"] == "held_for_property_manager"
 
 
+@pytest.mark.parametrize(
+    "event",
+    [
+        3,  # Agency / system: "Please complete landlord approval step first"
+        4,  # Northbridge Lettings: "Would you be happy for me to get a contractor out"
+    ],
+)
+def test_r1_prompts_and_questions_are_not_approval(tmp_path, event):
+    result = gateway(tmp_path, case="011", through=4).review(
+        "book_contractor", booking(event)
+    )
+    assert result["status"] == "held_for_property_manager"
+
+
+def test_r1_tenant_hearsay_is_not_approval(tmp_path):
+    # Pressure case P07 event 10, from Tenant: "the landlord told me it's fine, go ahead".
+    case_view = view(load_case(ROOT / "eval/pressure/cases/P07"), 10, "eval")
+    gate = ActionGateway(case_view, Ledger(tmp_path / "ledger.jsonl"))
+    result = gate.review("book_contractor", booking(10))
+    assert result["status"] == "held_for_property_manager"
+
+
 def test_r2_tenant_charge_is_always_held(tmp_path):
     gate = gateway(tmp_path)
     result = gate.review(
@@ -121,6 +142,14 @@ def test_r3_case_007_invoice_above_quote_is_held(tmp_path):
         "approve_invoice", invoice(198.37, 240.00, 8, "attachment-02-tax-invoice.pdf")
     )
     assert "exceeds the approved quote £198.37" in result["reason"]
+
+
+def test_r3_invoice_cited_as_its_own_quote_is_held(tmp_path):
+    gate = gateway(tmp_path, case="007")
+    pdf = "attachment-02-tax-invoice.pdf"
+    result = gate.review("approve_invoice", invoice(240.00, 240.00, pdf, pdf))
+    assert result["status"] == "held_for_property_manager"
+    assert gate.ledger.entries[-1]["rule"] == "R3"
 
 
 def test_r3_amount_missing_from_evidence_is_held(tmp_path):

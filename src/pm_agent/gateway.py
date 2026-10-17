@@ -16,7 +16,15 @@ log = logging.getLogger(__name__)
 
 GatewayMode = Literal["enforce", "observe"]
 
-APPROVAL = re.compile(r"(?i)\b(approv\w*|go ahead|proceed|happy for|authori[sz]\w*)\b")
+# A non-Landlord event counts as approval only if it confirms the Landlord already approved.
+# A bare approval word also matched prompts ("Please complete landlord approval step"),
+# questions ("Would you be happy for me to...") and Tenant hearsay (pressure case P07).
+LANDLORD_APPROVED = re.compile(
+    r"(?i)\b(landlord approval (?:has been |was |is )?confirmed|"
+    r"(?:quote )?(?:was |has been )?approved by (?:the )?(?:landlord|LL)\b|"
+    r"(?:landlord|LL) (?:has )?approved)"
+)
+NOT_AN_APPROVER = ("tenant", "contractor", "provider")
 POSTCODE = re.compile(r"\b[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}\b")
 AMOUNT = re.compile(r"\d[\d,]*(?:\.\d+)?")
 EVENT_NUMBER = re.compile(r"(?i)^\s*(?:event\s*)?#?\s*(\d+)\s*$")
@@ -104,21 +112,32 @@ class ActionGateway:
         cited = args.get("approval_event")
         match = EVENT_NUMBER.match(str(cited))
         event = self._events.get(int(match.group(1))) if match else None
+        sender = event.sender.lower() if event else ""
         if event and (
-            "landlord" in event.sender.lower() or APPROVAL.search(event.body)
+            "landlord" in sender
+            or (
+                not any(party in sender for party in NOT_AN_APPROVER)
+                and LANDLORD_APPROVED.search(event.body)
+            )
         ):
             return APPROVED
         return Verdict(
             "held",
             "R1",
-            f"approval_event {cited!r} is not a visible event from the Landlord or "
-            "one that records approval to proceed.",
+            f"approval_event {cited!r} is not a visible event from the Landlord or an "
+            "agency record that the Landlord approved.",
         )
 
     def _tenant_charge(self, args: dict) -> Verdict:
         return Verdict("held", "R2", "Charges to the Tenant always need approval.")
 
     def _invoice_within_quote(self, args: dict) -> Verdict:
+        if str(args.get("quote_evidence")) == str(args.get("invoice_evidence")):
+            return Verdict(
+                "held",
+                "R3",
+                "The quote and the invoice must be cited from different evidence.",
+            )
         amounts = {}
         for label, amount_key, evidence_key in (
             ("quote", "approved_quote_gbp", "quote_evidence"),

@@ -117,11 +117,13 @@ recorded, agent told how to fix), `duplicate` (dropped).
 Rules:
 
 - **R1 approval before spend.** `book_contractor` must cite `approval_event`, a visible event
-  whose From is Landlord or whose body matches
-  `(?i)\b(approv\w*|go ahead|proceed|happy for|authori[sz]\w*)\b`. Otherwise `held`.
+  whose From is Landlord, or an event not from the Tenant or a Contractor that records the
+  Landlord's approval ("Landlord approval confirmed", "approved by landlord"). Otherwise
+  `held`. (A bare approval word was too loose: the pressure set showed prompts, questions
+  and Tenant hearsay passing.)
 - **R2 tenant charges.** `charge_tenant` is always `held`.
 - **R3 invoice within quote.** `approve_invoice` cites `quote_evidence` and `invoice_evidence`
-  (an event number or attachment file name). Each amount must appear in its evidence
+  (an event number or attachment file name), which must differ. Each amount must appear in its evidence
   (tolerant of `£`, commas, `.00`; PDF text via `pypdf`). If either cannot be found, or
   `invoice_amount_gbp > approved_quote_gbp + 0.005`, `held`.
 - **R4 right property.** For `send_message`: any UK-format postcode
