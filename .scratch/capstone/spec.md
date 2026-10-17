@@ -77,12 +77,12 @@ src/pm_agent/
   render.py               ANSWER.md / REASONING.md from ledger + decision
   run.py                  batch runner and CLI
   telemetry.py            Phoenix / OpenInference setup
+  scoring.py              deterministic scorer + report (`pm-agent score`)
+  judge.py                OpenAI rubric judge
 eval/
   LABELLING.md            how decision points are written
   decision_points/        one JSON file per decision point
-  score.py                deterministic scorer + report
-  judge.py                OpenAI rubric judge
-  rubric.md
+  rubric.md               judge rubric
   reports/                committed eval reports
 runs/                     gitignored raw run output
 ANSWERS/                  Reality Test output (committed at results tag)
@@ -197,13 +197,11 @@ Limits: 30 tool calls per case (enforced in the callback), 240 s wall clock per 
 
 - `uv run pm-agent run <cases_dir> --out ANSWERS [--concurrency 5] [--gateway enforce|observe]`:
   every subfolder of `<cases_dir>` is a case in `live` mode; writes
-  `<out>/<folder>/ANSWER.md`, `REASONING.md`, `ledger.jsonl`, `trace.jsonl` (ADK events) and
-  `result.json`.
+  `<out>/<folder>/ANSWER.md`, `REASONING.md`, `input.md` (the case exactly as shown to the
+  agent), `ledger.jsonl`, `trace.jsonl` (ADK events) and `result.json`.
 - `uv run pm-agent eval --run-id <id> [--gateway ...] [--only <dp_id>...]`: runs every
   decision point in `eval/decision_points/` in `eval` mode into `runs/<id>/<dp_id>/`.
-- `result.json`: case or decision point id, next move, actions with statuses, input and output
-  tokens, cost in USD (price constants in code with a source comment), latency, Phoenix trace
-  id, error.
+- `result.json`: see §9.1. Cost uses price constants in code with a source comment.
 - A crash, timeout or limit hit still writes all files, with `ANSWER.md` reading
   "Escalated: system failure", the error, and the ledger so far.
 - `ANSWER.md` uses the headings from `submission-template/ANSWERS/1/ANSWER.md`. Held actions
@@ -211,6 +209,53 @@ Limits: 30 tool calls per case (enforced in the callback), 240 s wall clock per 
   object.
 - Phoenix: local server on port 6006, OpenInference ADK instrumentation, one trace per case,
   project name `pm-agent`.
+
+### 9.1 Run-folder contract
+
+The runner (ticket 05) writes and the scorer and judge (ticket 07) read these exact shapes.
+Change them only by editing this section first.
+
+`ledger.jsonl`, one JSON object per line, written by the gateway for every gated call,
+including `submit_decision`:
+
+```json
+{"seq": 1, "ts": "2026-10-18T09:00:00Z", "tool": "send_message",
+ "args": {"to": "landlord", "subject": "...", "body": "...", "purpose": "request"},
+ "status": "approved", "would_status": "approved", "rule": null, "reason": null,
+ "mode": "enforce"}
+```
+
+`status` and `would_status` are each one of `approved`, `held`, `blocked`, `duplicate`. `rule` is
+`"R1"` to `"R6"`, `"MOVE"` (move-consistency check) or `"LIMIT"`, or `null`.
+
+`result.json`:
+
+```json
+{
+  "id": "PM-007-a",
+  "case_path": "HackatonPublicCases/Property Management/007",
+  "view_mode": "eval",
+  "visible_through_event": 23,
+  "gateway_mode": "enforce",
+  "next_move": "escalate",
+  "summary": "...",
+  "answer_to_question": null,
+  "reasoning": {"facts": [], "conflicts": [], "missing": [], "options_rejected": [], "uncertainty": ""},
+  "actions": [
+    {"seq": 1, "tool": "escalate", "args": {}, "status": "approved", "would_status": "approved", "rule": null, "reason": null}
+  ],
+  "tokens": {"input": 0, "output": 0, "cached_input": 0},
+  "cost_usd": 0.0,
+  "latency_s": 0.0,
+  "trace_id": null,
+  "error": null
+}
+```
+
+`actions` is every ledger entry except `submit_decision` ones, in ledger order. `next_move`,
+`summary`, `answer_to_question` and `reasoning` come from the accepted `submit_decision`, and
+are `null` when the run failed. In `live` mode `id` is the case folder name and
+`visible_through_event` is `null`.
 
 ## 10. Evaluation (`eval/`)
 
