@@ -112,3 +112,30 @@ Report: [`holdout.md`](holdout.md).
 - **Run time:** 67 s wall-clock for all 17, 5 in parallel. Cost $1.92.
 - **Reading:** exact-match accuracy is the same on unseen cases as on the build set, so there's no sign the agent or playbook overfitted the 62.
 - **Caveat on the 1.00:** six of the 17 count via an acceptable alternative, and the holdout has no escalation case. The labels have not been reviewed by a person.
+
+## Reality Test (30 unseen hackathon cases)
+
+Run once, unattended, on the `freeze` tag: 130 s wall-clock against a 30-minute budget, $3.46,
+30 of 30 answered, no system failures. Answers are in `ANSWERS/` exactly as generated (tag
+`results`). Self-evaluated after the tag, following the organisers' guide:
+[`reality-test.md`](reality-test.md). The grader was a Claude model, so expect some leniency.
+
+| Measure | Result |
+|---|---|
+| Correct outcome (0–2 per case) | 1.70 mean (85%): 21 scored 2, 9 scored 1, none scored 0 |
+| Positive behaviours | 16/30 (53%) |
+| Red flags / critical failures | 2 / 0 |
+| Net sheet score | 65/90 (72%) |
+| Escalation judgement | 10 of 12 escalations correct; 2 over, 1 under; 17 of 18 non-escalations correct |
+| Agreement with the 8 real teams' consensus | 22 agree, 5 partial, 2 minority, 1 none |
+| Gateway | 1 real block: R5 stopped a wait on case 021 (no hot water), and the agent switched to asking the tenant to confirm today |
+
+**What the Reality Test showed that the build eval did not:** the move was rarely wrong.
+Points were lost in the actions that should go with it.
+
+- **Escalations without companion messages:** 9 of 12 escalations sent nothing else. The teams usually also chased the contractor or updated the tenant.
+- **Messaging only one party:** often only the party who triggered the decision point got a message.
+- **Naming a problem, then deferring it:** for example, a follow-up dated after a move-in.
+
+The build eval's labels required only minimal actions, so it never rewarded keeping every party
+informed. The next eval should.

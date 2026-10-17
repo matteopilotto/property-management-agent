@@ -1,6 +1,6 @@
 # 11 Reality Test run
 
-Status: ready-for-human
+Status: done
 Blocked by: 10
 
 ## What

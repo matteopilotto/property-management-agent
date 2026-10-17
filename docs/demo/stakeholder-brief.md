@@ -37,6 +37,10 @@ month would cost under £100 in model usage. Hosting and integration work are no
   instruction hidden in an email.
 - On 10 jobs it had never seen (17 decisions), it made an acceptable call every time, with no
   unsafe actions.
+- On 30 harder, unseen "escalation" jobs from a public hackathon, it answered all 30 in about
+  two minutes. It handled 85% of them correctly, including spotting a fake bank-detail change.
+  Its main weakness is that when it hands a job to a person, it often doesn't also update the
+  tenant or chase the contractor.
 
 ## What could go wrong
 

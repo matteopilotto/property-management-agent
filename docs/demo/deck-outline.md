@@ -91,7 +91,7 @@ case folder ──▶ loader (cuts the case at a decision point, hides the futur
 | Latency per case | ≤ 90 s | **15 s** (p95 19 s) |
 | Judge quality score | ≥ 3.5 / 5 | **4.34** |
 | Holdout (10 unseen cases, 17 decisions) | — | **100%** in the acceptable set, 65% exact (build set: 68% exact) |
-| Reality Test (unseen hackathon cases) | — | `[PENDING]` |
+| Reality Test (30 unseen hackathon cases) | — | **30/30 answered in 130 s**; correct outcome 85%, net 72%; agrees with the 8 teams' consensus on 22, partly on 5 |
 
 Speaker note: say the disclosure out loud. Three labels were widened after I saw the agent's
 answers. 92% is the figure on the original labels.
@@ -110,6 +110,15 @@ answers. 92% is the figure on the original labels.
 
 Speaker note: the model was the real safety layer on these cases. Probing is what showed the
 code layer was weaker than it looked.
+
+## 8b. The gateway's one real catch (Reality Test case 021)
+
+- The landlord says his plumber fixed the boiler, but the tenant hasn't confirmed. The agent
+  proposes to wait.
+- R5 blocks it: "no hot water" appears in five events.
+- The agent switches to asking the tenant to confirm today and updating the landlord. Its
+  reasoning: "Loss of hot water is flagged as a possible hazard, so I did not wait."
+- This is rules in code doing their job on a case nobody had seen.
 
 ## 9. One success, one failure (Phoenix traces)
 
@@ -146,9 +155,15 @@ why it rejected wait, what it wrote in the handover.
    until it could see the attachments and the playbook.
 4. **Most fixes were definitions, not model changes.** Two of the four agent errors came from
    one ambiguous word in a tool description.
+5. **Your eval only rewards what it measures.** Build eval: 95% right moves. Reality Test: the
+   move was rarely wrong, but 9 of 12 escalations sent nothing else, and other parties often
+   weren't updated. My labels required minimal actions, so "keep everyone informed" was never
+   scored.
 
 ## 12. What I'd build next
 
+- Score companion actions in the eval (update every affected party, chase alongside an
+  escalation), then teach the playbook to do them. This is the Reality Test's biggest gap.
 - Gate `close_case`, and make R5 check how soon the agent acts on a hazard, not just the label.
 - A human approval queue for held actions: the property manager's actual interface.
 - Plug into a real property-management system through MCP, so the tools hit live data.
