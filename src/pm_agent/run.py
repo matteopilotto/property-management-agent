@@ -224,6 +224,11 @@ async def run_cases(
     return await _bounded(jobs, concurrency)
 
 
+def case_path(case: str) -> Path:
+    """A decision point's case: a public case number, or a repo-relative folder path."""
+    return Path(case) if "/" in case else CASES_ROOT / case
+
+
 async def run_eval(
     run_id: str,
     gateway_mode: str,
@@ -240,7 +245,7 @@ async def run_eval(
         points = [p for p in points if p["id"] in only]
     jobs = [
         lambda point=point: run_case(
-            CASES_ROOT / point["case"],
+            case_path(point["case"]),
             RUNS / run_id / point["id"],
             case_id=point["id"],
             view_mode="eval",
@@ -267,6 +272,12 @@ def main(argv: list[str] | None = None) -> None:
         "--gateway", choices=["enforce", "observe"], default="enforce"
     )
     evaluate.add_argument("--only", nargs="+", metavar="dp_id")
+    evaluate.add_argument(
+        "--points",
+        type=Path,
+        default=DECISION_POINTS,
+        help="folder of decision-point files (default: eval/decision_points)",
+    )
     score = commands.add_parser("score", help="score an eval run")
     score.add_argument(
         "run_ids",
@@ -282,6 +293,12 @@ def main(argv: list[str] | None = None) -> None:
         metavar="observe_run_id",
         help="list an observe run's unsafe proposals next to approved prohibited actions",
     )
+    score.add_argument(
+        "--points",
+        type=Path,
+        default=DECISION_POINTS,
+        help="folder of decision-point files (default: eval/decision_points)",
+    )
     args = parser.parse_args(argv)
     load_dotenv()
     if args.command == "run":
@@ -290,10 +307,12 @@ def main(argv: list[str] | None = None) -> None:
         return
     if args.command == "eval":
         setup_tracing()
-        asyncio.run(run_eval(args.run_id, args.gateway, args.only))
+        asyncio.run(run_eval(args.run_id, args.gateway, args.only, args.points))
         return
     if args.command == "score":
         from pm_agent import scoring
 
-        raise SystemExit(scoring.cli(args.run_ids, args.judge, args.compare))
+        raise SystemExit(
+            scoring.cli(args.run_ids, args.judge, args.compare, args.points)
+        )
     print(f"{args.command}: not implemented")

@@ -9,9 +9,10 @@ from google.adk.models.base_llm import BaseLlm
 from google.adk.models.llm_response import LlmResponse
 from google.genai import types
 
+from pm_agent import run
 from pm_agent.agent import root_agent
 from pm_agent.render import FAILURE
-from pm_agent.run import cost_usd, run_cases, run_eval
+from pm_agent.run import DECISION_POINTS, cost_usd, main, run_cases, run_eval
 
 ROOT = Path(__file__).resolve().parents[1]
 CASES = ROOT / "HackatonPublicCases" / "Property Management"
@@ -195,6 +196,40 @@ def test_eval_runs_only_the_named_decision_point(tmp_path, monkeypatch, stub_age
     assert result["gateway_mode"] == "observe"
     assert result["actions"][0]["status"] == "approved"
     assert result["actions"][0]["would_status"] == "held"
+
+
+def test_eval_case_may_be_a_folder_path(tmp_path, monkeypatch, stub_agent):
+    shutil.copytree(CASES / "049", tmp_path / "eval" / "pressure" / "cases" / "P99")
+    points = tmp_path / "points"
+    points.mkdir()
+    (points / "P99.json").write_text(
+        json.dumps(
+            {"id": "P99", "case": "eval/pressure/cases/P99", "visible_through_event": 7}
+        )
+    )
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr("pm_agent.run.RUNS", tmp_path / "runs")
+    asyncio.run(
+        run_eval("r1", "enforce", None, decision_points=points, agent=stub_agent)
+    )
+    result = json.loads((tmp_path / "runs/r1/P99/result.json").read_text())
+    assert result["case_path"] == "eval/pressure/cases/P99"
+    assert result["error"] is None
+    assert "Flat 13, 103 Meadow Row" in (tmp_path / "runs/r1/P99/input.md").read_text()
+
+
+def test_eval_command_takes_a_points_folder(monkeypatch):
+    calls = []
+
+    async def fake_run_eval(run_id, gateway_mode, only, decision_points):
+        calls.append(decision_points)
+
+    monkeypatch.setattr(run, "run_eval", fake_run_eval)
+    monkeypatch.setattr(run, "setup_tracing", lambda: None)
+    monkeypatch.setattr(run, "load_dotenv", lambda *_: None)
+    main(["eval", "--run-id", "r1"])
+    main(["eval", "--run-id", "r1", "--points", "eval/pressure/decision_points"])
+    assert calls == [DECISION_POINTS, Path("eval/pressure/decision_points")]
 
 
 @pytest.mark.live

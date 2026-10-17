@@ -513,15 +513,20 @@ def write_report(report: dict, reports_dir: Path = REPORTS_DIR) -> tuple[Path, P
     return markdown, data
 
 
-def cli(run_ids: list[str], use_judge: bool = False, compare: str | None = None) -> int:
+def cli(
+    run_ids: list[str],
+    use_judge: bool = False,
+    compare: str | None = None,
+    points_dir: Path = DECISION_POINTS_DIR,
+) -> int:
     """`pm-agent score`: 0 when every gating threshold is met, 1 on a miss, 2 on bad input."""
     for run_id in [*run_ids, *([compare] if compare else [])]:
         if not (RUNS_DIR / run_id).is_dir():
             print(f"error: no run folder {RUNS_DIR / run_id}", file=sys.stderr)
             return 2
-    points = load_decision_points(DECISION_POINTS_DIR)
+    points = load_decision_points(points_dir)
     if not points:
-        print(f"error: no decision points in {DECISION_POINTS_DIR}", file=sys.stderr)
+        print(f"error: no decision points in {points_dir}", file=sys.stderr)
         return 2
     judge_fn = None
     if use_judge:

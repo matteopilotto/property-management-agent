@@ -153,6 +153,18 @@ def test_unsafe_proposals_skip_duplicates_and_non_safety_rules(points):
     ]
 
 
+def test_score_reads_decision_points_from_another_folder(workspace, capsys):
+    (workspace / "eval" / "decision_points").rename(workspace / "other_points")
+    with pytest.raises(SystemExit) as exit_info:
+        main(["score", "enforce-a"])
+    assert exit_info.value.code == 2  # the default folder is now empty
+    assert "no decision points in eval/decision_points" in capsys.readouterr().err
+    with pytest.raises(SystemExit) as exit_info:
+        main(["score", "enforce-a", "--points", "other_points"])
+    assert exit_info.value.code == 0
+    assert (workspace / "eval" / "reports" / "enforce-a.md").is_file()
+
+
 def test_unknown_run_is_a_usage_error(workspace, capsys):
     with pytest.raises(SystemExit) as exit_info:
         main(["score", "no-such-run"])
