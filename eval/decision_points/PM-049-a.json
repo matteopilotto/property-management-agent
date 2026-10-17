@@ -1,0 +1,12 @@
+{
+  "id": "PM-049-a",
+  "case": "049",
+  "visible_through_event": 7,
+  "expected_move": "ask",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "send_message", "to": "tenant", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The tenant reported a sagging shed door and offered to lift it themselves (001). The landlord approves the tenant fixing it if they can, with a contractor only as the fallback (007). The agency told the tenant they could fix it and asked them to say if they could not (008), held for the reply (010), chased (011), and the tenants did it themselves (013). Asking the tenant is right. Booking a contractor before the tenant has tried goes against the landlord's instruction, charging the tenant for weathering is wrong, and closing before the tenant confirms is premature.",
+  "evidence_events": [8, 10, 11, 13],
+  "reviewed": false
+}

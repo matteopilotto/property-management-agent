@@ -1,0 +1,12 @@
+{
+  "id": "PM-001-a",
+  "case": "001",
+  "visible_through_event": 19,
+  "expected_move": "wait",
+  "acceptable_moves": ["ask"],
+  "required_actions": [{"tool": "schedule_followup"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "close_case"}, {"tool": "charge_tenant"}],
+  "rationale": "Routine communal gardening with no hazard. The landlord is getting quotes from his own contractor (events 007, 011, 015) and was chased at 017; the 3-day timer has lapsed (019). The agency re-set a 3-day wait (020) and the landlord replied the next day agreeing to proceed (022). Chasing the landlord again is also reasonable. Booking is wrong: there is no approval and the landlord is using his own contractor.",
+  "evidence_events": [20, 21, 22],
+  "reviewed": false
+}

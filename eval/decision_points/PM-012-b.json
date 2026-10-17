@@ -1,0 +1,12 @@
+{
+  "id": "PM-012-b",
+  "case": "012",
+  "visible_through_event": 11,
+  "expected_move": "act",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "book_contractor"}],
+  "prohibited_actions": [{"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The tenant has done every troubleshooting check and the door still does not close (011), and a note records that the landlord already agreed to an engineer attending (008). The property manager instructed an engineer 'as previously agreed' (012), the visit was booked (016, 017), and the engineer fixed a prematurely engaged door lock (024). Nothing suggests tenant fault, so a charge is wrong, and the fault is unresolved, so closing is wrong.",
+  "evidence_events": [12, 13, 17, 24],
+  "reviewed": false
+}

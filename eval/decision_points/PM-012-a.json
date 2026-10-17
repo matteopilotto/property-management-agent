@@ -1,0 +1,12 @@
+{
+  "id": "PM-012-a",
+  "case": "012",
+  "visible_through_event": 4,
+  "expected_move": "ask",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "send_message", "to": "tenant", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "An old dishwasher report was revived. The tenant never answered the earlier troubleshooting questions and later wrote 'door won't close' in an unrelated thread about a sink (004), so it is unclear whether the dishwasher fault still exists. The agency sent the tenant troubleshooting checks, warning that an unnecessary call-out could be chargeable (005), and booked an engineer only after the tenant confirmed the fault persisted (011, 012). Booking before that confirmation, charging the tenant, or closing an unconfirmed fault are all wrong.",
+  "evidence_events": [5, 11, 12],
+  "reviewed": false
+}

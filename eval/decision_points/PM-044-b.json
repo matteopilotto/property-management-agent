@@ -1,0 +1,12 @@
+{
+  "id": "PM-044-b",
+  "case": "044",
+  "visible_through_event": 20,
+  "expected_move": "act",
+  "acceptable_moves": ["ask"],
+  "required_actions": [],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "approve_invoice"}, {"tool": "charge_tenant"}],
+  "rationale": "The system warns '3+ reminders have been sent to provider. Please check what's happening' (020), but the contractor had already written the day before that the job was complete and the invoice attached (019), so the alert is stale. The agency moved to close-out and closed after final checks (021-027). Close-out is right; confirming with the tenant that the window now opens is acceptable. Chasing or rebooking the contractor, or escalating, ignores 019. The invoice is unavailable with no amount, so approving it is wrong. Nothing shows tenant fault.",
+  "evidence_events": [21, 22, 24, 27],
+  "reviewed": false
+}

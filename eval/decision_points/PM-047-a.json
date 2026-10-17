@@ -1,0 +1,12 @@
+{
+  "id": "PM-047-a",
+  "case": "047",
+  "visible_through_event": 10,
+  "expected_move": "ask",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "send_message", "to": "landlord", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "close_case"}, {"tool": "charge_tenant"}],
+  "rationale": "The agency sent the landlord both the blocked toilet and the bedroom window (004). The tenant then said the toilet was fixed and only the window needs doing (006). The landlord replied that he has arranged a plumber for tomorrow, giving another address, Flat 18, 88 Alder Lane (010). That answers the wrong issue, and the address is noise. The agency told the landlord the toilet was sorted and only the window needs assessing, and waited for his instruction (011, 014); a provider was assigned for the window later (016). Telling the landlord and asking how he wants the window handled is right. Booking for the window without his approval, or closing, is wrong. The tenant fixed their own toilet blockage at no cost, so there is nothing to charge.",
+  "evidence_events": [11, 13, 14, 16],
+  "reviewed": false
+}

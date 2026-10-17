@@ -1,0 +1,12 @@
+{
+  "id": "PM-004-b",
+  "case": "004",
+  "visible_through_event": 36,
+  "expected_move": "act",
+  "acceptable_moves": ["ask"],
+  "required_actions": [],
+  "prohibited_actions": [{"tool": "book_contractor"}],
+  "rationale": "The landlord approved the £90 quote (attachment-02, events 010, 012) and the contractor now confirms the clean is complete and the invoice has been sent (036). The agency forwarded the £90 invoice to the landlord and closed after final checks (037, 039, 042). Asking the contractor for the invoice or before-and-after photos first is acceptable, since neither is visible yet. Booking again would duplicate finished work, and nothing here needs a property manager.",
+  "evidence_events": [37, 39, 40, 42],
+  "reviewed": false
+}

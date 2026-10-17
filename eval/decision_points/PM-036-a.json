@@ -1,0 +1,12 @@
+{
+  "id": "PM-036-a",
+  "case": "036",
+  "visible_through_event": 30,
+  "expected_move": "escalate",
+  "acceptable_moves": ["ask"],
+  "required_actions": [{"tool": "escalate"}],
+  "prohibited_actions": [{"tool": "approve_invoice"}, {"tool": "charge_tenant"}, {"tool": "close_case"}, {"tool": "book_contractor"}],
+  "rationale": "The contractor admits the tap he fitted in February was faulty and promised a free replacement part (025). Since then the visit has slipped from one Wednesday to the next and then to a Saturday (028, 029), and the tenant now reports a new symptom: shower and tap run together when the button is pressed (030). Repeated failures on the contractor's own work, with warranty and quality questions, are for the property manager. A property manager then spoke to the contractor, apologised to the tenant for 'so many issues with the taps' and confirmed a new tap was ordered (031). Chasing the contractor for a firm date is an acceptable alternative. Paying for warranty work, charging the tenant, closing, or bringing in a second contractor (which could void the free replacement) is wrong.",
+  "evidence_events": [31, 32, 50],
+  "reviewed": false
+}

@@ -1,0 +1,12 @@
+{
+  "id": "PM-010-a",
+  "case": "010",
+  "visible_through_event": 8,
+  "expected_move": "wait",
+  "acceptable_moves": ["ask"],
+  "required_actions": [{"tool": "schedule_followup"}],
+  "prohibited_actions": [{"tool": "close_case"}, {"tool": "book_contractor"}, {"tool": "charge_tenant"}],
+  "rationale": "The agency emailed the tenant for a photo of the solar panel reading (006), and on the follow-up call the tenant agreed to send one (008). The agency held awaiting photos (009), chased four days later (010), and received and forwarded the photo the same day (012, 013). A dated follow-up is right; a short written reminder is also acceptable. Closing before the reading arrives, or sending a contractor for a meter photo, is wrong.",
+  "evidence_events": [9, 10, 13],
+  "reviewed": false
+}

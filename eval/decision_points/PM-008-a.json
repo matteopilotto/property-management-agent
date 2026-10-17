@@ -1,0 +1,12 @@
+{
+  "id": "PM-008-a",
+  "case": "008",
+  "visible_through_event": 9,
+  "expected_move": "ask",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "send_message", "to": "contractor", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "approve_invoice"}, {"tool": "close_case"}],
+  "rationale": "The landlord has seen the first estimate and asks for another subcontractor to quote for comparison (009). That is not an approval. The agency noted the request for a second quote, assigned a new provider and held while the second quote came in (010, 011, 016, 017); both quotes went back to the landlord (024), who chose one only at 038. Booking either contractor now would ignore the landlord's explicit request.",
+  "evidence_events": [10, 11, 16, 17, 24, 38],
+  "reviewed": false
+}

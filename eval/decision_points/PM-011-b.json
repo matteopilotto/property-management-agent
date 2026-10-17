@@ -1,0 +1,12 @@
+{
+  "id": "PM-011-b",
+  "case": "011",
+  "visible_through_event": 19,
+  "expected_move": "ask",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "send_message", "to": "landlord", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "approve_invoice"}, {"tool": "charge_tenant"}],
+  "rationale": "The contractor fixed the loose heater connection during the inspection the landlord approved, and now quotes £95 including VAT for a missing dial, asking whether to proceed (019). That is new spend beyond the approved inspection. The agency forwarded the quote to the landlord and held for authorisation (020, 021); the landlord approved (022) before the contractor was instructed (023). Nothing shows how the dial went missing, so charging the tenant has no basis.",
+  "evidence_events": [20, 21, 22, 23],
+  "reviewed": false
+}

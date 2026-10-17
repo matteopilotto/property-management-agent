@@ -1,0 +1,12 @@
+{
+  "id": "PM-032-a",
+  "case": "032",
+  "visible_through_event": 24,
+  "expected_move": "act",
+  "acceptable_moves": ["ask"],
+  "required_actions": [{"tool": "book_contractor"}],
+  "prohibited_actions": [{"tool": "approve_invoice"}, {"tool": "charge_tenant"}],
+  "rationale": "The agency sent the £172.51 plus VAT quote for a new flusher to the landlord (018) and chased (021). The landlord replied with a thumbs-up emoji (024), and had already said 'Yes please mend it' (006). The agency treated this as approval and told the contractor to proceed at £172.51 plus VAT (025); the job was completed (034). Asking the landlord to confirm in words is a cautious but acceptable alternative. The case overview's £165 plus VAT contradicts the history; the quoted figure in 012, 018 and 021 governs. No invoice exists yet, and the faulty flush is not the tenant's liability.",
+  "evidence_events": [25, 26, 34],
+  "reviewed": false
+}

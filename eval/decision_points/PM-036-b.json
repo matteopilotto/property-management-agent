@@ -1,0 +1,12 @@
+{
+  "id": "PM-036-b",
+  "case": "036",
+  "visible_through_event": 43,
+  "expected_move": "ask",
+  "acceptable_moves": ["wait", "escalate"],
+  "required_actions": [{"tool": "send_message", "to": "contractor", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "approve_invoice"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "After five weeks of repeat visits for a faulty tap the contractor himself fitted (025, 031), the landlord complains about the delay and the missing photos, and notes the taps are under guarantee (043). The fitting is booked for early November, though the dates disagree: the contractor says Wednesday 4th (039), the agency told the landlord 03/11/26 (041). The agency chased the contractor for an update, photos and confirmation of the work (045-048), and the contractor confirmed the new tap was fitted at no charge because it was his faulty part (050). Asking the contractor for photos and confirmation of no charge is right; holding until after the booked visit, or handing the landlord's complaint to the property manager, is also reasonable. Paying for warranty work, charging the tenant, or closing without photos is wrong.",
+  "evidence_events": [45, 46, 48, 50, 51],
+  "reviewed": false
+}

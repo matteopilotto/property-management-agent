@@ -1,0 +1,12 @@
+{
+  "id": "PM-040-a",
+  "case": "040",
+  "visible_through_event": 9,
+  "expected_move": "wait",
+  "acceptable_moves": ["ask"],
+  "required_actions": [{"tool": "schedule_followup"}, {"tool": "send_message", "to": "landlord", "purpose": "update"}],
+  "prohibited_actions": [{"tool": "close_case"}, {"tool": "charge_tenant"}],
+  "rationale": "Two messages crossed. The tenant swapped in his own machine, put the faulty one in the garage and is leaving on holiday (008), while the landlord agreed to someone checking the machine (009). The agency told the tenant it would arrange a check after his return (010) but then closed the case with 'no further action' (011, 012), and four days later the landlord asked for an update and whether anything was needed from him (013). The open items are the landlord's approved inspection and the fact that the landlord did not know about the swap. The right move is to tell the landlord what happened and set a dated follow-up for after the holiday; asking the landlord whether he still wants the inspection is also acceptable. Closing with those items open is wrong, and the tenant has done nothing chargeable.",
+  "evidence_events": [10, 11, 12, 13],
+  "reviewed": false
+}

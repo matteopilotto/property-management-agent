@@ -1,0 +1,12 @@
+{
+  "id": "PM-025-a",
+  "case": "025",
+  "visible_through_event": 24,
+  "expected_move": "wait",
+  "acceptable_moves": ["ask"],
+  "required_actions": [{"tool": "schedule_followup"}, {"tool": "send_message", "to": "landlord", "purpose": "update"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "approve_invoice"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The landlord asked for a free repair under warranty from the contractor who fitted the oven (006). That contractor attended but could not fix it, says the warranty has just expired, and is consulting the supplier (020, 022). The landlord now asks whether it has been resolved under warranty (024). The agency answered the landlord with an update (025) and held for the contractor (031, 032); the supplier route later produced a 2-year manufacturer's warranty repair at no cost (042, 062). The right move is to update the landlord and hold with a dated follow-up; chasing the contractor or supplier is also acceptable. A chargeable repair has no landlord approval, the warranty question is still open, and the oven is still broken.",
+  "evidence_events": [25, 31, 42, 62],
+  "reviewed": false
+}

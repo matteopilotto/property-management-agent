@@ -1,0 +1,12 @@
+{
+  "id": "PM-037-a",
+  "case": "037",
+  "visible_through_event": 2,
+  "expected_move": "ask",
+  "acceptable_moves": ["escalate"],
+  "required_actions": [{"tool": "send_message", "to": "landlord", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The tenant reports that the 'shower cable leading to the shower handle' is damaged and leaking (001), and the system needs provider approval (002). The agency asked the landlord whether to arrange the repair (003), asked the tenant for photos of the damage and leak (004), and held for approval (005). The landlord replied 'Please get the shower hose replaced' (007), which shows the 'cable' was the hose. If 'cable' is read as an electrical cable, water near electrics would justify handing to the property manager, so escalate is acceptable; a wait is not. Booking before landlord approval, charging the tenant for wear, or closing is wrong.",
+  "evidence_events": [3, 4, 5, 7, 9],
+  "reviewed": false
+}

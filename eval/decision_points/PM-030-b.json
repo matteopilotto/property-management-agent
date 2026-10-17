@@ -1,0 +1,12 @@
+{
+  "id": "PM-030-b",
+  "case": "030",
+  "visible_through_event": 39,
+  "expected_move": "act",
+  "acceptable_moves": ["ask"],
+  "required_actions": [],
+  "prohibited_actions": [{"tool": "charge_tenant"}, {"tool": "approve_invoice"}],
+  "rationale": "The contractor missed the confirmed visit (034, 037) but has now reported completion: a new ball valve fitted to the toilet, and the tenants say the basin taps are fine (039). The agency recorded that the landlord pays the contractor directly and completed the task without payment (040, 041). Moving to close-out is right; confirming with the tenant first is acceptable. No quote or invoice amount is visible, so there is nothing to approve, and the faults are not the tenant's.",
+  "evidence_events": [40, 41],
+  "reviewed": false
+}

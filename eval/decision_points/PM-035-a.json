@@ -1,0 +1,12 @@
+{
+  "id": "PM-035-a",
+  "case": "035",
+  "visible_through_event": 9,
+  "expected_move": "wait",
+  "acceptable_moves": ["ask"],
+  "required_actions": [{"tool": "schedule_followup"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "close_case"}, {"tool": "charge_tenant"}],
+  "rationale": "The landlord has the shower photo and will get the parts and fit them himself (004-006); the tenant acknowledged (009). The agency held to check the landlord had done it (007, 010), and the landlord rang the same day to confirm it was sorted (011, 012). A dated follow-up with the landlord is right; asking the landlord to confirm when it is done is also fine. Booking the agency's contractor would duplicate the landlord's own repair, closing before confirmation is premature, and a worn hose is not the tenant's liability.",
+  "evidence_events": [10, 11, 12, 13],
+  "reviewed": false
+}

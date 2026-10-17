@@ -1,0 +1,12 @@
+{
+  "id": "PM-014-a",
+  "case": "014",
+  "visible_through_event": 9,
+  "expected_move": "ask",
+  "acceptable_moves": ["escalate"],
+  "required_actions": [{"tool": "send_message", "to": "tenant", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "close_case"}, {"tool": "charge_tenant"}],
+  "rationale": "The front door has to be slammed and the door and frame wobble, and a visiting contractor warned the glass could shatter (initial request, 004). The landlord replied with a workaround (open the latch with the key before closing) and offered a contractor next month (009). The agency relayed the workaround to the tenant and asked her to try it (011); she confirmed it worked and agreed to monitor (012), and the job was closed (013-015). Because of the glass risk, handing the landlord's one-month deferral to the property manager is also defensible, but a wait is not. The landlord has not approved a contractor now, and closing before the tenant confirms the workaround is wrong.",
+  "evidence_events": [10, 11, 12, 13],
+  "reviewed": false
+}

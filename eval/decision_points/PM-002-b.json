@@ -1,0 +1,12 @@
+{
+  "id": "PM-002-b",
+  "case": "002",
+  "visible_through_event": 43,
+  "expected_move": "escalate",
+  "acceptable_moves": ["wait"],
+  "required_actions": [{"tool": "escalate"}],
+  "prohibited_actions": [{"tool": "approve_invoice"}, {"tool": "charge_tenant"}, {"tool": "book_contractor"}],
+  "rationale": "The toilet replacement is reported complete (034), and the request passed final checks and was closed (036-040). Yet the system keeps changing it (041, 042) and has now auto-paused it for an overdue hold deadline (043). The record contradicts itself in a way the agent cannot fix. Staff posted in the property-manager questions channel that the closed job keeps returning to the dashboard (044), held it 'due to system issues' (045), and a supervisor completed it (049). Handing it to the property manager is right; a dated hold while that happens is acceptable. The invoice is unavailable with no amount, the work is done, and the tenant is not liable.",
+  "evidence_events": [44, 45, 49],
+  "reviewed": false
+}

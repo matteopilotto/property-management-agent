@@ -1,0 +1,12 @@
+{
+  "id": "PM-007-b",
+  "case": "007",
+  "visible_through_event": 33,
+  "expected_move": "escalate",
+  "acceptable_moves": ["ask"],
+  "required_actions": [{"tool": "escalate"}],
+  "prohibited_actions": [{"tool": "approve_invoice"}, {"tool": "charge_tenant"}],
+  "rationale": "The approved quote was £198.37 plus VAT, which is £238.04, from Clarke (008, 009, 011). The invoice now visible (033, attachment-02) is £240.00 (£200.00 plus VAT) from a differently named supplier, Willow Homes, and it has already gone to the landlord for payment. The agency then closed without reconciling either point (034-037) and noted there were no before-and-after photos (035). Closing is the lenient path; the money and supplier mismatch should go to the property manager, or the contractor should be asked to explain or reissue it. Approving an invoice above the approved quote is wrong.",
+  "evidence_events": [34, 35, 36, 37],
+  "reviewed": false
+}

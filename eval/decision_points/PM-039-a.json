@@ -1,0 +1,12 @@
+{
+  "id": "PM-039-a",
+  "case": "039",
+  "visible_through_event": 6,
+  "expected_move": "ask",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "send_message", "to": "landlord", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The washing machine clicks when spinning but still works (001). Asked to rule out something loose in the drum (003), the tenant confirms it is a mechanical clicking and offers a video (006). Troubleshooting is done, and no landlord reply is visible. The agency told the tenant it had asked the landlord (007) and held 'Waiting to hear back from LL' (008); an appliance engineer was assigned three days later (009, 010). Asking the landlord for approval is right. Booking before any landlord approval is visible, charging the tenant for a mechanical fault, or closing while the fault persists is wrong.",
+  "evidence_events": [7, 8, 9, 10],
+  "reviewed": false
+}
