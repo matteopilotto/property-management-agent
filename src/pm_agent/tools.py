@@ -165,9 +165,11 @@ def send_message(
     body: str,
     purpose: Literal["request", "instruct", "update"],
 ) -> dict:
-    """Draft a message to one party. purpose: request = ask for information or a
-    decision (including chasing); instruct = tell a contractor to do work or confirm
-    a visit; update = inform only. Messages to the landlord or contractor must
+    """Draft a message to one party. purpose: request = ask for information, a quote
+    or a decision, including chasing and asking a contractor for a quote, a date or
+    progress on a job it already has; instruct = commit a contractor to attend or do
+    work the landlord has approved, or forward an invoice to the landlord for
+    payment; update = inform only. Messages to the landlord or contractor must
     include the case property address with its postcode."""
 
 

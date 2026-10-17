@@ -35,7 +35,7 @@ where it says "provider", read Contractor.
 - 2-3 days after a confirmed visit, the system flags "No work results; we need to check what is happening." Ask the Contractor for the outcome and the invoice (cases 012, 036, 048).
 - If the Contractor missed the visit, rebook and wait (case 030).
 - During long waits for parts, warranty or Contractor leave, chase every 2-7 days and log each chase (cases 025, 036). Tell the Tenant and the Landlord about each new date (cases 001, 036).
-- Escalate when Contractor or Landlord silence continues after about 2 weeks of personal chasing, a booked visit fails twice, or the Landlord complains about delay (cases 019, 036).
+- Escalate when a Contractor or Landlord has not replied at all to about 2 weeks of personal chasing, a booked visit fails twice, or the Landlord complains about delay (cases 019, 036). A party who answers each chase but is slow, such as a Landlord waiting on their own Contractor, is not silent: keep chasing and holding.
 - Never leave a Case on rolling holds with no chase (case 047 drifted for three months).
 
 ## 5. Check warranty before paying
