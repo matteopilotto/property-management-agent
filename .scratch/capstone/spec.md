@@ -167,7 +167,9 @@ Action tools (all go through the gateway):
 - `escalate(reason, handover_note: {known, conflicts, done, needed})`
 
 Final tool, called exactly once: `submit_decision(next_move, summary, answer_to_question,
-reasoning: {facts, conflicts, missing, options_rejected, uncertainty})`. Facts cite event
+facts, conflicts, missing, options_rejected, uncertainty)`. The arguments are flat because
+Claude sometimes serialised a nested `reasoning` object as a string of raw parameter
+markup; the runner assembles them into `result.json`'s `reasoning` object. Facts cite event
 numbers or attachment names. Code checks that `next_move` matches the actions by the glossary
 precedence (escalate > act > ask > wait), and blocks with an explanation if not:
 

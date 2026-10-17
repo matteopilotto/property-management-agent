@@ -219,19 +219,15 @@ def escalate(reason: str, handover_note: HandoverNote) -> dict:
     what conflicts, what was done and what decision or action is needed."""
 
 
-class Reasoning(BaseModel):
-    facts: list[str]
-    conflicts: list[str]
-    missing: list[str]
-    options_rejected: list[str]
-    uncertainty: str
-
-
 def submit_decision(
     next_move: Literal["act", "ask", "wait", "escalate"],
     summary: str,
     answer_to_question: str | None,
-    reasoning: Reasoning,
+    facts: list[str],
+    conflicts: list[str],
+    missing: list[str],
+    options_rejected: list[str],
+    uncertainty: str,
 ) -> dict:
     """Submit the next move, exactly once, after recording its actions. Facts cite
     event numbers or attachment names. answer_to_question answers the case's

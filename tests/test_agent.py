@@ -118,7 +118,7 @@ def test_gateway_answers_actions_and_rejects_a_contradicting_move(tmp_path):
                     next_move="ask",
                     summary="Ask the contractor.",
                     answer_to_question=None,
-                    reasoning=REASONING,
+                    **REASONING,
                 ),
             ],
             [
@@ -127,7 +127,7 @@ def test_gateway_answers_actions_and_rejects_a_contradicting_move(tmp_path):
                     next_move="escalate",
                     summary="Invoice exceeds the quote; property manager decides.",
                     answer_to_question=None,
-                    reasoning=REASONING,
+                    **REASONING,
                 )
             ],
         ]

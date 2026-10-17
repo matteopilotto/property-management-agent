@@ -86,18 +86,15 @@ class CaseStub(BaseLlm):
                 "options_rejected": ["act: liability unknown."],
                 "uncertainty": "Medium.",
             }
-            case_id = responses[0]["case_id"]
-            if case_id == "json-string":  # seen from Claude in eval run fix-1
-                reasoning = json.dumps(reasoning)
-            elif case_id == "free-text":
-                reasoning = "Event 1: request received."
+            if responses[0]["case_id"] == "bare-string":
+                reasoning["facts"] = "Event 1: request received."
             parts = [
                 call(
                     "submit_decision",
                     next_move="escalate",
                     summary="Liability is unclear; the property manager decides.",
                     answer_to_question=None,
-                    reasoning=reasoning,
+                    **reasoning,
                 )
             ]
         yield LlmResponse(
@@ -219,22 +216,17 @@ def test_live_eval_runs_one_decision_point(tmp_path, monkeypatch):
     assert result["cost_usd"] > 0
 
 
-def test_malformed_reasoning_is_rendered_not_fatal(tmp_path, stub_agent):
+def test_a_bare_string_list_argument_becomes_one_item(tmp_path, stub_agent):
     cases = tmp_path / "cases"
-    for name in ("json-string", "free-text"):
-        shutil.copytree(CASES / "049", cases / name)
+    shutil.copytree(CASES / "049", cases / "bare-string")
     out = tmp_path / "ANSWERS"
 
-    results = asyncio.run(run_cases(cases, out, 2, "enforce", agent=stub_agent))
+    [result] = asyncio.run(run_cases(cases, out, 1, "enforce", agent=stub_agent))
 
-    assert [(r["id"], r["error"]) for r in results] == [
-        ("free-text", None),
-        ("json-string", None),
-    ]
-    for name in ("json-string", "free-text"):
-        assert {p.name for p in (out / name).iterdir()} == FILES
-        reasoning = (out / name / "REASONING.md").read_text()
-        assert "## Facts\n\n- Event 1: request received." in reasoning
+    assert result["error"] is None
+    assert result["reasoning"]["facts"] == ["Event 1: request received."]
+    reasoning = (out / "bare-string" / "REASONING.md").read_text()
+    assert "## Facts\n\n- Event 1: request received." in reasoning
 
 
 def test_a_rendering_crash_still_writes_every_file(tmp_path, monkeypatch, stub_agent):

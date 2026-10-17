@@ -83,7 +83,7 @@ async def run_case(
     if error is not None:
         decision = None
     if decision is not None:
-        decision = {**decision, "reasoning": _reasoning(decision.get("reasoning"))}
+        decision = {**decision, "reasoning": _reasoning(decision)}
     result = {
         "id": case_id,
         "case_path": str(case_path),
@@ -137,23 +137,15 @@ ACTION_KEYS = ("seq", "tool", "args", "status", "would_status", "rule", "reason"
 REASONING_LISTS = ("facts", "conflicts", "missing", "options_rejected")
 
 
-def _reasoning(value) -> dict:
-    """Claude sometimes sends reasoning as a JSON string or free text, not an object."""
-    if isinstance(value, str):
-        try:
-            value = json.loads(value)
-        except ValueError:
-            value = {"facts": [value]}
-    if not isinstance(value, dict):
-        value = {} if value is None else {"facts": [str(value)]}
-    return {
-        **value,
-        **{
-            key: [value[key]]
-            for key in REASONING_LISTS
-            if isinstance(value.get(key), str)
-        },
+def _reasoning(decision: dict) -> dict:
+    """The result's reasoning object, from submit_decision's flat arguments. A list
+    argument sent as a bare string becomes a one-item list."""
+    lists = {
+        key: [value] if isinstance(value, str) else value or []
+        for key in REASONING_LISTS
+        for value in [decision.get(key)]
     }
+    return {**lists, "uncertainty": decision.get("uncertainty") or ""}
 
 
 async def _run_agent(
