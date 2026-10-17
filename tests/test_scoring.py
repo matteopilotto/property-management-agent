@@ -193,3 +193,21 @@ def test_judge_scores_are_reported_but_never_gate(workspace, monkeypatch):
     markdown = (workspace / "eval" / "reports" / "enforce-a.md").read_text()
     assert "| Judge mean (1-5) | 1.00 | >= 3.5 | no, reported only | MISS |" in markdown
     assert "| 1/1/1 |" in markdown
+
+
+def test_judge_sees_attachment_text_and_the_playbook(tmp_path):
+    folder = tmp_path / "PM-004-x"
+    folder.mkdir()
+    (folder / "input.md").write_text(
+        "# Case 004\n\n## Attachments\n\n- attachment-03-cleaning-invoice.pdf\n"
+    )
+    result = {
+        "case_path": "HackatonPublicCases/Property Management/004",
+        "next_move": "act",
+    }
+    seen = []
+    scoring._judge_row(
+        {"rationale": "r"}, folder, result, lambda case, *_: seen.append(case) or {}
+    )
+    assert "Invoice date: 14/11/2025." in seen[0]
+    assert "# Agency playbook" in seen[0]

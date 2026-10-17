@@ -1,6 +1,7 @@
 """Deterministic scorer, ablation view and report for eval runs (spec §2, §9.1, §10)."""
 
 import json
+import re
 import statistics
 import sys
 from collections.abc import Callable
@@ -10,6 +11,7 @@ import openai
 from dotenv import find_dotenv, load_dotenv
 
 from pm_agent import judge
+from pm_agent.gateway import pdf_text
 
 # Spec §2 success criteria, declared before any run.
 MOVE_ACCURACY_MIN = 0.70
@@ -22,6 +24,7 @@ JUDGE_MEAN_TARGET = 3.5  # reported only, never gates
 RUNS_DIR = Path("runs")
 DECISION_POINTS_DIR = Path("eval/decision_points")
 REPORTS_DIR = Path("eval/reports")
+PLAYBOOK = (Path(__file__).parent / "playbook.md").read_text(encoding="utf-8")
 
 # Statuses under which the gateway recorded the action (held awaits the property manager).
 RECORDED = {"approved", "held"}
@@ -158,11 +161,24 @@ def _judge_row(point: dict, folder: Path, result: dict, judge_fn: Judge) -> dict
         return {"error": "no input.md"}
     try:
         return judge_fn(
-            case_path.read_text(), point["rationale"], _agent_output(result)
+            _evidence(case_path, result), point["rationale"], _agent_output(result)
         )
     except (openai.OpenAIError, ValueError, TypeError) as error:
         # The judge never gates: record its failure on this row and move on.
         return {"error": f"{type(error).__name__}: {error}"}
+
+
+def _evidence(input_md: Path, result: dict) -> str:
+    """What the agent could know: the visible case, its attachments' text and the playbook.
+    Without the last two the judge marks correct attachment facts and playbook rules as invented."""
+    shown = input_md.read_text()
+    listed = shown.partition("## Attachments")[2]
+    parts = [shown]
+    for name in re.findall(r"^- (\S+\.pdf)$", listed, re.MULTILINE):
+        path = Path(result.get("case_path") or "") / "attachments" / name
+        parts.append(f"# Attachment text: {name}\n\n{pdf_text(path) or '(unreadable)'}")
+    parts.append(f"# Agency playbook (the agent's standing instructions)\n\n{PLAYBOOK}")
+    return "\n\n".join(parts)
 
 
 def _failure_reasons(row: dict) -> list[str]:
