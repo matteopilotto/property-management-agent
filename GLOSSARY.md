@@ -45,7 +45,7 @@ The single choice made at a decision point: **act**, **ask**, **wait** or **esca
 _Avoid_: Decision, outcome, resolution
 
 **Act**:
-The agency moves the job forward itself, for example by instructing a contractor, forwarding a quote or invoice to the landlord, confirming a visit or closing the job.
+The agency moves the job forward itself, for example by instructing a contractor, forwarding an invoice to the landlord for payment, confirming a visit or closing the job. Sending a quote to the landlord for approval is ask, not act.
 
 **Ask**:
 The agency requests missing information or a decision from the tenant, landlord or contractor, including chasing a party already asked.
