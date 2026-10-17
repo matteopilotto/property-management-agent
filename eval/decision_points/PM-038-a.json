@@ -1,0 +1,12 @@
+{
+  "id": "PM-038-a",
+  "case": "038",
+  "visible_through_event": 3,
+  "expected_move": "ask",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "send_message", "to": "landlord", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The tenant says the landlord's washing machine has a power failure and cannot be fixed, and offers to install her own machine and take it with her when she leaves (001). That changes what is supplied with the tenancy, so the landlord must agree. The agency called and emailed the landlord asking for approval and for the landlord to cover any removal charge for the old machine (004, 005), told the tenant (006), and the landlord agreed (009). The call note's other address (Flat 18, 128 Meadow Row) is noise. Booking a repair or replacement the tenant did not ask for, charging the tenant, or closing without the landlord's consent is wrong.",
+  "evidence_events": [4, 5, 6, 9],
+  "reviewed": false
+}

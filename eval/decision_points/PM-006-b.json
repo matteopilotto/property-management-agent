@@ -1,0 +1,12 @@
+{
+  "id": "PM-006-b",
+  "case": "006",
+  "visible_through_event": 15,
+  "expected_move": "act",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "book_contractor"}],
+  "prohibited_actions": [{"tool": "approve_invoice"}, {"tool": "charge_tenant"}],
+  "rationale": "The agency sent the itemised quote (£220 paint, £240 carpet, £100 vinyl, £45 sink waste, £605 in total) to the landlord (013) and the landlord replied 'Pls go ahead' (015). The agency then confirmed the approval to the contractor and asked for start and completion dates (016); the work was completed (020). No invoice exists yet. Charging the outgoing tenant for the burnt carpet is a deposit matter that is not raised in the visible record, and nothing here needs a property manager.",
+  "evidence_events": [16, 17, 20],
+  "reviewed": false
+}

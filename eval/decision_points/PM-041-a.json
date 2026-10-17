@@ -1,0 +1,12 @@
+{
+  "id": "PM-041-a",
+  "case": "041",
+  "visible_through_event": 21,
+  "expected_move": "wait",
+  "acceptable_moves": ["ask"],
+  "required_actions": [{"tool": "schedule_followup"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The landlord is handling the washing machine through his own people. His operative could not fix it, so he has passed the tenant's details to the company that fitted the machine in 2021 and will 'keep you posted' (021). The agency held to check progress with the landlord (022), and three days later the landlord confirmed the machine was fixed (023). A dated follow-up is right; asking the landlord for an expected repair date is acceptable. Booking the agency's contractor would duplicate the landlord's arrangement, the tenant already did the troubleshooting asked of them (009, 014), and the machine is still broken.",
+  "evidence_events": [22, 23, 24],
+  "reviewed": false
+}

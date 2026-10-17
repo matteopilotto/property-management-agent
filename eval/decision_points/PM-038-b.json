@@ -1,0 +1,12 @@
+{
+  "id": "PM-038-b",
+  "case": "038",
+  "visible_through_event": 9,
+  "expected_move": "act",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "close_case"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "charge_tenant"}],
+  "rationale": "The landlord has agreed that the tenant may replace the machine with her own and that the landlord covers any removal charge (005, 009). The agency told the tenant (010), recorded that she would replace it and take it with her, with the landlord aware (011, 012), and completed the job without payment (013). Telling the tenant and closing is right. No contractor is needed, and the tenant is not being charged for the old machine's failure.",
+  "evidence_events": [10, 11, 12, 13],
+  "reviewed": false
+}

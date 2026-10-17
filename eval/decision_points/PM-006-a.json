@@ -1,0 +1,12 @@
+{
+  "id": "PM-006-a",
+  "case": "006",
+  "visible_through_event": 8,
+  "expected_move": "ask",
+  "acceptable_moves": ["wait"],
+  "required_actions": [{"tool": "send_message", "to": "contractor", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "close_case"}, {"tool": "charge_tenant"}],
+  "rationale": "The contractor has ignored the original instruction and two reminders to quote for check-out works at a vacant flat (005-007), and the system flags '3+ reminders... check what's happening' (008). Nothing is urgent, so chasing the contractor directly for the quote is the proportionate move. The agency held for the quote (009, 010) and the quote arrived on 9 October (012), so a dated hold is also acceptable. There is no quote and no landlord approval, so booking is wrong, and closing would abandon the job.",
+  "evidence_events": [9, 10, 12],
+  "reviewed": false
+}

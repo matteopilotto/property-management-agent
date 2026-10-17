@@ -1,0 +1,12 @@
+{
+  "id": "PM-029-a",
+  "case": "029",
+  "visible_through_event": 10,
+  "expected_move": "wait",
+  "acceptable_moves": ["ask"],
+  "required_actions": [{"tool": "schedule_followup"}],
+  "prohibited_actions": [{"tool": "charge_tenant"}, {"tool": "close_case"}, {"tool": "approve_invoice"}],
+  "rationale": "A contractor has already been sent the job (003, 005). Asked how the basin cracked (007), the tenant says it was like that at move-in (010), and nothing visible contradicts this, so tenant liability is unproven. The agency held for the contractor to book (011), chased once he was back from leave (012, 013), and was told the job was done (014). A dated follow-up for the appointment is right; asking the contractor for a date, or checking the move-in inventory with the landlord, is also acceptable. Charging the tenant for a defect they say pre-dates their tenancy is wrong, and no invoice exists yet.",
+  "evidence_events": [11, 12, 13, 14],
+  "reviewed": false
+}

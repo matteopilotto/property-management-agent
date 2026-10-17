@@ -1,0 +1,12 @@
+{
+  "id": "PM-027-b",
+  "case": "027",
+  "visible_through_event": 7,
+  "expected_move": "act",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "close_case"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "charge_tenant"}],
+  "rationale": "The tenant confirms a plunger cleared the drain (007). The agency recorded it as resolved without a contractor (009) and completed it without payment (016, 017). No contractor attended, so there is nothing to charge the tenant and nothing to book.",
+  "evidence_events": [8, 9, 16, 17],
+  "reviewed": false
+}

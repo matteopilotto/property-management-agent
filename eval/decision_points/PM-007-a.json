@@ -1,0 +1,12 @@
+{
+  "id": "PM-007-a",
+  "case": "007",
+  "visible_through_event": 15,
+  "expected_move": "act",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "book_contractor"}],
+  "prohibited_actions": [{"tool": "approve_invoice"}, {"tool": "close_case"}],
+  "rationale": "The landlord approved the £198.37 plus VAT quote with 'Pls go ahead' (011), and the system recorded the approval (013). The 'not tenanted' pause (015) is expected for check-out works and does not block them. The agency told the contractor the quote was approved and asked when he could attend (017), and the work was booked (023, 027). No invoice exists yet, and closing because the flat is vacant would drop approved work.",
+  "evidence_events": [17, 23, 27],
+  "reviewed": false
+}

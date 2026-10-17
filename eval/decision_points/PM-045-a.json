@@ -1,0 +1,12 @@
+{
+  "id": "PM-045-a",
+  "case": "045",
+  "visible_through_event": 6,
+  "expected_move": "ask",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "send_message", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The request reads only 'Kitchen window + patio door windows' (001), and the tenant says the landlord did not ask for the work (006). Nothing says what is wrong, and the landlord has not approved anything (002). The agency sent the tenant's photos to the landlord for instructions (007) and asked the tenant to describe the problem (009); the landlord then arranged his own contractors to quote (011). Asking the landlord and/or tenant is right. Booking a contractor for an undefined job without approval, charging the tenant, or closing is wrong. The agency's emails carry another address (Flat 12, 182 Meadow Row, ZZ5 7ZZ); messages must use the case property, Flat 26, 116 Copperfield Walk, ZZ7 8ZZ.",
+  "evidence_events": [7, 9, 11],
+  "reviewed": false
+}

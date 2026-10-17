@@ -1,0 +1,12 @@
+{
+  "id": "PM-041-b",
+  "case": "041",
+  "visible_through_event": 23,
+  "expected_move": "act",
+  "acceptable_moves": ["wait"],
+  "required_actions": [{"tool": "close_case"}],
+  "prohibited_actions": [{"tool": "approve_invoice"}, {"tool": "charge_tenant"}, {"tool": "book_contractor"}],
+  "rationale": "The landlord confirms that his repair company has fixed the washing machine, and that his operative has ordered a part for the towel rail (023). The agency recorded that the landlord had dealt with it and completed the job without payment (024, 025). Closing the washing-machine job is right. Keeping it open with a dated check on the towel rail, a separate landlord-managed item, is acceptable. The landlord's own contractors did the work, so there is no agency invoice to approve and nothing to charge the tenant.",
+  "evidence_events": [24, 25],
+  "reviewed": false
+}

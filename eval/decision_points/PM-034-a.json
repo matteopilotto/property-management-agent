@@ -1,0 +1,12 @@
+{
+  "id": "PM-034-a",
+  "case": "034",
+  "visible_through_event": 10,
+  "expected_move": "act",
+  "acceptable_moves": ["ask"],
+  "required_actions": [],
+  "prohibited_actions": [{"tool": "charge_tenant"}, {"tool": "approve_invoice"}, {"tool": "book_contractor"}],
+  "rationale": "With landlord approval recorded (004), the engineer attended, cleaned and greased the shower mechanism, which resolved the main temperature problem, and attached an invoice (010). The agency told the landlord the shower was repaired on site with a call-out charge, sent the invoice to the landlord, and closed (011, 013-016); the landlord later paid (017). Close-out is right. Because the email says only the 'main' problem was resolved, confirming with the tenant that the cold side works is an acceptable alternative. No invoice amount is visible to approve, a worn mechanism is not the tenant's fault, and no further visit is needed.",
+  "evidence_events": [11, 14, 16, 17],
+  "reviewed": false
+}

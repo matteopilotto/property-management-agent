@@ -1,6 +1,6 @@
 # 06 Label the eval decision points
 
-Status: ready-for-agent
+Status: done
 Track: B (eval)
 Blocked by: none
 

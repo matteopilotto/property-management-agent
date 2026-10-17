@@ -1,0 +1,12 @@
+{
+  "id": "PM-047-b",
+  "case": "047",
+  "visible_through_event": 33,
+  "expected_move": "escalate",
+  "acceptable_moves": ["ask"],
+  "required_actions": [{"tool": "escalate"}],
+  "prohibited_actions": [{"tool": "close_case"}, {"tool": "book_contractor"}, {"tool": "charge_tenant"}],
+  "rationale": "The window was reported on 21 February. The agency's own contractor ignored three reminders (020-026). Since then the record holds only 'Held awaiting update from Dawson' entries over two months, with the reason switching between provider and landlord and no message to anyone (027-033), so it is unclear who is doing the job. Repeated silence plus unclear ownership is for the property manager. Another passive hold followed (034), and the job turned out to have been done by the landlord's contractor, noted only on 11 June (035). Chasing the landlord or contractor directly is an acceptable alternative, but another dated hold is not. Closing without confirmation, or booking a second contractor, is wrong.",
+  "evidence_events": [34, 35, 36],
+  "reviewed": false
+}

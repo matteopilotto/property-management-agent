@@ -1,0 +1,12 @@
+{
+  "id": "PM-044-a",
+  "case": "044",
+  "visible_through_event": 4,
+  "expected_move": "ask",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "send_message", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "close_case"}, {"tool": "charge_tenant"}],
+  "rationale": "A window handle fell off and the window cannot be opened (001). The holds say 'Will email LL' and 'Waiting to hear from LL' (003, 004), but no message to the landlord appears in the record, so the agency is waiting on a request it never sent. The agency then asked the tenant which window it was (005, 007) and asked the landlord for permission to send a contractor (009); the landlord said go ahead (012). The right move is to ask: the landlord for approval and/or the tenant for the missing detail. Booking without approval, closing, or charging the tenant for a handle that came off in normal use is wrong.",
+  "evidence_events": [5, 7, 9, 12],
+  "reviewed": false
+}

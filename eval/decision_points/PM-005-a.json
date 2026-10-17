@@ -1,0 +1,12 @@
+{
+  "id": "PM-005-a",
+  "case": "005",
+  "visible_through_event": 10,
+  "expected_move": "ask",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "send_message", "to": "contractor", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "approve_invoice"}, {"tool": "charge_tenant"}],
+  "rationale": "The contractor says the quote was uploaded (010), but no quote document is visible on the case. The agency told the contractor the quote had not attached (011), and a quote only appears later (013, attachment-02), after which it went to the landlord (015). Asking the contractor to resend is right. Booking is wrong: there is no quote and no landlord approval for this job.",
+  "evidence_events": [11, 13, 15],
+  "reviewed": false
+}

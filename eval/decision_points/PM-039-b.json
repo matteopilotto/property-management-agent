@@ -1,0 +1,12 @@
+{
+  "id": "PM-039-b",
+  "case": "039",
+  "visible_through_event": 17,
+  "expected_move": "act",
+  "acceptable_moves": ["ask"],
+  "required_actions": [],
+  "prohibited_actions": [{"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The contractor writes that the visit is booked for Monday 12 till 2 (017). The earlier call summary says Sunday and gives another address, Flat 20, 130 Harbour View (015); this is noise against the canonical property. The agency confirmed the appointment to the contractor and tenant (018-021), and the engineer completed the job (022). Confirming the visit is right; checking the day with the tenant first is acceptable. The address noise does not need a property manager, the job is not done, and the tenant is not liable.",
+  "evidence_events": [18, 19, 20, 22],
+  "reviewed": false
+}

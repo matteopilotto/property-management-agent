@@ -1,0 +1,12 @@
+{
+  "id": "PM-042-a",
+  "case": "042",
+  "visible_through_event": 24,
+  "expected_move": "act",
+  "acceptable_moves": ["ask"],
+  "required_actions": [],
+  "prohibited_actions": [{"tool": "charge_tenant"}, {"tool": "book_contractor"}],
+  "rationale": "The landlord approved an engineer (008). The engineer visited and the agency held for his invoice (017, 021). An invoice for GBP 75.11 has now arrived (024); its due date (July 2026) is noise. The agency told the landlord the heating-element wiring had been replaced for '£75 + VAT', then closed after final checks (025-031). Close-out is right, with the landlord told the invoice is £75.11 as shown; the agency's '£75 + VAT' is not the amount on the invoice. Because a contractor call on 27 February (022) asked to schedule a visit after the job was apparently done, confirming the repair with the tenant first is acceptable. The intake label 'Heating & Hot Water' is a misclassification: the property's hot water is unaffected (002). The appliance fault is not the tenant's, and nothing further needs booking.",
+  "evidence_events": [25, 27, 29, 31],
+  "reviewed": false
+}

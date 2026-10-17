@@ -1,0 +1,12 @@
+{
+  "id": "PM-016-a",
+  "case": "016",
+  "visible_through_event": 22,
+  "expected_move": "act",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "close_case"}],
+  "prohibited_actions": [{"tool": "approve_invoice"}, {"tool": "charge_tenant"}, {"tool": "book_contractor"}],
+  "rationale": "The contractor attended the landlord-approved visit (009, 010) and reports the garden door is working well after settling naturally, so no repair and no invoice are needed (022). The agency thanked the contractor, told the landlord no invoice was needed, and completed the job without payment (023-026). There is no invoice to approve, nothing to charge, and nothing further to book.",
+  "evidence_events": [23, 24, 25, 26],
+  "reviewed": false
+}

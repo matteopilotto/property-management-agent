@@ -1,0 +1,12 @@
+{
+  "id": "PM-028-a",
+  "case": "028",
+  "visible_through_event": 9,
+  "expected_move": "wait",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "schedule_followup"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "close_case"}, {"tool": "charge_tenant"}],
+  "rationale": "The landlord replied 'We will sort this' to the loose garden pipe report (007), so the landlord's own contractor is handling it. The forwarded tenant email (009) gives a different address (Flat 7, 177 Alder Lane, ZZ6 5ZZ), but the case property is Flat 7, 87 Alder Lane, ZZ3 8ZZ; this is noise, not a new job. The agency held for the landlord's contractor (008), chased the landlord two weeks later (010), and the landlord confirmed it was completed on 19 June (012). Booking the agency's own contractor would duplicate the landlord's, and closing before completion is confirmed is premature.",
+  "evidence_events": [10, 11, 12, 13],
+  "reviewed": false
+}

@@ -1,0 +1,12 @@
+{
+  "id": "PM-009-a",
+  "case": "009",
+  "visible_through_event": 13,
+  "expected_move": "wait",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "schedule_followup"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The front garden is the tenant's job, picked up at inspection. After several chases and a family medical delay (006, 007), the tenant now says it will be finished this evening, with photos tomorrow morning (013). The agency held for the tenant (015) and chased only on 1 March (016, 017), and the photo arrived on 6 March (019-023). A dated follow-up is right. Sending a contractor or charging the tenant would be premature, and closing without the photo would skip the check.",
+  "evidence_events": [15, 16, 17, 22, 23],
+  "reviewed": false
+}

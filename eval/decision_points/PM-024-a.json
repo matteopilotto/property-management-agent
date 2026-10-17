@@ -1,0 +1,12 @@
+{
+  "id": "PM-024-a",
+  "case": "024",
+  "visible_through_event": 6,
+  "expected_move": "ask",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "send_message", "to": "landlord", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The agency first suggested oven settings (003). The tenant now says the oven has not worked since she moved in, despite those settings, and asks for an inspection (006). Troubleshooting is exhausted, and the system still needs provider approval (002). The agency asked the landlord whether it could send an appliance repair contractor (008) and assigned one only after the landlord said yes (010, 011). Booking before approval is wrong. A fault present since move-in is not the tenant's liability, and closing would leave the oven broken.",
+  "evidence_events": [8, 9, 10, 11],
+  "reviewed": false
+}

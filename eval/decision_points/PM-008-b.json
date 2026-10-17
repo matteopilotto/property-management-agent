@@ -1,0 +1,12 @@
+{
+  "id": "PM-008-b",
+  "case": "008",
+  "visible_through_event": 38,
+  "expected_move": "act",
+  "acceptable_moves": ["escalate"],
+  "required_actions": [{"tool": "book_contractor"}],
+  "prohibited_actions": [{"tool": "approve_invoice"}, {"tool": "charge_tenant"}],
+  "rationale": "After a month of chasing, VAT confusion and messages naming other properties, the landlord chose between Eliza Bennett's £1,370.00 (no VAT) and Kendall's £1,700 plus VAT: 'Please go ahead with Eliza' (038). The agency asked Eliza to proceed, aware the landlord had been slow to pay her previous invoice (039, 041), and the work was completed for £1,190.00 (045). Instructing Eliza within £1,370 is right. Handing the slow-payment concern on a previous job to the property manager is defensible but not required. No invoice exists yet for this job.",
+  "evidence_events": [39, 41, 45],
+  "reviewed": false
+}

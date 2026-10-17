@@ -1,0 +1,12 @@
+{
+  "id": "PM-004-a",
+  "case": "004",
+  "visible_through_event": 4,
+  "expected_move": "ask",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "send_message", "to": "contractor", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The request is explicitly for a quote for a checkout clean, and the system paused it because the property is not tenanted (004), which is normal for a checkout clean. The agency asked the contractor to quote against the checkout report (006) and later sent the quote to the landlord (010). Booking the clean before any quote exists, charging the tenant before any cost is known, or closing because the property is vacant are all wrong.",
+  "evidence_events": [6, 9, 10],
+  "reviewed": false
+}

@@ -1,0 +1,12 @@
+{
+  "id": "PM-048-a",
+  "case": "048",
+  "visible_through_event": 17,
+  "expected_move": "act",
+  "acceptable_moves": ["ask"],
+  "required_actions": [],
+  "prohibited_actions": [{"tool": "approve_invoice"}, {"tool": "charge_tenant"}],
+  "rationale": "The landlord said 'Yes please get that sorted' (006). The contractor now reports the window repair complete, with the handle, gearbox and hinges replaced because of multiple faults (016, 017), but names another property (Flat 7, 177 Beacon Close, ZZ7 3ZZ); this is noise against the canonical Flat 20, 120 Lantern Quay. The agency confirmed the visit, recorded a quote as landlord-approved and closed after final checks (018-036). Close-out is right; asking the contractor to confirm the property, or the tenant to confirm the window opens, is acceptable. No invoice or amount is visible, so approving one is wrong. A window that stuck is not the tenant's liability.",
+  "evidence_events": [18, 26, 30, 36],
+  "reviewed": false
+}

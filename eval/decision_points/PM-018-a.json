@@ -1,0 +1,12 @@
+{
+  "id": "PM-018-a",
+  "case": "018",
+  "visible_through_event": 12,
+  "expected_move": "wait",
+  "acceptable_moves": ["ask"],
+  "required_actions": [{"tool": "schedule_followup"}],
+  "prohibited_actions": [{"tool": "close_case"}, {"tool": "charge_tenant"}],
+  "rationale": "Routine overgrowth in a communal garden with no safety risk (002). The agency already told the tenant the gardener is on annual leave and will be booked on his return (004), so three automated reminders over Christmas going unanswered (009-012) are expected. The record shows no further chasing; the work was done by 3 January and the agency told the landlord it would be invoiced off the rent (013, 015). A dated follow-up after the holiday is right, and one direct chase is acceptable. Escalating a known holiday delay is unnecessary. The tenant reported a communal area, so charging the tenant has no basis.",
+  "evidence_events": [13, 15, 16, 17],
+  "reviewed": false
+}

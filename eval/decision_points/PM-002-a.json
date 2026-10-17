@@ -1,0 +1,12 @@
+{
+  "id": "PM-002-a",
+  "case": "002",
+  "visible_through_event": 16,
+  "expected_move": "ask",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "send_message", "to": "landlord", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "approve_invoice"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The contractor attended, found the toilet needs repiping with a risk of breaking it on removal, and quoted for a new toilet and cistern (016). The earlier landlord approval (002, 003) covered attendance only, not a replacement. The agency sent the quote to the landlord for approval and held (017, 018); the landlord approved (019, 021) and only then was the work scheduled (024). Booking the replacement now would spend without approval.",
+  "evidence_events": [17, 18, 19, 21, 24],
+  "reviewed": false
+}

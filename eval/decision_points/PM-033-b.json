@@ -1,0 +1,12 @@
+{
+  "id": "PM-033-b",
+  "case": "033",
+  "visible_through_event": 37,
+  "expected_move": "act",
+  "acceptable_moves": ["ask"],
+  "required_actions": [],
+  "prohibited_actions": [{"tool": "approve_invoice"}, {"tool": "charge_tenant"}],
+  "rationale": "The approved tap work was booked for 13 October (032-035). The contractor now reports it complete, with images and an invoice (037), but the summary names another property (Flat 21, 161 Meadow Row, ZZ5 7ZZ). Addresses from other cases inside messages are known noise, and the timing matches this booking. The agency treated the job as done and closed after final checks (038-044). Closing is right; asking the contractor to confirm the property and send an invoice for the correct address is an acceptable, more cautious alternative. The invoice amount is not visible and its address is in doubt, so approving it is wrong.",
+  "evidence_events": [38, 39, 41, 44],
+  "reviewed": false
+}

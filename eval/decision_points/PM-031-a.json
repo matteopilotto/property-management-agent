@@ -1,0 +1,12 @@
+{
+  "id": "PM-031-a",
+  "case": "031",
+  "visible_through_event": 16,
+  "expected_move": "ask",
+  "acceptable_moves": ["wait"],
+  "required_actions": [{"tool": "send_message", "to": "contractor", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "close_case"}, {"tool": "approve_invoice"}, {"tool": "charge_tenant"}],
+  "rationale": "The visit was on 26 July (011-014). The contractor's email the next day could not be read (015, 016), so the agency cannot tell whether the constantly filling cistern was fixed. The agency found out the job was done, held for the invoice (018), and the contractor sent it (019) and asked for closure (021, 022). Asking the contractor for the visit result and invoice is right; a short dated hold is acceptable. Closing on an unreadable email, or approving an invoice not yet received, is wrong.",
+  "evidence_events": [18, 19, 21, 22],
+  "reviewed": false
+}

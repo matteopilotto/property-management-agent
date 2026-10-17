@@ -1,0 +1,12 @@
+{
+  "id": "PM-027-a",
+  "case": "027",
+  "visible_through_event": 1,
+  "expected_move": "ask",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "send_message", "to": "tenant", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "The tenant reports the bath draining slowly after showers for two days (initial request). That is an everyday blockage, normally the tenant's responsibility and often fixable without a call-out. The agency asked the tenant to try drain cleaner and a plunger, warned that a contractor visit could be billed to them, and asked how they wanted to proceed (002). The tenant cleared it with a plunger (007). Booking a contractor before troubleshooting, or without warning about the cost, is wrong, as is charging the tenant now. Closing before the tenant answers is premature.",
+  "evidence_events": [2, 4, 7, 9],
+  "reviewed": false
+}

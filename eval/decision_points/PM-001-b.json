@@ -1,0 +1,12 @@
+{
+  "id": "PM-001-b",
+  "case": "001",
+  "visible_through_event": 42,
+  "expected_move": "act",
+  "acceptable_moves": ["ask"],
+  "required_actions": [{"tool": "close_case"}],
+  "prohibited_actions": [{"tool": "approve_invoice"}, {"tool": "charge_tenant"}],
+  "rationale": "The landlord arranged and approved his own contractor (events 022, 026) and the agency has just discussed invoicing and completion of the tree job with that contractor (042). The agency closed the job, noting the landlord pays the contractor directly (043, 044). Confirming completion with the landlord first is also reasonable. The agency holds no quote or invoice amount, so approving an invoice is wrong, and there is no basis to charge the tenant.",
+  "evidence_events": [43, 44],
+  "reviewed": false
+}

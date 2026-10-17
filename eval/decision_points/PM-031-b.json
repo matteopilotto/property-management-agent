@@ -1,0 +1,12 @@
+{
+  "id": "PM-031-b",
+  "case": "031",
+  "visible_through_event": 22,
+  "expected_move": "act",
+  "acceptable_moves": ["ask"],
+  "required_actions": [],
+  "prohibited_actions": [{"tool": "approve_invoice"}, {"tool": "charge_tenant"}],
+  "rationale": "The contractor has twice asked for the job to be closed, saying it was completed on 26 July and the invoice was uploaded (019-022). The landlord's approval is recorded (003). The agency ran final checks and closed (023-027). Closing out, or forwarding the invoice to the landlord, is right; confirming with the tenant that the cistern has stopped running is acceptable. The invoice is referenced but no amount or quote is visible, so approving it would mean inventing figures, and there is no basis for a tenant charge.",
+  "evidence_events": [23, 25, 26, 27],
+  "reviewed": false
+}

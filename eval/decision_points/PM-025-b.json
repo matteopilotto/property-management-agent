@@ -1,0 +1,12 @@
+{
+  "id": "PM-025-b",
+  "case": "025",
+  "visible_through_event": 38,
+  "expected_move": "ask",
+  "acceptable_moves": ["escalate"],
+  "required_actions": [{"tool": "send_message", "to": "contractor", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "approve_invoice"}, {"tool": "close_case"}, {"tool": "charge_tenant"}],
+  "rationale": "The tenant has had no working oven for weeks. The contractor has given no substantive update since 23 May (022) despite calls on 5, 6 and 8 June (033-038) and a promise to check with the supplier (035). Chasing the contractor firmly for the supplier's warranty answer is the next step; after this much silence, handing it to the property manager is also reasonable. The agency called again (039) and the same day learned the oven is under a 2-year manufacturer's warranty (042). Booking another, chargeable contractor without the landlord's approval would undercut the warranty route the landlord asked for (006).",
+  "evidence_events": [39, 42, 44],
+  "reviewed": false
+}

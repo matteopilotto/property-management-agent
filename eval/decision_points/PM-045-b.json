@@ -1,0 +1,12 @@
+{
+  "id": "PM-045-b",
+  "case": "045",
+  "visible_through_event": 25,
+  "expected_move": "wait",
+  "acceptable_moves": ["ask"],
+  "required_actions": [{"tool": "schedule_followup"}],
+  "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "close_case"}, {"tool": "charge_tenant"}],
+  "rationale": "The landlord accepted his own contractor's quote for the windows (017) and now says they are 'probably still waiting for them to be made' (025). The agency held with dated check-ins while the window company arranged a visit (026-031), then asked the landlord how the visit went and was told 'all done' (032, 034). A dated follow-up is right; a later chase to the landlord or window company is acceptable. Booking the agency's contractor would duplicate the landlord's, closing before fitting is premature, and blown glazing is not the tenant's liability.",
+  "evidence_events": [26, 27, 31, 34],
+  "reviewed": false
+}

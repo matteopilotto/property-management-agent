@@ -1,0 +1,12 @@
+{
+  "id": "PM-013-a",
+  "case": "013",
+  "visible_through_event": 25,
+  "expected_move": "ask",
+  "acceptable_moves": ["wait"],
+  "required_actions": [{"tool": "send_message", "to": "contractor", "purpose": "request"}],
+  "prohibited_actions": [{"tool": "close_case"}, {"tool": "approve_invoice"}, {"tool": "charge_tenant"}],
+  "rationale": "The engineer was booked for 8 October (020-024); two days later there are no work results (025), and the contractor's emails at 011 and 017 have no readable content. Asking the contractor what happened at the visit is right. The agency held 'Waiting on response' (026), so a dated follow-up is acceptable. The contractor then reported the job done and sent an invoice (027), which the agency passed to the landlord (028). Closing now is premature because nothing confirms the repair, and no invoice exists yet to approve.",
+  "evidence_events": [26, 27, 28],
+  "reviewed": false
+}

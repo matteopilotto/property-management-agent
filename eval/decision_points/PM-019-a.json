@@ -1,0 +1,12 @@
+{
+  "id": "PM-019-a",
+  "case": "019",
+  "visible_through_event": 25,
+  "expected_move": "act",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "book_contractor"}],
+  "prohibited_actions": [{"tool": "approve_invoice"}, {"tool": "charge_tenant"}, {"tool": "close_case"}],
+  "rationale": "After weeks of the landlord being unreachable (012-017) and the tenant chasing (018), the agency told the landlord the removal quote had risen to around £600 because the waste is specialist builders' material (019) and chased (022). The landlord replied 'Please go ahead with the removal' (025). The agency arranged the contractor (026), offered the tenant access dates (029), and the garden was cleared (031). The approval covers removal at about £600 only, not the levelling and gravel the tenant also asked for. No invoice exists yet, and the waste is builders' material, not the tenant's.",
+  "evidence_events": [26, 29, 31, 38],
+  "reviewed": false
+}

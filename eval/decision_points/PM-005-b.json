@@ -1,0 +1,12 @@
+{
+  "id": "PM-005-b",
+  "case": "005",
+  "visible_through_event": 16,
+  "expected_move": "act",
+  "acceptable_moves": [],
+  "required_actions": [{"tool": "book_contractor"}],
+  "prohibited_actions": [{"tool": "approve_invoice"}],
+  "rationale": "The landlord replied to the quote (attachment-03: £135 clean, £45 bedroom-two carpet, £25 freezer defrost, £205 in total) with 'Yes please go ahead. Let them do the carpets too' (016). The agency instructed the contractor to proceed (017) and the clean went ahead (024, 025). The instruction should stay within the approved £205 scope; the agency's own wording 'both bedroom carpets' (017) went beyond the quoted bedroom-two carpet. No invoice exists yet, and nothing here needs a property manager.",
+  "evidence_events": [17, 24, 25],
+  "reviewed": false
+}
