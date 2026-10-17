@@ -1,6 +1,6 @@
 # 10 Holdout dress rehearsal
 
-Status: ready-for-agent
+Status: done
 Blocked by: 09 (the freeze tag must exist)
 
 ## What

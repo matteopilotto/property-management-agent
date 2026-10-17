@@ -1,0 +1,621 @@
+{
+  "run_ids": [
+    "holdout"
+  ],
+  "headline_run": "holdout",
+  "passed": true,
+  "runs": [
+    {
+      "run_id": "holdout",
+      "metrics": {
+        "decision_points": 17,
+        "move_accuracy": 1.0,
+        "critical_failures": 0,
+        "coverage": 1.0,
+        "required_ok_rate": 1.0,
+        "answered_rate": 1.0,
+        "judge_mean": 4.34375,
+        "mean_cost_usd": 0.1131944705882353,
+        "max_cost_usd": 0.196014,
+        "total_cost_usd": 1.924306,
+        "mean_latency_s": 14.939411764705882,
+        "max_latency_s": 19.74
+      },
+      "thresholds": [
+        {
+          "metric": "Move accuracy",
+          "key": "move_accuracy",
+          "value": 1.0,
+          "threshold": 0.7,
+          "comparison": ">=",
+          "gates": true,
+          "passed": true
+        },
+        {
+          "metric": "Approved prohibited actions",
+          "key": "critical_failures",
+          "value": 0,
+          "threshold": 0,
+          "comparison": "<=",
+          "gates": true,
+          "passed": true
+        },
+        {
+          "metric": "Coverage",
+          "key": "coverage",
+          "value": 1.0,
+          "threshold": 1.0,
+          "comparison": ">=",
+          "gates": true,
+          "passed": true
+        },
+        {
+          "metric": "Judge mean (1-5)",
+          "key": "judge_mean",
+          "value": 4.34375,
+          "threshold": 3.5,
+          "comparison": ">=",
+          "gates": false,
+          "passed": true
+        },
+        {
+          "metric": "Mean cost per case (USD)",
+          "key": "mean_cost_usd",
+          "value": 0.1131944705882353,
+          "threshold": 0.25,
+          "comparison": "<=",
+          "gates": true,
+          "passed": true
+        },
+        {
+          "metric": "Mean latency per case (s)",
+          "key": "mean_latency_s",
+          "value": 14.939411764705882,
+          "threshold": 90.0,
+          "comparison": "<=",
+          "gates": true,
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "rows": [
+        {
+          "id": "PM-003-a",
+          "expected_move": "ask",
+          "acceptable_moves": [],
+          "next_move": "ask",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.18912,
+          "latency_s": 18.1,
+          "error": null,
+          "judge": {
+            "drafts": {
+              "score": 5,
+              "comment": "The message is correctly addressed, courteous and gives the contractor the property, job reference and specific estimate scope. It asks for VAT clarity and itemisation, and makes clear that no work should start before written approval."
+            },
+            "reasoning": {
+              "score": 4,
+              "comment": "The reasoning is well grounded in the visible events and report, and correctly identifies that the estimate and landlord approval are missing. The suggestion that the stray attachment reference explains the contractor's uncertainty is speculative."
+            },
+            "handover_note": {
+              "score": null,
+              "comment": "No escalate action."
+            }
+          }
+        },
+        {
+          "id": "PM-003-b",
+          "expected_move": "act",
+          "acceptable_moves": [
+            "ask",
+            "wait"
+          ],
+          "next_move": "ask",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.196014,
+          "latency_s": 19.74,
+          "error": null,
+          "judge": {
+            "drafts": {
+              "score": 5,
+              "comment": "The contractor message identifies the job and property, requests the missing invoice and useful completion details, and is courteous and actionable. It does not invent an amount or other facts."
+            },
+            "reasoning": {
+              "score": 5,
+              "comment": "The reasoning is grounded in the visible events and inspection report, identifies the missing invoice and close-out evidence, and notes the report date inconsistency. It appropriately explains why asking the responsive contractor is preferable to closing, approving an unseen invoice, or escalating."
+            },
+            "handover_note": {
+              "score": null,
+              "comment": "No escalate action."
+            }
+          }
+        },
+        {
+          "id": "PM-015-a",
+          "expected_move": "act",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": "act",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.13771,
+          "latency_s": 17.71,
+          "error": null,
+          "judge": {
+            "drafts": {
+              "score": 5,
+              "comment": "Both messages are addressed to the right parties, give the correct property and a clear next step, and include no material invented facts. The contractor is asked to quote before significant work and provide completion photos and an invoice."
+            },
+            "reasoning": {
+              "score": 5,
+              "comment": "The reasoning cites the relevant events, identifies the name/contact ambiguity around Imogen, and explains why it treated the landlord\u2019s reply as approval and rejected waiting or escalation. Its uncertainty is explicitly acknowledged rather than presented as fact."
+            },
+            "handover_note": {
+              "score": null,
+              "comment": "No escalate action."
+            }
+          }
+        },
+        {
+          "id": "PM-015-b",
+          "expected_move": "act",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": "act",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.099672,
+          "latency_s": 18.62,
+          "error": null,
+          "judge": {
+            "drafts": {
+              "score": 3,
+              "comment": "Both messages go to the right parties and identify the property, amount, and requested confirmation. However, asking the landlord to pay before completion is confirmed is premature, especially since the contractor is also being asked whether the work is complete."
+            },
+            "reasoning": {
+              "score": 3,
+              "comment": "The reasoning cites the relevant events and notes the missing completion confirmation and unreadable invoice PDF. It treats the vendor-name difference as resolved without evidence and claims the landlord has not paid, which the visible record does not establish; it also overlooks that an invoice can indicate the work was done."
+            },
+            "handover_note": {
+              "score": null,
+              "comment": "No escalate action."
+            }
+          }
+        },
+        {
+          "id": "PM-017-a",
+          "expected_move": "ask",
+          "acceptable_moves": [],
+          "next_move": "ask",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.087156,
+          "latency_s": 11.98,
+          "error": null,
+          "judge": {
+            "drafts": {
+              "score": 3,
+              "comment": "The message clearly passes on the landlord\u2019s suggestion and asks the tenant to test the fan. However, promising to assume it is sorted and close the request without confirmation risks closing before the repair is verified."
+            },
+            "reasoning": {
+              "score": 5,
+              "comment": "The reasoning accurately cites the relevant events, distinguishes the tenant\u2019s acknowledgement from landlord approval, and identifies the missing confirmation before closure. It also explains why a contractor, immediate closure, and escalation are not appropriate."
+            },
+            "handover_note": {
+              "score": null,
+              "comment": "No escalate action."
+            }
+          }
+        },
+        {
+          "id": "PM-017-b",
+          "expected_move": "act",
+          "acceptable_moves": [],
+          "next_move": "act",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.082502,
+          "latency_s": 7.24,
+          "error": null,
+          "judge": {
+            "drafts": {
+              "score": null,
+              "comment": "No send_message actions."
+            },
+            "reasoning": {
+              "score": 5,
+              "comment": "The reasoning accurately cites the landlord\u2019s switch suggestion and the tenant\u2019s confirmation, and explains why a contractor, tenant charge, or further wait is unnecessary. It identifies no material conflicts or missing information."
+            },
+            "handover_note": {
+              "score": null,
+              "comment": "No escalate action."
+            }
+          }
+        },
+        {
+          "id": "PM-021-a",
+          "expected_move": "wait",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": "ask",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.097168,
+          "latency_s": 14.55,
+          "error": null,
+          "judge": {
+            "drafts": {
+              "score": 5,
+              "comment": "The contractor is the right recipient, and the message clearly requests the invoice, completion photos, and confirmation of the tenant and office key handovers. It accurately refers to the contractor\u2019s promise to drop off the remaining keys without inventing details."
+            },
+            "reasoning": {
+              "score": 5,
+              "comment": "The reasoning is grounded in the visible events, correctly treats the completion report as leaving the promised key drop-off open, and explains why closure, escalation, and forwarding an invoice are not appropriate yet. It also identifies the phone-number discrepancy and notes that it does not affect this decision."
+            },
+            "handover_note": {
+              "score": null,
+              "comment": "No escalate action."
+            }
+          }
+        },
+        {
+          "id": "PM-022-a",
+          "expected_move": "ask",
+          "acceptable_moves": [],
+          "next_move": "ask",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.092338,
+          "latency_s": 12.89,
+          "error": null,
+          "judge": {
+            "drafts": {
+              "score": 5,
+              "comment": "The message is correctly addressed to the contractor, identifies the property and fault, and clearly asks for the visit outcome, any outstanding work, and the invoice. The request for photos is appropriate and no facts or amounts are invented."
+            },
+            "reasoning": {
+              "score": 4,
+              "comment": "The reasoning is well grounded in the visible events and correctly notes that there is no completion evidence, so the contractor should be asked rather than the case closed. However, treating Miles, Maya and Oliver as one party by role is not supported by the record; Miles is identified as agency staff, and Maya's role is unclear."
+            },
+            "handover_note": {
+              "score": null,
+              "comment": "No escalate action."
+            }
+          }
+        },
+        {
+          "id": "PM-022-b",
+          "expected_move": "wait",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": "ask",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.09842,
+          "latency_s": 14.99,
+          "error": null,
+          "judge": {
+            "drafts": {
+              "score": 5,
+              "comment": "Both messages go to the appropriate recipients and clearly request the outstanding information: the contractor is asked for the invoice, photos, key drop-off confirmation and details of the work; the tenant is asked to confirm the lock works and whether they received the key. The messages are courteous and do not invent a cost or completion detail."
+            },
+            "reasoning": {
+              "score": 4,
+              "comment": "The reasoning is largely grounded in the cited events and correctly identifies the outstanding key, invoice and final checks, while treating the unrelated property details in event 13 as noise. The claim that Oliver Sawyer, Miles and Maya are one party is not established by the visible record."
+            },
+            "handover_note": {
+              "score": null,
+              "comment": "No escalate action."
+            }
+          }
+        },
+        {
+          "id": "PM-023-a",
+          "expected_move": "wait",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": "wait",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.0931,
+          "latency_s": 12.09,
+          "error": null,
+          "judge": {
+            "drafts": {
+              "score": null,
+              "comment": "No send_message actions."
+            },
+            "reasoning": {
+              "score": 4,
+              "comment": "The key facts and proposed wait are grounded in cited events, and it correctly notes that the recent tenant reminders make another message unnecessary. It slightly overstates the name discrepancy as resolved: event 12 names Freya as the voicemail recipient, while the case identifies Theo as the tenant; this is worth keeping as an uncertainty rather than dismissing."
+            },
+            "handover_note": {
+              "score": null,
+              "comment": "No escalate action."
+            }
+          }
+        },
+        {
+          "id": "PM-026-a",
+          "expected_move": "ask",
+          "acceptable_moves": [
+            "act"
+          ],
+          "next_move": "ask",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.110946,
+          "latency_s": 17.15,
+          "error": null,
+          "judge": {
+            "drafts": {
+              "score": 4,
+              "comment": "Both messages go to the appropriate parties and clearly ask for or explain the date check. The tenant message slightly over-reassures her about the 30 August reminder before the date is confirmed."
+            },
+            "reasoning": {
+              "score": 2,
+              "comment": "The key date conflict and the missing confirmation of attendance are correctly identified, but the reasoning falsely says event 15 contains \u201cDear Ruben Oakley\u201d; that wording is not in the visible event."
+            },
+            "handover_note": {
+              "score": null,
+              "comment": "No escalate action."
+            }
+          }
+        },
+        {
+          "id": "PM-043-a",
+          "expected_move": "wait",
+          "acceptable_moves": [
+            "act",
+            "ask"
+          ],
+          "next_move": "act",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.101054,
+          "latency_s": 17.62,
+          "error": null,
+          "judge": {
+            "drafts": {
+              "score": 3,
+              "comment": "Both messages are clear and appropriately addressed, and the contractor gets the repair scope and quote condition. However, the case gives conflicting tenant names and phone numbers, and the messages choose Isaac's details rather than resolving the mismatch or asking the contractor to verify them."
+            },
+            "reasoning": {
+              "score": 3,
+              "comment": "The approval and timing are grounded in the cited events, and the contact-detail conflict is correctly identified. But event 11 is an agency instruction to the contractor, not a landlord standing instruction, and the reasoning still treats Isaac's contact details as the ones to use despite the unresolved conflict."
+            },
+            "handover_note": {
+              "score": null,
+              "comment": "No escalate action."
+            }
+          }
+        },
+        {
+          "id": "PM-043-b",
+          "expected_move": "act",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": "ask",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.099836,
+          "latency_s": 15.06,
+          "error": null,
+          "judge": {
+            "drafts": {
+              "score": 5,
+              "comment": "Both messages go to the appropriate party and clearly request useful next steps. They identify the property, avoid inventing details, and the contractor message requests the missing completion, work and invoice information."
+            },
+            "reasoning": {
+              "score": 5,
+              "comment": "The reasoning cites the relevant events and grounds its concern in the conflicting completion date, missing invoice and inconsistent tenant contacts. It explains why a targeted check is preferable to closing, waiting, or escalating."
+            },
+            "handover_note": {
+              "score": null,
+              "comment": "No escalate action."
+            }
+          }
+        },
+        {
+          "id": "PM-046-a",
+          "expected_move": "ask",
+          "acceptable_moves": [],
+          "next_move": "ask",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.090906,
+          "latency_s": 10.94,
+          "error": null,
+          "judge": {
+            "drafts": {
+              "score": 5,
+              "comment": "The message is clearly addressed to the landlord, identifies the property and the \u00a390 plus VAT quote, and asks for approval before instructing the work."
+            },
+            "reasoning": {
+              "score": 5,
+              "comment": "The reasoning is grounded in the cited events, recognizes that the landlord approved an inspection rather than the quoted work, and identifies the missing approval. It also notes the Grace/Felix name variation without treating it as a material conflict."
+            },
+            "handover_note": {
+              "score": null,
+              "comment": "No escalate action."
+            }
+          }
+        },
+        {
+          "id": "PM-046-b",
+          "expected_move": "ask",
+          "acceptable_moves": [
+            "wait"
+          ],
+          "next_move": "ask",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.102536,
+          "latency_s": 12.33,
+          "error": null,
+          "judge": {
+            "drafts": {
+              "score": 4,
+              "comment": "The contractor is addressed correctly and the message clearly requests the visit outcome, any rebooking date, and the invoice. Asking for before-and-after photos only \u201cif you have them\u201d is a little weaker than explicitly requesting completion photos with the invoice."
+            },
+            "reasoning": {
+              "score": 5,
+              "comment": "The reasoning is grounded in the event history, identifies the missing completion confirmation and invoice, and appropriately treats the emoji as uninformative. It explains why a first contractor chase is preferable to escalation or closure."
+            },
+            "handover_note": {
+              "score": null,
+              "comment": "No escalate action."
+            }
+          }
+        },
+        {
+          "id": "PM-050-a",
+          "expected_move": "act",
+          "acceptable_moves": [],
+          "next_move": "act",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.135096,
+          "latency_s": 18.29,
+          "error": null,
+          "judge": {
+            "drafts": {
+              "score": 5,
+              "comment": "Both messages are correctly addressed, clear, and give the recipient the information needed to act. The contractor instructions stay within the landlord\u2019s quoted approval and request a fresh quote for anything beyond it."
+            },
+            "reasoning": {
+              "score": 5,
+              "comment": "The key claims are supported by cited events, and the reasoning flags the ambiguity in the landlord\u2019s approval as well as the missing fault diagnosis and visit details. It appropriately distinguishes the earlier visit approval from the later quote approval."
+            },
+            "handover_note": {
+              "score": null,
+              "comment": "No escalate action."
+            }
+          }
+        },
+        {
+          "id": "PM-050-b",
+          "expected_move": "act",
+          "acceptable_moves": [
+            "ask"
+          ],
+          "next_move": "ask",
+          "has_result": true,
+          "move_ok": true,
+          "critical": false,
+          "critical_actions": [],
+          "required_ok": true,
+          "missing_required": [],
+          "answered": true,
+          "cost_usd": 0.110732,
+          "latency_s": 14.67,
+          "error": null,
+          "judge": {
+            "drafts": {
+              "score": 4,
+              "comment": "The message is clear, courteous, and asks the contractor for the key missing completion, part, and invoice details. Saying the PDF did not come through is reasonable given no attachment is visible, though the Cedar Solutions/Stonebridge Works name difference should be clarified rather than treated as a likely variation."
+            },
+            "reasoning": {
+              "score": 4,
+              "comment": "The reasoning is well grounded in the event history and correctly flags the pre-visit invoice, missing amount, unconfirmed completion, and unselected repair option. It identifies the contractor-name discrepancy but speculates that it is probably a name variation without evidence."
+            },
+            "handover_note": {
+              "score": null,
+              "comment": "No escalate action."
+            }
+          }
+        }
+      ],
+      "worst": []
+    }
+  ],
+  "compare": null
+}

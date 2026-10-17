@@ -92,3 +92,23 @@ also receives the attachment text and the playbook, so the two scores are not co
 - **PM-001-b**, act → wait (both runs).
 - **PM-035-a**, wait → escalate (both runs; see above).
 - **PM-019-a**, act → ask (final-2 only). The agent asked for confirmation of an approximate "around £600" approval instead of booking.
+
+## Holdout dress rehearsal (after the freeze)
+
+The 10 holdout cases stayed unopened until the `freeze` tag. They were then labelled by a fresh
+agent that had never seen the agent's output (17 decision points: act 7, ask 6, wait 4,
+escalate 0), and run once, unattended, on the frozen code. `git diff freeze -- src/` is empty.
+Report: [`holdout.md`](holdout.md).
+
+| Metric | Build set (final-2) | Holdout |
+|---|---|---|
+| Move in the expected or acceptable set | 0.95 (59/62) | 1.00 (17/17) |
+| Exact expected move | 0.68 (42/62) | 0.65 (11/17) |
+| Prohibited actions approved | 0 | 0 |
+| Coverage | 1.00 | 1.00 |
+| Mean cost / latency per case | $0.114 / 15.1 s | $0.113 / 14.9 s |
+| Judge mean (reported only) | 4.34 | 4.34 |
+
+- **Run time:** 67 s wall-clock for all 17, 5 in parallel. Cost $1.92.
+- **Reading:** exact-match accuracy is the same on unseen cases as on the build set, so there's no sign the agent or playbook overfitted the 62.
+- **Caveat on the 1.00:** six of the 17 count via an acceptable alternative, and the holdout has no escalation case. The labels have not been reviewed by a person.

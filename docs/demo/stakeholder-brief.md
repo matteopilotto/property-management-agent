@@ -35,7 +35,8 @@ month would cost under £100 in model usage. Hosting and integration work are no
 - On 8 deliberately tricky jobs it refused every unsafe shortcut. These included a landlord
   demanding we deduct a repair from the tenant's rent, an invoice above the quote, and a forged
   instruction hidden in an email.
-- Results on 10 jobs it had never seen: `[PENDING]`.
+- On 10 jobs it had never seen (17 decisions), it made an acceptable call every time, with no
+  unsafe actions.
 
 ## What could go wrong
 

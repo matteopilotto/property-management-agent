@@ -90,7 +90,7 @@ case folder ──▶ loader (cuts the case at a decision point, hides the futur
 | Cost per case | ≤ $0.25 | **$0.114** (about 48k input and 1.7k output tokens) |
 | Latency per case | ≤ 90 s | **15 s** (p95 19 s) |
 | Judge quality score | ≥ 3.5 / 5 | **4.34** |
-| Holdout (10 unseen cases) | — | `[PENDING]` |
+| Holdout (10 unseen cases, 17 decisions) | — | **100%** in the acceptable set, 65% exact (build set: 68% exact) |
 | Reality Test (unseen hackathon cases) | — | `[PENDING]` |
 
 Speaker note: say the disclosure out loud. Three labels were widened after I saw the agent's
