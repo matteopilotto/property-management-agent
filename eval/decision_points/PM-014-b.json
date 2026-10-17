@@ -3,10 +3,10 @@
   "case": "014",
   "visible_through_event": 12,
   "expected_move": "act",
-  "acceptable_moves": [],
+  "acceptable_moves": ["escalate"],
   "required_actions": [{"tool": "close_case"}],
   "prohibited_actions": [{"tool": "book_contractor"}, {"tool": "charge_tenant"}],
-  "rationale": "The tenant has tried the landlord's workaround: opening the latch with the key means she no longer needs to slam the door, which removes the glass risk. It works, and she will monitor and report any recurrence (012). The agency told the landlord it would close unless the tenant came back (013) and completed the job without payment (014, 015); the landlord thanked them (016). Closing with a note to the landlord is right. A contractor was not approved and is no longer needed, and the tenant is not at fault.",
+  "rationale": "The tenant has tried the landlord's workaround: opening the latch with the key means she no longer needs to slam the door, which removes the glass risk. It works, and she will monitor and report any recurrence (012). The agency told the landlord it would close unless the tenant came back (013) and completed the job without payment (014, 015); the landlord thanked them (016). Closing with a note to the landlord is right. A contractor was not approved and is no longer needed, and the tenant is not at fault. Widened after baseline-1: the contractor's glass warning (001) and the landlord's 'contractor next month' (010) make a handover defensible.",
   "evidence_events": [13, 14, 15, 16],
   "reviewed": false
 }

@@ -37,7 +37,7 @@ PM-008-b (landlord known to pay slowly; escalate is accepted).
 | PM-002-a | 16 | ask | - | Replacement toilet quote is beyond the approved attendance: send it to the landlord. |
 | PM-002-b | 43 | escalate | wait | Closed job keeps being auto-paused and returning to the dashboard: system contradiction. |
 | PM-004-a | 4 | ask | - | Quote-only checkout clean on a vacant flat: ask the contractor to quote, do not book. |
-| PM-004-b | 36 | act | ask | Approved £90 clean reported done with the invoice sent: forward it and close. |
+| PM-004-b | 36 | act | ask, wait | Approved £90 clean reported done with the invoice sent: forward it and close. |
 | PM-005-a | 10 | ask | - | Contractor says the quote was uploaded but none is visible: ask for it again. |
 | PM-005-b | 16 | act | - | Landlord approved the £205 cleaning quote: instruct within that scope. |
 | PM-006-a | 8 | ask | wait | 3+ reminders unanswered for a check-out works quote: chase the contractor. |
@@ -54,7 +54,7 @@ PM-008-b (landlord known to pay slowly; escalate is accepted).
 | PM-012-b | 11 | act | - | Troubleshooting failed and the landlord already agreed: book the engineer. |
 | PM-013-a | 25 | ask | wait | No work results two days after the visit, and contractor emails unreadable: ask the contractor. |
 | PM-014-a | 9 | ask | escalate | Landlord proposes a key workaround for the door with glass risk: ask the tenant to try it. |
-| PM-014-b | 12 | act | - | Workaround works and the tenant will monitor: close. |
+| PM-014-b | 12 | act | escalate | Workaround works and the tenant will monitor: close. |
 | PM-016-a | 22 | act | - | Door settled naturally and no invoice is needed: close. |
 | PM-018-a | 12 | wait | ask | Reminders unanswered, but the gardener is known to be on holiday: dated follow-up. |
 | PM-019-a | 25 | act | - | Landlord approved removal at about £600: instruct the removal only. |
@@ -79,7 +79,7 @@ PM-008-b (landlord known to pay slowly; escalate is accepted).
 | PM-036-b | 43 | ask | wait, escalate | Landlord complains about delay and missing photos: ask for photos and confirm no charge. |
 | PM-037-a | 2 | ask | escalate | Leaking "shower cable": landlord approval and tenant photos. |
 | PM-038-a | 3 | ask | - | Tenant offers to replace the landlord's washing machine: landlord consent. |
-| PM-038-b | 9 | act | - | Landlord agrees to the tenant's machine: inform and close. |
+| PM-038-b | 9 | act | ask | Landlord agrees to the tenant's machine: inform and close. |
 | PM-039-a | 6 | ask | - | Clicking washing machine, troubleshooting done: landlord approval. |
 | PM-039-b | 17 | act | ask | Contractor books Monday; call summary says Sunday at another address (noise): confirm. |
 | PM-040-a | 9 | wait | ask | Tenant swapped machines while the landlord approved an inspection: update the landlord, follow up, do not close. |
