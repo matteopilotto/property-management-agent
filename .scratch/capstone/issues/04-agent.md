@@ -1,6 +1,6 @@
 # 04 Agent, tools and playbook
 
-Status: ready-for-agent
+Status: done
 Track: A (agent core)
 Blocked by: 02, 03
 

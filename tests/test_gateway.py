@@ -35,6 +35,14 @@ def message(
     return {"to": to, "subject": "Cleaning quote", "body": body, "purpose": "request"}
 
 
+UPDATE = {
+    "to": "tenant",
+    "subject": "Update",
+    "body": "We are waiting for the Landlord.",
+    "purpose": "update",
+}
+
+
 def booking(approval_event):
     return {
         "contractor": "Stonebridge Solutions",
@@ -185,19 +193,59 @@ def test_r5_wait_on_no_hot_water_is_blocked(tmp_path):
     hazard = Event(4, "2025-10-24 09:00:00 UTC", "Call", "Tenant", "Agency", body)
     case_view = replace(case_view, events=[*case_view.events, hazard])
     gate = ActionGateway(case_view, Ledger(tmp_path / "ledger.jsonl"))
+    gate.review("schedule_followup", FOLLOWUP)
     result = gate.review("submit_decision", decision("wait"))
     assert result["status"] == "blocked"
     assert "event 4 (no hot water)" in result["reason"]
     assert gate.ledger.entries[-1]["rule"] == "R5"
-    assert gate.review("submit_decision", decision("escalate")) == {
-        "status": "recorded"
-    }
 
 
 def test_r5_wait_without_hazard_passes(tmp_path):
-    assert gateway(tmp_path, through=10).review(
-        "submit_decision", decision("wait")
-    ) == {"status": "recorded"}
+    gate = gateway(tmp_path, through=10)
+    gate.review("schedule_followup", FOLLOWUP)
+    assert gate.review("submit_decision", decision("wait")) == {"status": "recorded"}
+
+
+FOLLOWUP = {"due_date": "2025-10-27", "reason": "Waiting for Landlord"}
+ESCALATION = {
+    "reason": "Invoice above quote",
+    "handover_note": {"known": "k", "conflicts": "c", "done": "d", "needed": "n"},
+}
+
+
+@pytest.mark.parametrize(
+    ("actions", "move"),
+    [
+        ([("escalate", ESCALATION), ("send_message", message())], "escalate"),
+        ([("send_message", message()), ("close_case", {"reason": "done"})], "act"),
+        ([("send_message", {**message(), "purpose": "instruct"})], "act"),
+        ([("send_message", message()), ("schedule_followup", FOLLOWUP)], "ask"),
+        ([("schedule_followup", FOLLOWUP), ("send_message", UPDATE)], "wait"),
+    ],
+)
+def test_move_must_match_the_actions(tmp_path, actions, move):
+    gate = gateway(tmp_path, through=10)
+    for tool, args in actions:
+        gate.review(tool, args)
+    for other in {"act", "ask", "wait", "escalate"} - {move}:
+        result = gate.review("submit_decision", decision(other))
+        assert result["status"] == "blocked", other
+        assert gate.ledger.entries[-1]["rule"] == "MOVE"
+        assert repr(move) in result["how_to_fix"]
+    assert gate.review("submit_decision", decision(move)) == {"status": "recorded"}
+
+
+def test_move_without_any_action_is_blocked(tmp_path):
+    result = gateway(tmp_path).review("submit_decision", decision("escalate"))
+    assert result["status"] == "blocked"
+    assert "not backed by any recorded action" in result["reason"]
+
+
+def test_blocked_actions_do_not_count_towards_the_move(tmp_path):
+    gate = gateway(tmp_path)
+    gate.review("send_message", message(to="contractor", body="No postcode here."))
+    gate.review("schedule_followup", FOLLOWUP)
+    assert gate.review("submit_decision", decision("wait")) == {"status": "recorded"}
 
 
 def test_r6_repeated_message_is_duplicate(tmp_path):

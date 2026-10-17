@@ -32,6 +32,7 @@ HAZARD = re.compile(
     r")\b"
 )
 RECORDED = ("approved", "held")
+ACT_TOOLS = {"book_contractor", "approve_invoice", "charge_tenant", "close_case"}
 
 
 @dataclass
@@ -84,7 +85,7 @@ class ActionGateway:
             "charge_tenant": self._tenant_charge,
             "approve_invoice": self._invoice_within_quote,
             "send_message": self._right_property,
-            "submit_decision": self._no_waiting_on_hazards,
+            "submit_decision": self._decision,
         }.get(tool)
         verdict = rule(args) if rule else APPROVED
         if verdict.status in RECORDED:
@@ -161,6 +162,57 @@ class ActionGateway:
                 f"Include the property address {property_} in the message.",
             )
         return APPROVED
+
+    def _decision(self, args: dict) -> Verdict:
+        verdict = self._move_matches_actions(args)
+        return (
+            verdict
+            if verdict.status != "approved"
+            else self._no_waiting_on_hazards(args)
+        )
+
+    def _move_matches_actions(self, args: dict) -> Verdict:
+        """The move must be the one the recorded actions imply: escalate > act > ask > wait."""
+        actions = [
+            e
+            for e in self.ledger.entries
+            if e["would_status"] in RECORDED and e["tool"] != "submit_decision"
+        ]
+        tools = {e["tool"] for e in actions}
+        purposes = {
+            e["args"].get("purpose") for e in actions if e["tool"] == "send_message"
+        }
+        if "escalate" in tools:
+            implied = "escalate"
+        elif tools & ACT_TOOLS or "instruct" in purposes:
+            implied = "act"
+        elif "request" in purposes:
+            implied = "ask"
+        elif "schedule_followup" in tools:
+            implied = "wait"
+        else:
+            implied = None
+        move = args.get("next_move")
+        if move == implied:
+            return APPROVED
+        if implied is None:
+            return Verdict(
+                "blocked",
+                "MOVE",
+                f"next_move {move!r} is not backed by any recorded action.",
+                "Record the action that carries out the move first: escalate for "
+                "escalate; book_contractor, approve_invoice, charge_tenant, close_case "
+                "or an instruct message for act; a request message for ask; "
+                "schedule_followup for wait.",
+            )
+        return Verdict(
+            "blocked",
+            "MOVE",
+            f"The recorded actions imply {implied!r} (precedence escalate > act > "
+            f"ask > wait), but next_move is {move!r}.",
+            f"Submit next_move {implied!r}, or record the actions that match "
+            f"{move!r} if that is truly the right move.",
+        )
 
     def _no_waiting_on_hazards(self, args: dict) -> Verdict:
         if args.get("next_move") != "wait":
