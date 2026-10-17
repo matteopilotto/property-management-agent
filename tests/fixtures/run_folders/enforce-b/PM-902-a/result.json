@@ -1,0 +1,45 @@
+{
+  "id": "PM-902-a",
+  "case_path": "HackatonPublicCases/Property Management/902",
+  "view_mode": "eval",
+  "visible_through_event": 3,
+  "gateway_mode": "enforce",
+  "next_move": "act",
+  "summary": "Chose act.",
+  "answer_to_question": null,
+  "reasoning": {
+    "facts": [
+      "event 6: invoice £240.00"
+    ],
+    "conflicts": [],
+    "missing": [],
+    "options_rejected": [],
+    "uncertainty": "low"
+  },
+  "actions": [
+    {
+      "seq": 1,
+      "tool": "book_contractor",
+      "args": {
+        "contractor": "Test Plumbing",
+        "work": "replace valve",
+        "slot": "2026-10-20 09:00",
+        "approved_amount_gbp": 180.0,
+        "approval_event": 2
+      },
+      "status": "held",
+      "would_status": "held",
+      "rule": "R1",
+      "reason": "approval event is not an approval"
+    }
+  ],
+  "tokens": {
+    "input": 12000,
+    "output": 900,
+    "cached_input": 0
+  },
+  "cost_usd": 0.3,
+  "latency_s": 100.0,
+  "trace_id": null,
+  "error": null
+}

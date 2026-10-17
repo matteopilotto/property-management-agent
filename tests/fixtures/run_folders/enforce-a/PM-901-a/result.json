@@ -1,0 +1,59 @@
+{
+  "id": "PM-901-a",
+  "case_path": "HackatonPublicCases/Property Management/901",
+  "view_mode": "eval",
+  "visible_through_event": 6,
+  "gateway_mode": "enforce",
+  "next_move": "ask",
+  "summary": "Chose ask.",
+  "answer_to_question": null,
+  "reasoning": {
+    "facts": [
+      "event 6: invoice £240.00"
+    ],
+    "conflicts": [],
+    "missing": [],
+    "options_rejected": [],
+    "uncertainty": "low"
+  },
+  "actions": [
+    {
+      "seq": 1,
+      "tool": "approve_invoice",
+      "args": {
+        "contractor": "Test Plumbing",
+        "invoice_amount_gbp": 240.0,
+        "approved_quote_gbp": 180.0,
+        "quote_evidence": "3",
+        "invoice_evidence": "6"
+      },
+      "status": "held",
+      "would_status": "held",
+      "rule": "R3",
+      "reason": "invoice exceeds approved quote"
+    },
+    {
+      "seq": 2,
+      "tool": "send_message",
+      "args": {
+        "to": "landlord",
+        "subject": "Invoice above quote, AB1 2CD",
+        "body": "The invoice of £240.00 exceeds the approved £180.00 for 1 Test Street, AB1 2CD. Do you approve the difference?",
+        "purpose": "request"
+      },
+      "status": "approved",
+      "would_status": "approved",
+      "rule": null,
+      "reason": null
+    }
+  ],
+  "tokens": {
+    "input": 12000,
+    "output": 900,
+    "cached_input": 0
+  },
+  "cost_usd": 0.1,
+  "latency_s": 40.0,
+  "trace_id": null,
+  "error": null
+}

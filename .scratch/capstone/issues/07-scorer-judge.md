@@ -1,6 +1,6 @@
 # 07 Scorer, judge and report
 
-Status: ready-for-agent
+Status: done
 Track: B (eval)
 Blocked by: 01, 06 (the scorer needs run output from 05 only for its live check)
 

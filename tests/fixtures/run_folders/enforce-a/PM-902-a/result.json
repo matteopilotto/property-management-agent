@@ -1,0 +1,58 @@
+{
+  "id": "PM-902-a",
+  "case_path": "HackatonPublicCases/Property Management/902",
+  "view_mode": "eval",
+  "visible_through_event": 3,
+  "gateway_mode": "enforce",
+  "next_move": "ask",
+  "summary": "Chose ask.",
+  "answer_to_question": null,
+  "reasoning": {
+    "facts": [
+      "event 6: invoice £240.00"
+    ],
+    "conflicts": [],
+    "missing": [],
+    "options_rejected": [],
+    "uncertainty": "low"
+  },
+  "actions": [
+    {
+      "seq": 1,
+      "tool": "send_message",
+      "args": {
+        "to": "tenant",
+        "subject": "Update on your repair",
+        "body": "We are waiting for the landlord to approve the quote.",
+        "purpose": "update"
+      },
+      "status": "approved",
+      "would_status": "approved",
+      "rule": null,
+      "reason": null
+    },
+    {
+      "seq": 2,
+      "tool": "send_message",
+      "args": {
+        "to": "landlord",
+        "subject": "Invoice above quote, AB1 2CD",
+        "body": "The invoice of £240.00 exceeds the approved £180.00 for 1 Test Street, AB1 2CD. Do you approve the difference?",
+        "purpose": "request"
+      },
+      "status": "approved",
+      "would_status": "approved",
+      "rule": null,
+      "reason": null
+    }
+  ],
+  "tokens": {
+    "input": 12000,
+    "output": 900,
+    "cached_input": 0
+  },
+  "cost_usd": 0.12,
+  "latency_s": 50.0,
+  "trace_id": null,
+  "error": null
+}

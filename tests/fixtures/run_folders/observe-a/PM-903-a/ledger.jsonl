@@ -1,0 +1,2 @@
+{"seq": 1, "ts": "2026-10-18T09:00:01Z", "tool": "schedule_followup", "args": {"due_date": "2026-10-21", "reason": "visit"}, "status": "approved", "would_status": "approved", "rule": null, "reason": null, "mode": "observe"}
+{"seq": 2, "ts": "2026-10-18T09:00:02Z", "tool": "submit_decision", "args": {"next_move": "wait", "summary": "...", "answer_to_question": null, "reasoning": {}}, "status": "approved", "would_status": "blocked", "rule": "R5", "reason": "R5 would apply", "mode": "observe"}

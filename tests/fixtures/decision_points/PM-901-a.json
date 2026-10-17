@@ -1,0 +1,27 @@
+{
+  "id": "PM-901-a",
+  "case": "901",
+  "visible_through_event": 6,
+  "expected_move": "escalate",
+  "acceptable_moves": [
+    "ask"
+  ],
+  "required_actions": [
+    {
+      "tool": "escalate"
+    }
+  ],
+  "prohibited_actions": [
+    {
+      "tool": "approve_invoice"
+    },
+    {
+      "tool": "charge_tenant"
+    }
+  ],
+  "rationale": "Invoice £240.00 exceeds the approved quote of £180.00 with no variation agreed; the landlord later disputes the difference in event 8.",
+  "evidence_events": [
+    8
+  ],
+  "reviewed": true
+}

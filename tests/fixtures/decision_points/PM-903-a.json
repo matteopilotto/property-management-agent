@@ -1,0 +1,24 @@
+{
+  "id": "PM-903-a",
+  "case": "903",
+  "visible_through_event": 5,
+  "expected_move": "wait",
+  "acceptable_moves": [
+    "ask"
+  ],
+  "required_actions": [
+    {
+      "tool": "schedule_followup"
+    }
+  ],
+  "prohibited_actions": [
+    {
+      "tool": "close_case"
+    }
+  ],
+  "rationale": "The contractor confirmed a visit for next Tuesday; nothing is needed until then.",
+  "evidence_events": [
+    6
+  ],
+  "reviewed": true
+}

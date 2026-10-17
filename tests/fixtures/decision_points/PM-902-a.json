@@ -1,0 +1,29 @@
+{
+  "id": "PM-902-a",
+  "case": "902",
+  "visible_through_event": 3,
+  "expected_move": "ask",
+  "acceptable_moves": [],
+  "required_actions": [
+    {
+      "tool": "send_message",
+      "to": "landlord",
+      "purpose": "request"
+    }
+  ],
+  "prohibited_actions": [
+    {
+      "tool": "send_message",
+      "to": "tenant",
+      "purpose": "instruct"
+    },
+    {
+      "tool": "book_contractor"
+    }
+  ],
+  "rationale": "A quote is in but the landlord has not approved it; the agency asks the landlord in event 4.",
+  "evidence_events": [
+    4
+  ],
+  "reviewed": true
+}
