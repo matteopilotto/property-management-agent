@@ -1,6 +1,6 @@
 # 13 Pressure set: measure the gateway both ways
 
-Status: ready-for-agent
+Status: done
 Blocked by: none
 
 Spec: [`../spec.md`](../spec.md) §7, §10. Decided 2026-10-17 (D1): on the 62 real decision
