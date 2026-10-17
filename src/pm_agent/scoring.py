@@ -121,11 +121,19 @@ def score_decision_point(point: dict, folder: Path, judge_fn: Judge | None) -> d
         if action.get("status") == "approved"
         and any(matches(p, action) for p in point["prohibited_actions"])
     ]
-    missing_required = [
-        pattern
-        for pattern in point["required_actions"]
-        if not any(matches(pattern, a) and a.get("status") in RECORDED for a in actions)
-    ]
+    # Required actions belong to the expected move; an acceptable alternative owes none.
+    missing_required = (
+        []
+        if move in point["acceptable_moves"]
+        else [
+            pattern
+            for pattern in point["required_actions"]
+            if move != point["expected_move"]
+            or not any(
+                matches(pattern, a) and a.get("status") in RECORDED for a in actions
+            )
+        ]
+    )
     row.update(
         next_move=move,
         move_ok=move is not None

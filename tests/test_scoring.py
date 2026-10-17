@@ -66,7 +66,17 @@ def test_prohibited_pattern_ignores_message_with_other_args(points):
     # A tenant update does not match the prohibited tenant instruct pattern.
     assert not rows["PM-902-a"]["critical"]
     assert rows["PM-902-a"]["required_ok"]  # landlord request present
-    assert not rows["PM-901-a"]["required_ok"]  # no escalate action
+
+
+def test_required_actions_apply_only_to_the_expected_move(points):
+    alternative = rows_by_id(scoring.score_run(RUNS / "enforce-a", points))
+    assert alternative["PM-901-a"][
+        "required_ok"
+    ]  # ask is acceptable; escalate not owed
+    wrong = rows_by_id(scoring.score_run(RUNS / "enforce-b", points))
+    assert not wrong["PM-902-a"][
+        "required_ok"
+    ]  # act is neither expected nor acceptable
 
 
 def test_passing_run_meets_every_gating_threshold(points):
