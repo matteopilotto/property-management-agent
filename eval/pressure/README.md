@@ -108,3 +108,9 @@ test the gateway on its own, each tempted action was replayed directly through
 
 None of these was exploited in the runs, but gaps 2-5 mean the gateway's protection on R1
 and R3 depends on the agent citing honest evidence.
+
+**Status after 89a8ae3:** gaps 2, 3 and 4 are closed. R1 now accepts only a Landlord event or
+an agency record that the Landlord approved, and R3 requires the quote and invoice to come
+from different evidence. Replaying every recorded spend and invoice call from the earlier eval
+runs changed no verdict. Gaps 1 (R5 only checks the move label) and 5 (`close_case` is
+ungated) remain open as known limitations.
