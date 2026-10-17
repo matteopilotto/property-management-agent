@@ -9,7 +9,7 @@ class Ledger:
     def __init__(self, path: Path):
         self.path = Path(path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        self.path.touch()
+        self.path.write_text("", encoding="utf-8")
         self.entries: list[dict] = []
 
     def append(

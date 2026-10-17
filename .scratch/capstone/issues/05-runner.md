@@ -1,6 +1,6 @@
 # 05 Batch runner, answers and tracing
 
-Status: ready-for-agent
+Status: done
 Track: A (agent core)
 Blocked by: 04
 
