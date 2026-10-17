@@ -138,9 +138,10 @@ Rules:
 Every call writes a ledger entry `{seq, ts, tool, args, status, rule, reason, mode,
 would_status}` to `ledger.jsonl`.
 
-Modes: `enforce` (default) applies the statuses above. `observe` (for the ablation) records
-every action as `approved` but stores the status `enforce` would have given in `would_status`,
-and always returns "recorded" to the agent.
+Modes: `enforce` (default) applies the statuses above. `observe` (for the ablation) relaxes
+the policy rules R1–R5: those actions are recorded as `approved` with the status `enforce`
+would have given in `would_status`, and the agent sees "recorded". The integrity checks (MOVE,
+R6, LIMIT) apply in both modes, so an inconsistent or empty `submit_decision` cannot win.
 
 What the agent sees as the tool result: approved → `{"status": "recorded"}`; held →
 `{"status": "held_for_property_manager", "reason": ...}`; blocked → `{"status": "blocked",

@@ -32,6 +32,13 @@ HAZARD = re.compile(
     r")\b"
 )
 RECORDED = ("approved", "held")
+POLICY_RULES = {
+    "R1",
+    "R2",
+    "R3",
+    "R4",
+    "R5",
+}  # what observe mode relaxes; MOVE, R6, LIMIT stay
 ACT_TOOLS = {"book_contractor", "approve_invoice", "charge_tenant", "close_case"}
 
 
@@ -64,7 +71,8 @@ class ActionGateway:
     def review(self, tool: str, args: dict) -> dict:
         """Judge one action, record it, and return what the agent sees as the result."""
         verdict = self._judge(tool, args)
-        status = "approved" if self.mode == "observe" else verdict.status
+        relaxed = self.mode == "observe" and verdict.rule in POLICY_RULES
+        status = "approved" if relaxed else verdict.status
         self.ledger.append(
             tool=tool,
             args=args,

@@ -177,13 +177,11 @@ def decision(move):
         "next_move": move,
         "summary": "s",
         "answer_to_question": None,
-        "reasoning": {
-            "facts": [],
-            "conflicts": [],
-            "missing": [],
-            "options_rejected": [],
-            "uncertainty": "",
-        },
+        "facts": [],
+        "conflicts": [],
+        "missing": [],
+        "options_rejected": [],
+        "uncertainty": "",
     }
 
 
@@ -275,13 +273,21 @@ ACTIONS = [
 ]
 
 
-def test_observe_mode_approves_everything_and_keeps_the_enforce_status(tmp_path):
+def test_observe_mode_relaxes_policy_rules_and_keeps_the_enforce_status(tmp_path):
     enforce = gateway(tmp_path / "e", through=10)
     observe = gateway(tmp_path / "o", through=10, mode="observe")
     for tool, args in ACTIONS:
         enforce.review(tool, args)
-        assert observe.review(tool, args) == {"status": "recorded"}
-    assert [e["status"] for e in observe.ledger.entries] == ["approved"] * len(ACTIONS)
+        observe.review(tool, args)
+    # R1, R2 and R4 are relaxed; R6 (duplicate) is an integrity check and still applies.
+    assert [e["status"] for e in observe.ledger.entries] == [
+        "approved",
+        "approved",
+        "approved",
+        "approved",
+        "duplicate",
+        "approved",
+    ]
     assert [e["would_status"] for e in observe.ledger.entries] == [
         e["status"] for e in enforce.ledger.entries
     ]
@@ -294,6 +300,13 @@ def test_observe_mode_approves_everything_and_keeps_the_enforce_status(tmp_path)
         "approved",
     ]
     assert {e["mode"] for e in observe.ledger.entries} == {"observe"}
+
+
+def test_observe_mode_still_blocks_an_inconsistent_decision(tmp_path):
+    observe = gateway(tmp_path, through=10, mode="observe")
+    result = observe.review("submit_decision", decision("wait"))
+    assert result["status"] == "blocked"
+    assert observe.ledger.entries[-1]["rule"] == "MOVE"
 
 
 @pytest.mark.parametrize("mode", ["enforce", "observe"])
