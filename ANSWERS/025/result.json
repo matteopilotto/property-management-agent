@@ -1,0 +1,90 @@
+{
+  "id": "025",
+  "case_path": "HackatonChallenges/Property Management/025",
+  "view_mode": "live",
+  "visible_through_event": null,
+  "gateway_mode": "enforce",
+  "next_move": "ask",
+  "summary": "The corrected invoice (event 22 and the attachment) shows no amount, and there was no quote. I asked the contractor for a full invoice and completion details, and asked the tenant to confirm the tap is fixed. A follow-up is set for 2025-09-18.",
+  "answer_to_question": null,
+  "reasoning": {
+    "facts": [
+      "The landlord approved the plumbing work generally, with no amount stated (events 2-3).",
+      "The contractor never gave a quote despite requests (events 4, 5, 8, 11).",
+      "The visit was confirmed for 10 September (event 16), but no completion message or visit report is recorded.",
+      "The invoice for a new mono kitchen tap was corrected to the right postcode (events 19-22, corrected-plumbing-invoice.pdf). It has a reference and a description but no amount, VAT or date of work.",
+      "The tenant's loose-drawer report (event 12) is a separate issue and is unanswered.",
+      "The boiler remark in the call (event 21) is not part of this job."
+    ],
+    "conflicts": [
+      "The tenant asked about a possible new tap and limescale, but the contractor replaced the tap with no recorded diagnosis or quote.",
+      "The invoice postcode was wrong at first and has been corrected.",
+      "Event 13 notes confusion over the property address."
+    ],
+    "missing": [
+      "Invoice amount and VAT",
+      "Date of attendance and confirmation the work is complete",
+      "Warranty on the new tap",
+      "Tenant confirmation that the drip has stopped and whether the water is still cloudy",
+      "Landlord approval of any cost once the amount is known"
+    ],
+    "options_rejected": [
+      "Forward the invoice to the landlord for payment: there is no amount to forward and no quote to compare it with.",
+      "Approve the invoice: it cannot be checked against any quote or approved sum.",
+      "Close the case: completion is unconfirmed, and the drawer and cloudy-water issues are open.",
+      "Escalate: one message to the contractor can settle what is missing."
+    ],
+    "uncertainty": "It is not certain that the tap was fitted on 10 September, because no visit report exists. The cost is unknown, so it may exceed what the landlord expected and need fresh approval."
+  },
+  "actions": [
+    {
+      "seq": 1,
+      "tool": "send_message",
+      "args": {
+        "to": "contractor",
+        "purpose": "request",
+        "subject": "Invoice NBL-025-INV-15 – amount missing – 18 Thistlewick Row, Fenmere, ZZ1 1ZZ",
+        "body": "Hello Ivo, thank you for the corrected invoice NBL-025-INV-15 for 18 Thistlewick Row, Fenmere, ZZ1 1ZZ. The postcode is now right, but the invoice shows no amount, so we can't pass it to the landlord. We also never received a quote for this job. Please resend the invoice with: (1) the total, with labour, the tap and VAT shown separately; (2) the date you attended and confirmation that the mono kitchen sink tap was supplied and fitted; (3) any warranty on the new tap and your fitting work; (4) before and after photos if you have them. Please also tell us whether you found a cause for the cloudy water, such as limescale. The invoice should cover only the kitchen tap job at this address. Thank you."
+      },
+      "status": "approved",
+      "would_status": "approved",
+      "rule": null,
+      "reason": null
+    },
+    {
+      "seq": 2,
+      "tool": "send_message",
+      "args": {
+        "to": "tenant",
+        "purpose": "request",
+        "subject": "Kitchen tap – can you confirm it is fixed? 18 Thistlewick Row",
+        "body": "Hello Nia, the plumber has invoiced for a new kitchen mixer tap at 18 Thistlewick Row, Fenmere, ZZ1 1ZZ. Could you confirm that the new tap has been fitted and has stopped dripping? Is the water still cloudy when you fill a glass? We are waiting for the invoice details from the plumber. We have noted your loose kitchen drawer with the snapped brackets and will deal with it as a separate request. Please send a photo of it if you can."
+      },
+      "status": "approved",
+      "would_status": "approved",
+      "rule": null,
+      "reason": null
+    },
+    {
+      "seq": 3,
+      "tool": "schedule_followup",
+      "args": {
+        "due_date": "2025-09-18",
+        "reason": "Waiting for Provider: invoice with an amount (no quote or amount in the case), visit date and completion confirmation. Waiting for Tenant to confirm the tap is fixed."
+      },
+      "status": "approved",
+      "would_status": "approved",
+      "rule": null,
+      "reason": null
+    }
+  ],
+  "tokens": {
+    "input": 46546,
+    "output": 2305,
+    "cached_input": 0
+  },
+  "cost_usd": 0.116142,
+  "latency_s": 18.7,
+  "trace_id": "c4eff660ab6810315ff25d572dbc5736",
+  "error": null
+}

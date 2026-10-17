@@ -1,0 +1,66 @@
+{
+  "id": "022",
+  "case_path": "HackatonChallenges/Property Management/022",
+  "view_mode": "live",
+  "visible_through_event": null,
+  "gateway_mode": "enforce",
+  "next_move": "escalate",
+  "summary": "Escalated to the property manager. The landlord complained about delay, and the record contradicts itself on whether the job is done and whether a replacement washing machine is coming.",
+  "answer_to_question": null,
+  "reasoning": {
+    "facts": [
+      "The landlord complained that the response took too long (event 29).",
+      "The tenant said on 24 Sept that no replacement had arrived and there was no packaging (event 30).",
+      "On 25 Sept the tenant said 'the job is completed' but also asked whether a planned washing-machine change was still happening (event 31).",
+      "The landlord said a new machine was ordered and delivery, setup and disposal were arranged, with no date given (events 27, 29).",
+      "The landlord asked for a quote on 21 Sept (event 28) but said the same day they had sorted it themselves (event 29).",
+      "The 9 Sept engineer visit has no confirmed outcome (events 18, 21, 22)."
+    ],
+    "conflicts": [
+      "Event 31 says the job is completed, but event 30 says nothing was delivered and event 31 asks if the change is still happening.",
+      "Event 28 asks the agency for a quote, but event 29 says the landlord had already arranged the replacement.",
+      "Event 23 gives the unit height in cm and event 24 gives it in mm.",
+      "There is no evidence the engineer attended, and the replacement plan appeared without any recorded repair outcome."
+    ],
+    "missing": [
+      "Delivery and installation date and installer",
+      "Confirmation of whether the washer-dryer is now working or replaced",
+      "Engineer visit outcome",
+      "Appliance identification details from the tenant"
+    ],
+    "options_rejected": [
+      "Ask the tenant to confirm completion: the landlord has complained about delay, and the landlord's and tenant's accounts conflict, so one message would not settle it.",
+      "Close the case: there is no evidence of completion, and the tenant's own message contradicts it.",
+      "Wait: the landlord has complained about delay, and the playbook says to escalate."
+    ],
+    "uncertainty": "The tenant's 'job completed' reply (event 31) may refer to a different follow-up, so I can't tell whether the machine has been replaced."
+  },
+  "actions": [
+    {
+      "seq": 1,
+      "tool": "escalate",
+      "args": {
+        "reason": "Landlord complained about delay (event 29), and the record contradicts itself on whether the work is done and whether a replacement is happening (events 29, 30, 31). One message would not settle it.",
+        "handover_note": {
+          "known": "Case property: 8 Brackenmere Walk, Vellumford, ZZ1 1ZZ. Washer-dryer showed error E13 and was unusable (events 1, 7). The landlord said the insurer approved a repair (event 10). The landlord reported an engineer booked for 9 Sept (event 18) and said the engineer was about to arrive (event 21). There is no engineer report or booking confirmation. On 14 Sept the landlord said a replacement was needed (event 23). On 19 Sept the landlord said a new machine was ordered (event 27). On 21 Sept the landlord asked for a quote for removal and replacement (event 28). The same day the landlord said they had sorted delivery, setup and disposal, and complained the response took too long (event 29).",
+          "conflicts": "1) On 24 Sept the tenant said no replacement had arrived and there was no packaging (event 30). On 25 Sept the tenant replied 'Yes, the job is completed' to a follow-up. In the same message the tenant asked whether a planned washing-machine change was still happening (event 31). It is unclear whether the job is complete, and the tenant seems to have misread the follow-up. 2) Event 28 asks the agency for a quote, but event 29 says the landlord had already arranged it themselves. 3) There is no evidence the engineer attended on 9 Sept, and no evidence of the insurer's repair outcome. 4) The landlord's height figures are given as 825 cm and 820 cm (event 23), against 825 mm in event 24, so the unit of measure is inconsistent. 5) The tenant never supplied the appliance identification details (events 3, 13). Event 17 says they were supplied to the landlord, but the source is unclear. 6) Event 11 told the tenant to book the manufacturer's engineer themselves, while the landlord was booking one (event 18).",
+          "done": "No messages sent and no bookings made. I only reviewed the record. No contractor was instructed and no invoice or charge exists.",
+          "needed": "Property manager to: 1) Reply to the landlord's complaint about delay (event 29). 2) Confirm with the landlord the delivery and installation date and who is installing. 3) Confirm with the tenant whether the washer-dryer has been replaced or fixed, and answer their question in event 31. 4) Decide whether the quote requested in event 28 is still needed. 5) Don't close the case until completion is evidenced."
+        }
+      },
+      "status": "approved",
+      "would_status": "approved",
+      "rule": null,
+      "reason": null
+    }
+  ],
+  "tokens": {
+    "input": 44174,
+    "output": 2047,
+    "cached_input": 0
+  },
+  "cost_usd": 0.108818,
+  "latency_s": 15.68,
+  "trace_id": "180d3a169a325d5a7aa1b10de0c7d259",
+  "error": null
+}

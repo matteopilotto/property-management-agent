@@ -1,0 +1,69 @@
+{
+  "id": "023",
+  "case_path": "HackatonChallenges/Property Management/023",
+  "view_mode": "live",
+  "visible_through_event": null,
+  "gateway_mode": "enforce",
+  "next_move": "escalate",
+  "summary": "Escalated to the property manager. Invoice B (£372) claims actuator replacement on 5 Feb, but the file has no authorisation, no completion evidence and no return visit. Invoice A (£138) is within the diagnosis authority, but the two invoices overlap. The tenant says the heating is still faulty.",
+  "answer_to_question": null,
+  "reasoning": {
+    "facts": [
+      "Landlord authorised diagnosis only, up to £180 including VAT (event 5).",
+      "Diagnosis quote was £138 including VAT (event 7).",
+      "The £372 estimate was sent after the 5 Feb visit and asked for written authorisation (event 9).",
+      "Landlord had not decided on the estimate and authorised no further spend (event 12).",
+      "The contractor was still checking parts and estimate details on 7 Feb (event 16).",
+      "Invoices A (£138) and B (£372) are both dated 10 Feb with a service date of 5 Feb (events 17-18; invoice PDFs).",
+      "No signed completion record, no payment and no written authorisation for actuator work is on file (event 19).",
+      "The tenant does not know whether the actuator was replaced, and heating is still intermittent (event 20).",
+      "The contractor could not clarify or give evidence when asked on 11 Feb (events 21-22).",
+      "The landlord was asked how to proceed on 12 Feb and has not replied (event 23)."
+    ],
+    "conflicts": [
+      "Invoice B says actuator replacement was completed on 5 Feb, but the estimate was sent later that day, parts were unconfirmed on 7 Feb, and the tenant is unaware of any replacement.",
+      "Invoices A and B overlap on attendance and diagnosis, and neither says whether the other is credited or superseded.",
+      "Invoice B (£372) is above the £180 routine limit and has no landlord approval."
+    ],
+    "missing": [
+      "Contractor job notes, parts record and signed completion evidence",
+      "Landlord's decision on the invoices and on any further work",
+      "Clarification of which invoice is current and whether the diagnosis charge is credited"
+    ],
+    "options_rejected": [
+      "Approve or forward invoice A or B: unauthorised, contradictory and overlapping.",
+      "Ask the contractor again: it has been asked twice and could not answer.",
+      "Wait on the landlord only: the money dispute and the safety angle need property manager judgement.",
+      "Instruct the actuator replacement: the landlord has not authorised it."
+    ],
+    "uncertainty": "The landlord may reply to event 23 and settle the invoice question. It is unknown whether the actuator was replaced."
+  },
+  "actions": [
+    {
+      "seq": 1,
+      "tool": "escalate",
+      "args": {
+        "reason": "Contractor invoices contradict the file on whether actuator work was done, and £372 was never authorised. This is a money and record conflict that the agency should not decide alone.",
+        "handover_note": {
+          "known": "Property: 7 Larkspur Fold, Orvane Heath, ZZ1 1ZZ. The tenant reported intermittent radiator heating on 3 Feb, with hot water still working and a child in the home (events 1, 3). The landlord authorised diagnosis only, up to £180 including VAT, and asked to be consulted before any remedial work (event 5). Copper Finch Mechanical quoted £138 including VAT for diagnosis (event 7). It attended on 5 Feb and found an intermittent heating valve actuator fault, with no leak or gas-safety concern. It reported no remedial work (event 8). At 14:54 on 5 Feb it sent a £372 estimate for actuator replacement and asked for written authorisation (event 9). The landlord had not decided on it, asked whether the actuator could be repaired and whether the price was all-inclusive, and authorised nothing (event 12). On 7 Feb the contractor said parts and estimate details still needed checking (event 16). On 10 Feb it sent invoice A for £138 (diagnosis and test) and invoice B for £372 (actuator supply and replacement, attendance, diagnosis, testing). Both give a service date of 5 Feb (events 17-18; invoice-NBL-CFM-250210-A.pdf and invoice-NBL-CFM-250210-B.pdf). The file has no payment, no signed completion record, no return visit and no written authorisation for actuator work (event 19). The tenant does not know whether the actuator was replaced and has seen no contractor since 5 Feb. Heating is still intermittent, with one radiator cooler than the others (event 20).",
+          "conflicts": "Invoice B claims the actuator was replaced on 5 Feb. The £372 estimate was only sent after the visit on 5 Feb. On 7 Feb the contractor was still checking parts availability. The tenant has no knowledge of a replacement and the heating is still faulty. Invoice B repeats the attendance and diagnosis already in invoice A, so the two overlap. Neither invoice says whether the other is credited, cancelled or superseded. The contractor was asked twice (events 15, 21) and could not clarify or give evidence (events 16, 22). Invoice B at £372 is above the £180 limit and has no landlord approval. Sending both would total £510.",
+          "done": "I read all 23 events and both invoices. I approved no invoice, instructed no contractor and sent no payment forward. Event 23 (12 Feb) already asked the landlord how to proceed. No reply is on file.",
+          "needed": "1) Decide how to treat the invoices. Invoice A for £138 sits within the £180 diagnosis authority, and invoice B for £372 is unauthorised and unevidenced. Neither should be paid, forwarded or deducted from rent until this is settled. 2) Press Copper Finch Mechanical for job notes, parts records and a written statement of what was done on 5 Feb, and for a corrected or withdrawn invoice. 3) Get the landlord's decision on the repair, including the repair alternative and an all-inclusive price. 4) Because a child lives there and the tenant is using a portable heater plugged directly into a wall socket (event 11), consider whether the heating fault needs more urgent action and whether to give the tenant safety advice."
+        }
+      },
+      "status": "approved",
+      "would_status": "approved",
+      "rule": null,
+      "reason": null
+    }
+  ],
+  "tokens": {
+    "input": 52320,
+    "output": 2731,
+    "cached_input": 0
+  },
+  "cost_usd": 0.13195,
+  "latency_s": 21.18,
+  "trace_id": "db9aeca8876a26c8c189775e9097ff9f",
+  "error": null
+}

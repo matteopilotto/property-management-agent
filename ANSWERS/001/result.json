@@ -1,0 +1,85 @@
+{
+  "id": "001",
+  "case_path": "HackatonChallenges/Property Management/001",
+  "view_mode": "live",
+  "visible_through_event": null,
+  "gateway_mode": "enforce",
+  "next_move": "ask",
+  "summary": "Landlord asked which quote is meant (event 23). Told him there is one quotation (£2,844.00 inc VAT). Asked the contractor to reissue an itemised quote that reconciles the figures and shows the right property. No approval for the £2,844 work exists, so nothing was booked.",
+  "answer_to_question": null,
+  "reasoning": {
+    "facts": [
+      "Landlord authorised only an inspection and quote, not the repair (event 5).",
+      "Quotation NBL-001-Q1: £2,370.00 + £474.00 VAT = £2,844.00 (bathroom-works-quotation.pdf, event 16).",
+      "Landlord asked for an itemised breakdown (event 18); the contractor gave materials £1,270, labour £1,170, 10% commission and a 50% deposit (event 21).",
+      "Landlord asked 'Which quote do you mean?' after a vague chase that named no amount (events 22-23)."
+    ],
+    "conflicts": [
+      "Materials £1,270 + labour £1,170 = £2,440, not the quoted subtotal £2,370 (events 16, 21).",
+      "The quotation PDF names a different property address from the canonical one; treated as noise and not repeated.",
+      "The commission and deposit basis are unclear (event 21)."
+    ],
+    "missing": [
+      "Corrected, itemised contractor quote for the right property",
+      "Landlord approval of a specific amount",
+      "Deposit basis and commission treatment"
+    ],
+    "options_rejected": [
+      "Escalate: one message to the contractor can settle the figures, so asking comes first.",
+      "Book the contractor: no landlord approval of the quoted work (event 5).",
+      "Wait only: the landlord's question needed an answer."
+    ],
+    "uncertainty": "The 'couple of quotes' the landlord mentions may be the original quote and the breakdown in event 21. I don't know if he has seen another document."
+  },
+  "actions": [
+    {
+      "seq": 1,
+      "tool": "send_message",
+      "args": {
+        "to": "contractor",
+        "subject": "Corrected quotation needed - 4 Thistlewick Rise, Larkcombe, ZZ1 1ZZ",
+        "purpose": "request",
+        "body": "Hi Ewan, regarding the shower/bathroom works at 4 Thistlewick Rise, Larkcombe, ZZ1 1ZZ. Before the landlord can decide, please send one reissued, itemised quotation that settles the following:\n1. Your quotation NBL-001-Q1 (18 Sept) shows a different property address from the one above. Please reissue it for 4 Thistlewick Rise, Larkcombe, ZZ1 1ZZ.\n2. It shows a subtotal of £2,370.00 + VAT £474.00 = £2,844.00. Your breakdown (materials £1,270 + labour £1,170) adds up to £2,440.00, not £2,370.00. Please confirm the correct subtotal, VAT and total.\n3. Please clarify how the 10% Northbridge commission is applied, and whether it is included in or on top of the total.\n4. Please confirm what the 50% deposit is calculated on and the amount in pounds.\nPlease state clearly which figure is final so we can put a single quote to the landlord. Thank you."
+      },
+      "status": "approved",
+      "would_status": "approved",
+      "rule": null,
+      "reason": null
+    },
+    {
+      "seq": 2,
+      "tool": "send_message",
+      "args": {
+        "to": "landlord",
+        "subject": "Which quote - 4 Thistlewick Rise, Larkcombe, ZZ1 1ZZ",
+        "purpose": "request",
+        "body": "Hi Orin, apologies for the confusion about the shower leak at 4 Thistlewick Rise, Larkcombe, ZZ1 1ZZ. There is only one quotation, from Hearthline Plumbing & Bath (ref NBL-001-Q1, 18 Sept): remove the shower screen, taps and valve; install wall-and-riser cladding with chrome trims; fit new bath taps and a new shower valve; refit the existing screen. It shows £2,370.00 + VAT £474.00 = £2,844.00. The second figure you may have seen is the contractor's later breakdown (materials £1,270, labour £1,170, plus a 50% deposit), which doesn't add up to the quote. I've asked the contractor for a corrected, itemised quote. Nothing is approved yet and no work will be booked. I will send you the confirmed figures to approve as soon as I have them. Please let me know if you were referring to a different quote."
+      },
+      "status": "approved",
+      "would_status": "approved",
+      "rule": null,
+      "reason": null
+    },
+    {
+      "seq": 3,
+      "tool": "schedule_followup",
+      "args": {
+        "due_date": "2025-09-26",
+        "reason": "Waiting for Provider: corrected itemised quote (subtotal, commission, deposit, correct property address); then send to Landlord for approval."
+      },
+      "status": "approved",
+      "would_status": "approved",
+      "rule": null,
+      "reason": null
+    }
+  ],
+  "tokens": {
+    "input": 47655,
+    "output": 2506,
+    "cached_input": 0
+  },
+  "cost_usd": 0.12037,
+  "latency_s": 20.6,
+  "trace_id": "ba542f6b6b09e4426697213a17d62715",
+  "error": null
+}

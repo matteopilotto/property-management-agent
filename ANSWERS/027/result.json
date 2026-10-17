@@ -1,0 +1,63 @@
+{
+  "id": "027",
+  "case_path": "HackatonChallenges/Property Management/027",
+  "view_mode": "live",
+  "visible_through_event": null,
+  "gateway_mode": "enforce",
+  "next_move": "wait",
+  "summary": "The quote was forwarded to the landlord on 2025-09-15 and no reply has been recorded. Quote NBL-027-Q1 is £3,865.68, above the approval threshold. No contractor can be booked until the landlord approves. I sent nothing and scheduled a follow-up for 2025-09-18, with the reason \"Waiting for Landlord\".",
+  "answer_to_question": null,
+  "reasoning": {
+    "facts": [
+      "Quote NBL-027-Q1 from Alderwick Property Works is a single 'Labour & Materials' line of £3,865.68 (move-out-works-quotation.pdf, event 13)",
+      "The landlord was asked on 2025-09-15 whether to proceed at £3,865.68 (event 14)",
+      "The workflow says the total is above the approval threshold and landlord approval is required (event 15)",
+      "The note at event 16 says the agency is waiting for the landlord's decision",
+      "The call to the landlord captured no approval or rejection (event 17)",
+      "The contractor will only check scheduling after approval and gave no attendance date (event 13)",
+      "The property is vacant and the keys are at the agency office (event 3)"
+    ],
+    "conflicts": [
+      "Event 2 says landlord approval is normally already in place, but event 15 says approval is required for this quote, and event 4 told the contractor the works were already agreed. Nothing in the record shows approval, so I treated it as outstanding.",
+      "The quote does not cover every item in the checkout report: the worktop, boiler casing inspection, flooring, carpets, curtains and curtain pole, bulbs and remaining rusting radiators are missing (checkout-report.pdf compared with the quote).",
+      "The quote has no task-by-task prices, no VAT statement and no exclusions, even though event 13 lists the tasks.",
+      "The first report sent to the contractor was an old one and was replaced (events 7-8). The quote is dated after the corrected report was sent."
+    ],
+    "missing": [
+      "Landlord approval or rejection of the quote",
+      "Itemised pricing, a VAT statement and exclusions from the contractor",
+      "Contractor's attendance date",
+      "Quote or inspection for the items the contractor left out: boiler casing, worktop, carpets, flooring and others"
+    ],
+    "options_rejected": [
+      "Booking the contractor: there is no landlord approval",
+      "Escalating: the landlord was only asked today and has not been silent for long. The conflict over whether approval was already given does not settle the next step, because the landlord can answer it directly.",
+      "Asking the contractor for an itemised quote now: I judged it premature, since the landlord's reply may settle the matter first. I will ask if the landlord is still silent at the follow-up.",
+      "Closing the case: no work has been done"
+    ],
+    "uncertainty": "The quote is lump-sum and incomplete, so the landlord may ask for a breakdown or a second quote. The boiler casing inspection is not covered and may need separate attention. The 3-day follow-up interval is the playbook default, not a date given in the case."
+  },
+  "actions": [
+    {
+      "seq": 1,
+      "tool": "schedule_followup",
+      "args": {
+        "due_date": "2025-09-18",
+        "reason": "Waiting for Landlord (Owen Vale) to approve or reject quote NBL-027-Q1 (£3,865.68, VAT not stated) for 46 Fernwick Lane, Aldermead, ZZ1 1ZZ. It was sent on 2025-09-15 (event 14) and the call that day captured nothing (event 17). If there is still no reply, re-send or phone the Landlord. At that point also ask the contractor for an itemised breakdown with VAT and exclusions."
+      },
+      "status": "approved",
+      "would_status": "approved",
+      "rule": null,
+      "reason": null
+    }
+  ],
+  "tokens": {
+    "input": 49440,
+    "output": 2097,
+    "cached_input": 0
+  },
+  "cost_usd": 0.11985,
+  "latency_s": 18.33,
+  "trace_id": "c903d6321bb7a61a528b2b1be44081d0",
+  "error": null
+}

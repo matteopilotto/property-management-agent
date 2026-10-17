@@ -1,0 +1,57 @@
+{
+  "id": "004",
+  "case_path": "HackatonChallenges/Property Management/004",
+  "view_mode": "live",
+  "visible_through_event": null,
+  "gateway_mode": "enforce",
+  "next_move": "wait",
+  "summary": "The landlord has told us to use his own contractor, Dorian Wren, and not to instruct anyone else. Dorian is due at 18 Larkspur Quay, Morrowfen, ZZ1 1ZZ on 16 Sept after 10:00. I sent nothing and set a follow-up for 17 Sept to confirm the outcome.",
+  "answer_to_question": null,
+  "reasoning": {
+    "facts": [
+      "Landlord approval for the lock repair was recorded on 1 Sept (event 6).",
+      "On 1 Sept the landlord said not to instruct another contractor and to wait for his own contractor (event 11). That was recorded on 2 Sept (event 12), and Peregrine Keyworks was stood down (event 17).",
+      "Dorian Wren is the landlord's contractor and was away until 9 Sept (event 16).",
+      "The tenant reported on 9 Sept that Dorian visited, said a new lock was needed and left to fetch one. The lock is now worse and no return date was given (event 20).",
+      "On 16 Sept the tenant said the contractor is due that day after 10:00. No attendance or repair is confirmed (event 23)."
+    ],
+    "conflicts": [
+      "The landlord reported a Saturday visit by his contractor while nobody was home (event 11). The tenant described a separate, later visit (event 20). These are different visits, so they do not contradict each other.",
+      "The landlord said the front-door work should already have been done (event 5), but no repair is recorded."
+    ],
+    "missing": [
+      "Confirmation that Dorian Wren attended on 16 Sept and replaced the lock.",
+      "Any invoice or cost, and whether the landlord pays his contractor directly.",
+      "Ownership of the tenant's other concerns: bedroom blind, door glazing and hot water (event 21)."
+    ],
+    "options_rejected": [
+      "Instructing Peregrine Keyworks again: the landlord told us not to.",
+      "Escalating now: the landlord's contractor is responding and a visit is due today. Escalate if the visit fails or silence continues after further chasing.",
+      "Closing the case: no completion evidence exists."
+    ],
+    "uncertainty": "The landlord complained about coordination earlier (event 11), so patience is limited. If the 16 Sept visit did not happen or the lock is still unresolved on 17 Sept, chase promptly and consider escalating because of the security concern. The lock was reported as worse (event 20)."
+  },
+  "actions": [
+    {
+      "seq": 1,
+      "tool": "schedule_followup",
+      "args": {
+        "due_date": "2025-09-17",
+        "reason": "Other: the landlord's own contractor (Dorian Wren) was due to attend on 16 Sept after 10:00 with no narrower time (event 23). Check with the tenant whether he attended and whether the lock was replaced. If not, chase the landlord and Dorian by email. Also raise the tenant's separate concerns (blind, door glazing, hot water; event 21) with the landlord as separate items."
+      },
+      "status": "approved",
+      "would_status": "approved",
+      "rule": null,
+      "reason": null
+    }
+  ],
+  "tokens": {
+    "input": 42714,
+    "output": 1633,
+    "cached_input": 0
+  },
+  "cost_usd": 0.101758,
+  "latency_s": 14.16,
+  "trace_id": "bd2d593abe8d7234f152c50e4538a91f",
+  "error": null
+}

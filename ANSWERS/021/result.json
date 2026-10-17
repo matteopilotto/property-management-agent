@@ -1,0 +1,86 @@
+{
+  "id": "021",
+  "case_path": "HackatonChallenges/Property Management/021",
+  "view_mode": "live",
+  "visible_through_event": null,
+  "gateway_mode": "enforce",
+  "next_move": "ask",
+  "summary": "The landlord says his plumber fixed the boiler on 14 May, but the tenant has not confirmed. Loss of hot water is flagged as a possible hazard, so I did not wait. I asked the tenant to confirm today and to describe the letterbox fault. I asked the landlord for the plumber's report and any invoice. An earlier follow-up for 19 May is also recorded.",
+  "answer_to_question": null,
+  "reasoning": {
+    "facts": [
+      "Tenant reported no hot water and no boiler power (events 1, 3).",
+      "The landlord is using his own contractor (events 10, 15).",
+      "The tenant said nothing had been done on 11 and 13 May (events 12, 17).",
+      "On 15 May the landlord said his plumber fixed it on 14 May, based on a text, with no report (event 18).",
+      "The tenant has not replied to the 15 May voicemail and email (events 19, 20).",
+      "A letterbox fault was reported on 13 May and is unassessed (event 17)."
+    ],
+    "conflicts": [
+      "The landlord says it is fixed (event 18). The tenant's last word was that nothing had been done (events 12, 17). The two may simply have crossed in time."
+    ],
+    "missing": [
+      "Tenant confirmation that hot water is restored.",
+      "Plumber's report or invoice.",
+      "Letterbox details."
+    ],
+    "options_rejected": [
+      "Wait: blocked by the gateway as a possible hazard, and the tenant has had no hot water for about 10 days.",
+      "Close: no confirmation from the tenant and no completion evidence.",
+      "Escalate: the landlord has answered each chase, so the case is not yet stuck.",
+      "Instruct an agency contractor: no landlord approval and the landlord says it is fixed."
+    ],
+    "uncertainty": "It is not known whether hot water is back. If the tenant says it is not, or stays silent, escalate or push for an agency contractor with landlord approval."
+  },
+  "actions": [
+    {
+      "seq": 1,
+      "tool": "schedule_followup",
+      "args": {
+        "due_date": "2025-05-19",
+        "reason": "Waiting for Tenant: confirmation that hot water and boiler power are restored after the landlord's plumber reportedly attended on 14 May (events 18, 20). If there is no reply, phone the tenant again. If the tenant says it is still not fixed, go back to the landlord and offer an agency contractor (events 12, 13, 15). The letterbox report (event 17) is still to be followed up separately."
+      },
+      "status": "approved",
+      "would_status": "approved",
+      "rule": null,
+      "reason": null
+    },
+    {
+      "seq": 3,
+      "tool": "send_message",
+      "args": {
+        "to": "tenant",
+        "subject": "Is your hot water working again? 17 Wrenfold Quay, Larkhollow, ZZ1 1ZZ",
+        "body": "Dear Iris, the landlord has told us his plumber attended on 14 May and fixed the hot water and boiler power at 17 Wrenfold Quay, Larkhollow, ZZ1 1ZZ. We have not heard from you since our email of 15 May. Please reply today to say whether the boiler has power and you have hot water at the taps and shower. If it is still not working, tell us and we will push for an urgent attendance, and we can send our own contractor if needed. Please also tell us the letterbox details (what is wrong with it) and we will deal with that as a separate request.",
+        "purpose": "request"
+      },
+      "status": "approved",
+      "would_status": "approved",
+      "rule": null,
+      "reason": null
+    },
+    {
+      "seq": 4,
+      "tool": "send_message",
+      "args": {
+        "to": "landlord",
+        "subject": "Plumber's report needed: 17 Wrenfold Quay, Larkhollow, ZZ1 1ZZ",
+        "body": "Dear Ravi, thank you for your update on 15 May that your plumber fixed the boiler at 17 Wrenfold Quay, Larkhollow, ZZ1 1ZZ. The tenant has not yet confirmed that hot water is back, and we have asked them to tell us. Could you send us a short note from the plumber saying what the fault was and what was done, with any invoice? If the tenant reports that the problem persists, we can arrange an agency contractor straight away if you approve.",
+        "purpose": "request"
+      },
+      "status": "approved",
+      "would_status": "approved",
+      "rule": null,
+      "reason": null
+    }
+  ],
+  "tokens": {
+    "input": 69850,
+    "output": 3038,
+    "cached_input": 0
+  },
+  "cost_usd": 0.17008,
+  "latency_s": 25.08,
+  "trace_id": "0f4b459461f822d00fb806a431b3e557",
+  "error": null
+}

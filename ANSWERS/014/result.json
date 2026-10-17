@@ -1,0 +1,105 @@
+{
+  "id": "014",
+  "case_path": "HackatonChallenges/Property Management/014",
+  "view_mode": "live",
+  "visible_through_event": null,
+  "gateway_mode": "enforce",
+  "next_move": "act",
+  "summary": "Booked the £168 diagnostic for 15 Jan 09:00-11:00 under the landlord's standing £250 urgent-repair authority. The slot expired at 17:30. Told the contractor, tenant and landlord. Interim heating, transport and accommodation spend is not authorised and was not committed.",
+  "answer_to_question": null,
+  "reasoning": {
+    "facts": [
+      "Heating failed and the living room was 10°C at 16:25 (events 1, 18). The tenant has a mobility impairment (event 3).",
+      "The £250 authority is per urgent incident, inclusive of call-out, labour and parts (event 7).",
+      "The landlord confirmed the £250 authority stands and the £168 diagnostic can be authorised without further consent (event 14).",
+      "The contractor offered a 15 Jan 09:00-11:00 slot at £168 incl. VAT, bookable only by 17:30. No parts or repair work are included (event 19).",
+      "The tenant can give access on 15 Jan with 30 minutes' notice and a direct call. The agency holds no key (event 13).",
+      "The earlier standard slot of 17 Jan clashes with the tenant's hospital appointment (events 6, 13).",
+      "The duty file records no spending limit for temporary equipment, transport or accommodation (events 7, 17)."
+    ],
+    "conflicts": [
+      "The landlord asked for a quote before non-emergency spend (event 10) but then clarified that the urgent authority stands (event 14). This is not a real conflict.",
+      "Event 19 says the tenant's direct access confirmation is still needed, though she already offered 15 Jan access in event 13. I have asked her to reconfirm."
+    ],
+    "missing": [
+      "The tenant's reconfirmation of access and her contact number for the engineer.",
+      "Landlord or duty-manager decision on temporary heating, transport or accommodation.",
+      "A quote for any repair. Only £82 of the incident limit remains after the diagnostic."
+    ],
+    "options_rejected": [
+      "Waiting for the landlord: the slot expired at 17:30 and the landlord had already confirmed the authority.",
+      "Keeping the 17 Jan standard slot: it is too late for a cold home and the tenant cannot attend.",
+      "Committing spend on heaters, transport or accommodation: there is no authority for it.",
+      "Escalating: the booking is within authority. The landlord was told the interim items need his decision, and the duty manager is already involved (event 17)."
+    ],
+    "uncertainty": "The tenant has not yet reconfirmed access for 15 Jan, and the contractor has not acknowledged the booking. The diagnostic may find work that exceeds the remaining £82. The interim welfare needs are unresolved and a property manager may need to decide them."
+  },
+  "actions": [
+    {
+      "seq": 1,
+      "tool": "book_contractor",
+      "args": {
+        "contractor": "Daniel Hart, Brackenridge Heat Services",
+        "work": "Diagnostic call-out for heating failure (cold radiators, blank boiler display/unresponsive controller) at 7 Mallowmere Walk, Larkfen, ZZ1 1ZZ. Fixed £168 incl. VAT; parts/remedial work not included and must be quoted separately.",
+        "slot": "2025-01-15 09:00-11:00",
+        "approved_amount_gbp": 168,
+        "approval_event": 14
+      },
+      "status": "approved",
+      "would_status": "approved",
+      "rule": null,
+      "reason": null
+    },
+    {
+      "seq": 2,
+      "tool": "send_message",
+      "args": {
+        "to": "contractor",
+        "subject": "Booked: diagnostic visit 15 Jan 09:00-11:00 - 7 Mallowmere Walk, Larkfen, ZZ1 1ZZ",
+        "body": "Hi Daniel, please treat this as a booking for the cancellation slot on 15 January, 09:00-11:00, for the heating diagnostic at 7 Mallowmere Walk, Larkfen, ZZ1 1ZZ, at the fixed £168 including VAT you quoted. We understand no repair work or parts are included. Please send a separate quote for any parts or remedial work, and do not start that work until we confirm approval.\n\nAccess: the agency holds no key. The tenant, Leah Venn, can admit you on 15 January only if she gets at least 30 minutes' notice and a direct call. Please call from outside and allow her extra time to answer the door. Please do not arrive unannounced. Nobody else is authorised to give access.\n\nPlease confirm receipt, and send the outcome and invoice after the visit.",
+        "purpose": "instruct"
+      },
+      "status": "approved",
+      "would_status": "approved",
+      "rule": null,
+      "reason": null
+    },
+    {
+      "seq": 3,
+      "tool": "send_message",
+      "args": {
+        "to": "tenant",
+        "subject": "Heating engineer booked for 15 January, 09:00-11:00",
+        "body": "Hi Leah, we have booked a heating diagnostic visit at 7 Mallowmere Walk, Larkfen, ZZ1 1ZZ for tomorrow, 15 January, between 09:00 and 11:00 with Brackenridge Heat Services. The engineer has been told to phone you directly at least 30 minutes before arriving, to call from outside, and to allow you extra time to answer the door. No medical details have been shared.\n\nPlease reply to confirm you will be at home and which phone number the engineer should call. Please keep avoiding the plug-in heater that gets hot.\n\nThe visit is a diagnosis only. Any repair or parts will need a separate quote and approval. We are still looking at what we can do about interim warmth and transport to your niece's home. I can't confirm anything yet and will update you as soon as I can. If you feel unwell or unsafe because of the cold, please contact the emergency services or your GP.",
+        "purpose": "update"
+      },
+      "status": "approved",
+      "would_status": "approved",
+      "rule": null,
+      "reason": null
+    },
+    {
+      "seq": 4,
+      "tool": "send_message",
+      "args": {
+        "to": "landlord",
+        "subject": "Heating diagnostic booked - 7 Mallowmere Walk, Larkfen, ZZ1 1ZZ",
+        "body": "Hi Owen, following your email confirming the standing £250 urgent-repair authority, we have treated the heating failure as an urgent repair. We have booked the £168 (including VAT) diagnostic call-out with Brackenridge Heat Services for 15 January, 09:00-11:00 at 7 Mallowmere Walk, Larkfen, ZZ1 1ZZ. That leaves £82 of the £250 incident limit for any parts or labour. Any quote above that will be sent to you for consent before work starts.\n\nThe tenant has a mobility impairment and the living room was 10°C at 16:25 today. Temporary heating, transport and accommodation are not covered by the repair authority. If you want to approve any of these, please tell us.",
+        "purpose": "update"
+      },
+      "status": "approved",
+      "would_status": "approved",
+      "rule": null,
+      "reason": null
+    }
+  ],
+  "tokens": {
+    "input": 56647,
+    "output": 3364,
+    "cached_input": 0
+  },
+  "cost_usd": 0.146934,
+  "latency_s": 25.42,
+  "trace_id": "fadde537fcdb2a492de68dfd8bc968fa",
+  "error": null
+}

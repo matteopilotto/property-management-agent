@@ -1,0 +1,57 @@
+{
+  "id": "028",
+  "case_path": "HackatonChallenges/Property Management/028",
+  "view_mode": "live",
+  "visible_through_event": null,
+  "gateway_mode": "enforce",
+  "next_move": "act",
+  "summary": "Closed the case without payment. The landlord used her own contractor and confirmed the work was completed. No agency invoice or contractor is outstanding.",
+  "answer_to_question": null,
+  "reasoning": {
+    "facts": [
+      "Pineglass quoted £564.48 for the bundled works (event 11, provider-quotation.pdf).",
+      "The landlord declined the quote and said she would arrange her own company (event 17).",
+      "The agency told the landlord it would wait for her to confirm completion (event 19) and told Pineglass not to attend (event 20).",
+      "The landlord wrote that the work had been completed (event 21).",
+      "The request was marked completed (event 22), and the pending workflow task was dismissed (event 24).",
+      "The property is vacant, and the agency stood the contractor down before any visit, so no keys were issued (events 3, 20)."
+    ],
+    "conflicts": [
+      "Event 1 says landlord approval was marked as already given for the move-out works. Events 12 to 17 show the agency asked the landlord for approval and she then declined the quote. The later events are treated as authoritative.",
+      "The landlord's completion message gives no date, photos or invoice (event 21)."
+    ],
+    "missing": [
+      "Completion evidence from the landlord's own contractor: photos, invoice and date.",
+      "Reply to the request for a cost breakdown and any former-tenant responsibility (event 23)."
+    ],
+    "options_rejected": [
+      "Instruct Pineglass: the landlord declined its quote.",
+      "Charge the tenant: there is no evidence of costs or tenant responsibility.",
+      "Escalate: the record does not contradict itself in a way that decides the move.",
+      "Wait for the breakdown reply: the landlord has confirmed completion and the playbook closes without payment in this case."
+    ],
+    "uncertainty": "Completion rests only on the landlord's unsupported email. The breakdown request in event 23 is unanswered, and a reply could reopen the tenancy account question."
+  },
+  "actions": [
+    {
+      "seq": 1,
+      "tool": "close_case",
+      "args": {
+        "reason": "Landlord declined the Pineglass quote of £564.48 (event 17) and arranged the works with her own contractor. The agency stood Pineglass down (event 20). The landlord confirmed completion in writing (event 21), and the request was marked completed (event 22). No payment is due from the agency because there is no agency contractor invoice. Photos and an invoice were not supplied because the landlord used her own contractor. No keys were issued, since Pineglass was stood down before attending. The landlord was told in event 19 to confirm when the work was finished, and she has now done so. The cost breakdown and responsibility question in event 23 is unanswered (event 25). That is a tenancy account matter, so no tenant charge is proposed without evidence. If the landlord replies, it will be handled separately."
+      },
+      "status": "approved",
+      "would_status": "approved",
+      "rule": null,
+      "reason": null
+    }
+  ],
+  "tokens": {
+    "input": 50620,
+    "output": 1705,
+    "cached_input": 0
+  },
+  "cost_usd": 0.11829,
+  "latency_s": 14.47,
+  "trace_id": "1b692941edfb3298675aba7467e1ce50",
+  "error": null
+}
