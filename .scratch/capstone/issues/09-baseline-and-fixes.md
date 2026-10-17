@@ -1,6 +1,6 @@
 # 09 Baseline eval, ablation and fixes before freeze
 
-Status: ready-for-agent
+Status: done
 Blocked by: 05, 07, 08
 
 Spec: [`../spec.md`](../spec.md) §2, §10.
