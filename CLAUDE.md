@@ -34,6 +34,8 @@ commands here in that same commit):
 - Build only from material on `main`. The `reality-test` and `reconstruction` branches and
   the local-only `teams/` clones hold the unseen cases and other teams' answers; open them
   only after the user says the code is frozen.
+- Property Management cases listed in `docs/holdout.md` are the holdout: build, design and
+  debug against the other 40, and open these only to run the dress rehearsal.
 
 ## Agent skills
 
