@@ -403,6 +403,10 @@ def _result_line(point: dict, folder: Path, *, recorded: bool) -> str:
         score=scoring.score_decision_point(point, folder, None),
         source=str(folder),
         recorded=recorded,
+        budget={
+            "cost_usd": scoring.COST_PER_CASE_MAX_USD,
+            "latency_s": scoring.LATENCY_PER_CASE_MAX_S,
+        },
         phoenix=phoenix_url(trace_id) if trace_id and phoenix_running() else None,
     )
 

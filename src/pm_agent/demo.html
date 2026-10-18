@@ -139,7 +139,28 @@ pre { white-space: pre-wrap; word-break: break-word; font-size: 12px; background
 ul.tight { margin: 4px 0 8px; padding-left: 18px; font-size: 13px; }
 .k { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase;
   letter-spacing: .05em; margin-top: 8px; }
-.stats { font-size: 12px; color: var(--muted); }
+.runcard .top { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .05em; padding: 2px 9px; border-radius: 10px; }
+.badge.live { background: var(--green-bg); color: var(--green); }
+.badge.live::before { content: ""; width: 7px; height: 7px; border-radius: 50%;
+  background: currentColor; }
+.badge.recorded { background: var(--bg); color: var(--muted); }
+.runcard .path { font-family: ui-monospace, Menlo, monospace; font-size: 11px;
+  color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.metric { background: var(--bg); border-radius: 8px; padding: 8px 10px; }
+.metric .label { font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--muted); }
+.metric .value { font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums;
+  line-height: 1.2; margin: 2px 0; }
+.metric .sub { font-size: 11px; color: var(--muted); }
+.metric .sub.ok { color: var(--green); }
+.metric .sub.over { color: var(--red); font-weight: 700; }
+.trace-link { display: block; margin-top: 10px; text-align: center; padding: 7px;
+  border: 1px solid var(--line); border-radius: 8px; font-size: 13px; font-weight: 600;
+  text-decoration: none; }
+.trace-link:hover { border-color: var(--blue); background: var(--blue-bg); }
 .status { font-size: 12px; font-weight: 600; color: var(--muted); }
 .spin { display: inline-block; width: 10px; height: 10px; border: 2px solid var(--line);
   border-top-color: var(--blue); border-radius: 50%; animation: spin .8s linear infinite;
@@ -474,12 +495,33 @@ function renderResult(msg) {
     <div class="card">${list("Facts", reasoning.facts)}${list("Conflicts", reasoning.conflicts)}
       ${list("Missing", reasoning.missing)}${list("Options rejected", reasoning.options_rejected)}
       ${reasoning.uncertainty ? `<div class="k">Uncertainty</div><div class="note">${esc(reasoning.uncertainty)}</div>` : ""}</div>
-    <div class="stats">${msg.recorded ? "Recorded run" : "Live run"} · ${esc(msg.source)}<br>
-      $${(r.cost_usd ?? 0).toFixed(4)} · ${(r.latency_s ?? 0).toFixed(1)} s ·
-      ${(r.tokens?.input ?? tokens.input).toLocaleString()} input / ${(r.tokens?.output ?? tokens.output).toLocaleString()} output tokens
-      ${msg.phoenix ? `<br><a href="${esc(msg.phoenix)}" target="_blank">View trace in Phoenix ↗</a>` : ""}</div>`;
+    ${runCard(msg)}`;
   light("n-agent", r.next_move ? "ok" : "blocked");
   revealCase(caseData);
+}
+
+function runCard(msg) {
+  const r = msg.result;
+  const cost = r.cost_usd ?? 0;
+  const secs = r.latency_s ?? 0;
+  const tin = r.tokens?.input ?? tokens.input;
+  const tout = r.tokens?.output ?? tokens.output;
+  const kilo = (n) => (n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n));
+  const budget = (value, max, text) => value <= max
+    ? `<div class="sub ok">within ${text}</div>` : `<div class="sub over">over ${text}</div>`;
+  return `<div class="card runcard">
+    <div class="top"><span class="badge ${msg.recorded ? "recorded" : "live"}">${msg.recorded ? "Recorded run" : "Live run"}</span>
+      <span class="path" title="${esc(msg.source)}">${esc(msg.source)}</span></div>
+    <div class="metrics">
+      <div class="metric"><div class="label">Cost</div><div class="value">$${cost.toFixed(3)}</div>
+        ${budget(cost, msg.budget.cost_usd, `$${msg.budget.cost_usd.toFixed(2)} budget`)}</div>
+      <div class="metric"><div class="label">Time</div><div class="value">${secs.toFixed(1)} s</div>
+        ${budget(secs, msg.budget.latency_s, `${msg.budget.latency_s} s budget`)}</div>
+      <div class="metric"><div class="label">Tokens</div><div class="value">${kilo(tin + tout)}</div>
+        <div class="sub">${kilo(tin)} in · ${kilo(tout)} out</div></div>
+    </div>
+    ${msg.phoenix ? `<a class="trace-link" href="${esc(msg.phoenix)}" target="_blank">View the full trace in Phoenix ↗</a>` : ""}
+  </div>`;
 }
 
 // --- runs, replays and probes -------------------------------------------------
