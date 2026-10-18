@@ -32,6 +32,8 @@ def lines(response) -> list[dict]:
     ("probe", "verdicts"),
     [
         ("R1", [("held", "R1")]),
+        ("R2", [("held", "R2")]),
+        ("R3", [("held", "R3")]),
         ("R4", [("blocked", "R4")]),
         ("R5", [("approved", None), ("blocked", "R5")]),
     ],
@@ -47,6 +49,25 @@ def test_probes_get_the_gateway_verdict_and_observe_lets_them_through(
         ("approved", status) for status, _ in verdicts
     ]
     assert enforce["case"]["id"] == demo.PROBES[probe]["point"]
+
+
+def test_the_duplicate_probe_is_dropped_in_both_modes(client):
+    for mode in ("enforce", "observe"):
+        steps = client.post(f"/api/probe/R6?gateway={mode}").json()["steps"]
+
+        assert [(s["status"], s["rule"]) for s in steps] == [
+            ("approved", None),
+            ("duplicate", "R6"),
+        ]
+
+
+def test_presets_list_every_category_and_which_can_be_replayed(client, monkeypatch):
+    monkeypatch.setitem(demo.PRESETS["P01"], "recorded", None)
+    data = client.get("/api/presets").json()
+
+    assert {p["label"] for p in data["presets"]} == set(data["categories"])
+    replay = {p["id"]: p["replay"] for p in data["presets"]}
+    assert replay["PM-035-a"] and not replay["P01"]
 
 
 def test_a_live_run_streams_its_events_and_replays_the_same_way(client):

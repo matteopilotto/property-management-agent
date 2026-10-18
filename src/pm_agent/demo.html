@@ -7,51 +7,62 @@
 :root { --ink: #16181d; --muted: #6b7280; --line: #e3e5ea; --bg: #f6f7f9;
   --green: #0a7a36; --green-bg: #dff5e6; --amber: #8a5a00; --amber-bg: #fff1c2;
   --red: #b00020; --red-bg: #fde7ea; --blue: #1d4ed8; --blue-bg: #e3ebff;
-  --violet: #6d28d9; --violet-bg: #efe7ff; }
+  --violet: #6d28d9; --violet-bg: #efe7ff; --teal: #0f766e; --teal-bg: #d5f5ef; }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--ink); height: 100vh;
   display: flex; flex-direction: column;
   font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
-header { background: #fff; border-bottom: 1px solid var(--line); padding: 12px 20px; }
-h1 { font-size: 20px; margin: 0 0 10px; }
-h1 small { font-weight: 400; color: var(--muted); font-size: 14px; margin-left: 8px; }
-.bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; }
-.bar .group { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-.bar .sep { width: 1px; background: var(--line); margin: 0 6px; }
-.group-title { font-size: 12px; text-transform: uppercase; letter-spacing: .05em;
-  color: var(--muted); margin-right: 2px; }
-.preset { border: 1px solid var(--line); border-radius: 10px; padding: 6px 10px;
-  background: #fff; max-width: 280px; }
-.preset .top { display: flex; align-items: center; gap: 6px; }
-.preset .blurb { font-size: 12px; color: var(--muted); margin: 3px 0 5px; }
-.preset .id { font-family: ui-monospace, Menlo, monospace; font-weight: 700; }
+header { background: #fff; border-bottom: 1px solid var(--line); padding: 8px 20px 0; }
+.row { display: flex; align-items: center; gap: 14px; min-height: 40px; flex-wrap: wrap; }
+h1 { font-size: 18px; margin: 0; white-space: nowrap; }
+h1 small { font-weight: 400; color: var(--muted); font-size: 13px; margin-left: 8px; }
 button { font: inherit; font-size: 13px; border: 1px solid var(--line); background: #fff;
-  border-radius: 7px; padding: 3px 10px; cursor: pointer; }
+  border-radius: 7px; padding: 4px 12px; cursor: pointer; }
 button:hover { border-color: var(--ink); }
 button.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
-button:disabled { opacity: .45; cursor: default; }
 .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 1px 7px;
-  border-radius: 10px; text-transform: uppercase; letter-spacing: .04em; }
+  border-radius: 10px; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
 .tag.Good { background: var(--green-bg); color: var(--green); }
-.tag.Good-safety { background: var(--green-bg); color: var(--green); }
+.tag.Safety { background: var(--teal-bg); color: var(--teal); }
 .tag.Attack { background: var(--violet-bg); color: var(--violet); }
 .tag.Miss { background: var(--red-bg); color: var(--red); }
-.tag.Caught { background: var(--amber-bg); color: var(--amber); }
+.tag.Probes { background: var(--amber-bg); color: var(--amber); }
 .toggle { display: inline-flex; border: 1px solid var(--line); border-radius: 7px;
   overflow: hidden; }
 .toggle button { border: 0; border-radius: 0; }
 .toggle button.on { background: var(--ink); color: #fff; }
 
-#arch { display: flex; align-items: center; justify-content: center; gap: 6px;
-  padding: 10px 20px; background: #fff; border-bottom: 1px solid var(--line);
-  flex-wrap: wrap; }
-.node { border: 2px solid var(--line); border-radius: 9px; padding: 5px 12px;
-  font-size: 13px; font-weight: 600; background: #fff; transition: all .25s; }
-.node small { display: block; font-weight: 400; color: var(--muted); font-size: 11px; }
-.arrow { color: var(--muted); }
-.stack { display: flex; flex-direction: column; gap: 4px; }
+#tabs { display: flex; gap: 2px; align-self: stretch; }
+.tab { border: 0; border-bottom: 3px solid transparent; border-radius: 0; padding: 8px 12px;
+  font-weight: 600; color: var(--muted); background: none; }
+.tab:hover { color: var(--ink); }
+.tab.on { color: var(--ink); border-bottom-color: currentColor; }
+.tab.on.Good { color: var(--green); }
+.tab.on.Safety { color: var(--teal); }
+.tab.on.Attack { color: var(--violet); }
+.tab.on.Miss { color: var(--red); }
+.tab.on.Probes { color: var(--amber); }
+.tab .n { font-size: 11px; font-weight: 700; margin-left: 4px; opacity: .7; }
+#chips { display: flex; gap: 6px; flex-wrap: wrap; flex: 1; }
+.chip { border-radius: 16px; padding: 3px 12px; }
+.chip .id { font-family: ui-monospace, Menlo, monospace; font-weight: 700; margin-right: 5px; }
+.chip.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+#detail { display: flex; align-items: center; gap: 10px; min-height: 44px;
+  border-top: 1px solid var(--line); flex-wrap: wrap; padding: 4px 0; }
+#detail .blurb { flex: 1; font-size: 14px; min-width: 260px; }
+#detail .blurb b { font-family: ui-monospace, Menlo, monospace; margin-right: 6px; }
+#detail .actions { display: flex; gap: 8px; align-items: center; }
+.hint { font-size: 12px; color: var(--muted); }
+
+#arch { display: flex; align-items: center; gap: 5px; margin-left: auto; flex-wrap: wrap; }
+.node { border: 2px solid var(--line); border-radius: 8px; padding: 2px 9px;
+  font-size: 12px; font-weight: 600; background: #fff; transition: all .25s;
+  white-space: nowrap; }
+.arrow { color: var(--muted); font-size: 12px; }
+.stack { display: flex; flex-direction: column; gap: 2px; }
+.stack .node { padding: 0 9px; font-size: 11px; }
 .node.active { border-color: var(--blue); background: var(--blue-bg);
-  box-shadow: 0 0 0 4px rgba(29, 78, 216, .15); }
+  box-shadow: 0 0 0 3px rgba(29, 78, 216, .15); }
 .node.ok { border-color: var(--green); background: var(--green-bg); }
 .node.held { border-color: var(--amber); background: var(--amber-bg); }
 .node.blocked { border-color: var(--red); background: var(--red-bg); }
@@ -104,6 +115,7 @@ details.later > summary { cursor: pointer; color: var(--muted); font-size: 13px;
 .why.held { background: var(--amber-bg); }
 .why.blocked { background: var(--red-bg); }
 .why.observe { background: var(--violet-bg); }
+.why.duplicate { background: #eee; }
 .email { margin-top: 6px; border: 1px solid var(--line); border-radius: 8px;
   font-size: 13px; overflow: hidden; }
 .email .hdr { background: var(--bg); padding: 5px 9px; }
@@ -138,40 +150,32 @@ a { color: var(--blue); }
 </head>
 <body>
 <header>
-  <h1>Letting agency back office <small>the agent handles one case at its decision point; every action passes the action gateway</small></h1>
-  <div class="bar">
-    <div class="group" id="presets"><span class="group-title">Cases</span></div>
-    <div class="sep"></div>
-    <div class="group" id="probes">
-      <span class="group-title">Gateway probes</span>
-      <span class="toggle" id="gw">
-        <button class="on" data-mode="enforce">enforce</button>
-        <button data-mode="observe">observe</button>
-      </span>
+  <div class="row">
+    <h1>Letting agency back office <small>one case, one next move; every action passes the gateway</small></h1>
+    <div id="arch">
+      <div class="node" id="n-case" title="events up to the decision point">Case</div>
+      <span class="arrow">→</span>
+      <div class="node" id="n-agent" title="Claude in ADK">Agent</div>
+      <span class="arrow">→</span>
+      <div class="stack">
+        <div class="node" id="n-lookup" title="read only">Lookups</div>
+        <div class="node" id="n-action" title="proposed">Actions</div>
+      </div>
+      <span class="arrow">→</span>
+      <div class="node" id="n-gateway" title="R1–R6, move check">Action gateway</div>
+      <span class="arrow">→</span>
+      <div class="stack">
+        <div class="node" id="n-ledger" title="recorded">Ledger</div>
+        <div class="node" id="n-pm" title="held &amp; escalated">Property manager</div>
+      </div>
     </div>
   </div>
+  <div class="row"><div id="tabs"></div><div id="chips"></div></div>
+  <div id="detail"></div>
 </header>
 
-<div id="arch">
-  <div class="node" id="n-case">Case<small>events up to the decision point</small></div>
-  <span class="arrow">→</span>
-  <div class="node" id="n-agent">Agent<small>Claude in ADK</small></div>
-  <span class="arrow">→</span>
-  <div class="stack">
-    <div class="node" id="n-lookup">Lookups<small>read only</small></div>
-    <div class="node" id="n-action">Actions<small>proposed</small></div>
-  </div>
-  <span class="arrow">→</span>
-  <div class="node" id="n-gateway">Action gateway<small>R1–R6, move check</small></div>
-  <span class="arrow">→</span>
-  <div class="stack">
-    <div class="node" id="n-ledger">Ledger<small>recorded</small></div>
-    <div class="node" id="n-pm">Property manager<small>held &amp; escalated</small></div>
-  </div>
-</div>
-
 <main>
-  <section id="case-pane"><h2>Case</h2><div class="empty">Pick a case or a probe above.</div></section>
+  <section id="case-pane"><h2>Case</h2><div class="empty">Pick a case above.</div></section>
   <section id="run-pane"><h2><span>Run</span><span id="run-ctl"></span></h2><div id="steps"></div></section>
   <section id="decision-pane"><h2>Decision</h2><div id="decision"></div></section>
 </main>
@@ -187,7 +191,6 @@ const VERDICT_TEXT = { approved: "approved", held: "held for property manager",
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g,
   (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
-const labelClass = (l) => l.replace(/[^A-Za-z]+/g, "-");
 
 let gatewayMode = "enforce";
 let session = 0;          // bumps on every new run, so a stale stream stops rendering
@@ -211,33 +214,79 @@ function pulse(id) {
 }
 
 // --- header -----------------------------------------------------------------
+let catalogue = { presets: [], probes: [] };
+let activeTab = null;
+
 async function loadPresets() {
   const data = await (await fetch("/api/presets")).json();
-  for (const p of data.presets) {
-    const el = document.createElement("div");
-    el.className = "preset";
-    el.innerHTML = `<div class="top"><span class="tag ${labelClass(p.label)}">${esc(p.label)}</span>
-      <span class="id">${esc(p.id)}</span></div><div class="blurb">${esc(p.blurb)}</div>`;
-    const buttons = document.createElement("div");
-    if (p.mode === "live") buttons.append(button("Run live", () => run(p.id, "live"), true));
-    buttons.append(button("Replay", () => run(p.id, "replay"), p.mode !== "live"));
-    el.append(buttons);
-    $("presets").append(el);
+  catalogue = data;
+  const tabs = [...data.categories, "Probes"];
+  for (const tab of tabs) {
+    const count = tab === "Probes" ? data.probes.length
+      : data.presets.filter((p) => p.label === tab).length;
+    const b = button("", () => showTab(tab));
+    b.className = `tab ${tab}`;
+    b.dataset.tab = tab;
+    b.innerHTML = `${tab === "Probes" ? "Gateway probes" : tab}<span class="n">${count}</span>`;
+    $("tabs").append(b);
   }
-  for (const p of data.probes) {
-    const el = document.createElement("div");
-    el.className = "preset";
-    el.innerHTML = `<div class="top"><span class="tag Caught">${esc(p.id)}</span>
-      <span class="id">${esc(p.point)}</span></div><div class="blurb">${esc(p.title)}</div>`;
-    const b = document.createElement("div");
-    b.append(button("Send to gateway", () => probe(p.id), true));
-    el.append(b);
-    $("probes").append(el);
+  showTab(tabs[0]);
+}
+function showTab(tab) {
+  activeTab = tab;
+  document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("on", t.dataset.tab === tab));
+  const items = tab === "Probes"
+    ? catalogue.probes.map((p) => ({ key: p.id, id: p.id, name: p.name }))
+    : catalogue.presets.filter((p) => p.label === tab).map((p) => ({ key: p.id, id: p.id, name: p.name }));
+  $("chips").innerHTML = "";
+  for (const item of items) {
+    const b = button("", () => select(item.key));
+    b.className = "chip";
+    b.dataset.key = item.key;
+    b.innerHTML = `<span class="id">${esc(item.id)}</span>${esc(item.name)}`;
+    $("chips").append(b);
   }
-  document.querySelectorAll("#gw button").forEach((b) => (b.onclick = () => {
-    gatewayMode = b.dataset.mode;
-    document.querySelectorAll("#gw button").forEach((x) => x.classList.toggle("on", x === b));
-  }));
+  select(items[0].key);
+}
+async function select(key) {
+  document.querySelectorAll(".chip").forEach((c) => c.classList.toggle("on", c.dataset.key === key));
+  const detail = $("detail");
+  detail.innerHTML = "";
+  const blurb = document.createElement("div");
+  blurb.className = "blurb";
+  const actions = document.createElement("div");
+  actions.className = "actions";
+  detail.append(blurb, actions);
+  let point;
+  if (activeTab === "Probes") {
+    const p = catalogue.probes.find((x) => x.id === key);
+    point = p.point;
+    blurb.innerHTML = `<span class="tag Probes">${esc(p.id)}</span> <b>${esc(p.point)}</b>${esc(p.title)}
+      <span class="hint">· sent straight to the gateway, no agent</span>`;
+    const toggle = document.createElement("span");
+    toggle.className = "toggle";
+    for (const mode of ["enforce", "observe"]) {
+      const b = button(mode, () => {
+        gatewayMode = mode;
+        toggle.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
+      });
+      if (mode === gatewayMode) b.classList.add("on");
+      toggle.append(b);
+    }
+    actions.append(toggle, button("Send to gateway", () => probe(p.id), true));
+  } else {
+    const p = catalogue.presets.find((x) => x.id === key);
+    point = p.id;
+    blurb.innerHTML = `<span class="tag ${p.label}">${esc(p.label)}</span> <b>${esc(p.id)}</b>${esc(p.blurb)}`;
+    if (p.mode === "live") actions.append(button("Run live", () => run(p.id, "live"), true));
+    if (p.replay) actions.append(button("Replay", () => run(p.id, "replay"), p.mode !== "live"));
+    if (p.mode === "live" && !p.replay) {
+      actions.insertAdjacentHTML("beforeend", `<span class="hint">no recording yet</span>`);
+    }
+  }
+  const mine = resetRun("");
+  const c = await (await fetch(`/api/case/${encodeURIComponent(point)}`)).json();
+  if (mine === session) renderCase(c);
 }
 function button(text, onclick, primary) {
   const b = document.createElement("button");
@@ -368,6 +417,8 @@ function setVerdict(el, verdict, detail, tool, observed) {
     light("n-gateway", "held"); light("n-pm", "held"); light("n-ledger", "held");
   } else if (verdict === "blocked") {
     light("n-gateway", "blocked");
+  } else {
+    light("n-gateway", "ok");
   }
 }
 function lookupSummary(name, r, resp) {
@@ -495,7 +546,9 @@ async function probe(id) {
     <h3>${esc(data.title)}</h3>
     <div class="note">Sent straight to the real action gateway on case ${esc(data.case.id)}, with no agent involved, in <b>${esc(gatewayMode)}</b> mode.</div>
     ${caught ? `<div class="k">Rule</div><div class="note"><b>${esc(caught.rule)}</b>: ${esc(caught.reason)}</div>` : ""}
-    <div class="k">Without the gateway</div><div class="note">${gatewayMode === "observe"
+    <div class="k">Without the gateway</div><div class="note">${caught?.rule === "R6"
+      ? "Duplicates are dropped in both modes: observe only relaxes R1–R5."
+      : gatewayMode === "observe"
       ? "Observe mode is the gateway switched to watch only: the unsafe action went through."
       : "Switch to observe to see the same action go through."}</div></div>`;
   $("run-ctl").innerHTML = `<span class="status">gateway probe · ${gatewayMode} · done</span>`;
