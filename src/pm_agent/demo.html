@@ -54,13 +54,14 @@ button.primary { background: var(--ink); color: #fff; border-color: var(--ink); 
 #detail .actions { display: flex; gap: 8px; align-items: center; }
 .hint { font-size: 12px; color: var(--muted); }
 
-#arch { display: flex; align-items: center; gap: 5px; margin-left: auto; flex-wrap: wrap; }
-.node { border: 2px solid var(--line); border-radius: 8px; padding: 2px 9px;
-  font-size: 12px; font-weight: 600; background: #fff; transition: all .25s;
+#arch { display: flex; align-items: stretch; gap: 6px; margin-left: auto; }
+.node { display: flex; align-items: center; justify-content: center; min-height: 22px;
+  border: 1.5px solid var(--line); border-radius: 6px; padding: 0 10px;
+  font-size: 12px; font-weight: 600; background: var(--bg); transition: all .25s;
   white-space: nowrap; }
-.arrow { color: var(--muted); font-size: 12px; }
-.stack { display: flex; flex-direction: column; gap: 2px; }
-.stack .node { padding: 0 9px; font-size: 11px; }
+.arrow { align-self: center; color: #b4b8c1; font-size: 13px; }
+.stack { display: flex; flex-direction: column; gap: 4px; }
+.stack .node { flex: 1; }
 .node.active { border-color: var(--blue); background: var(--blue-bg);
   box-shadow: 0 0 0 3px rgba(29, 78, 216, .15); }
 .node.ok { border-color: var(--green); background: var(--green-bg); }
