@@ -3,10 +3,12 @@ import asyncio
 import json
 import time
 import uuid
+from collections.abc import Callable
 from pathlib import Path
 
 from dotenv import load_dotenv
 from google.adk.agents import BaseAgent
+from google.adk.events import Event
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai import types
@@ -46,8 +48,10 @@ async def run_case(
     visible_through: int | None,
     gateway_mode: str,
     agent: BaseAgent = root_agent,
+    on_event: Callable[[Event], None] | None = None,
 ) -> dict:
-    """Run one case into out_dir. Never raises: a failure is written as an answer."""
+    """Run one case into out_dir. Never raises: a failure is written as an answer.
+    on_event sees each ADK event as it is written to trace.jsonl."""
     out_dir.mkdir(parents=True, exist_ok=True)
     ledger = Ledger(out_dir / "ledger.jsonl")
     trace_file = out_dir / "trace.jsonl"
@@ -65,7 +69,9 @@ async def run_case(
             )
             gateway = ActionGateway(case_view, ledger, gateway_mode)
             async with asyncio.timeout(CASE_TIMEOUT_S):
-                await _run_agent(agent, CaseRun(case_view, gateway), trace_file, tokens)
+                await _run_agent(
+                    agent, CaseRun(case_view, gateway), trace_file, tokens, on_event
+                )
         except TimeoutError:
             error = f"TimeoutError: the case took longer than {CASE_TIMEOUT_S} s"
         except Exception as exc:  # noqa: BLE001 - any crash must still write an answer
@@ -149,7 +155,11 @@ def _reasoning(decision: dict) -> dict:
 
 
 async def _run_agent(
-    agent: BaseAgent, case_run: CaseRun, trace_file: Path, tokens: dict
+    agent: BaseAgent,
+    case_run: CaseRun,
+    trace_file: Path,
+    tokens: dict,
+    on_event: Callable[[Event], None] | None = None,
 ) -> None:
     session_id = uuid.uuid4().hex
     CASE_RUNS[session_id] = case_run
@@ -169,6 +179,8 @@ async def _run_agent(
                 user_id="pm-agent", session_id=session_id, new_message=message
             ):
                 f.write(event.model_dump_json(exclude_none=True) + "\n")
+                if on_event:
+                    on_event(event)
                 usage = event.usage_metadata
                 if usage:
                     tokens["input"] += usage.prompt_token_count or 0
@@ -310,6 +322,9 @@ def main(argv: list[str] | None = None) -> None:
     board.add_argument(
         "--out", type=Path, help="output file (default: runs/<run_id>/board.html)"
     )
+    demo = commands.add_parser("demo", help="serve the demo UI")
+    demo.add_argument("--host", default="127.0.0.1")
+    demo.add_argument("--port", type=int, default=8000)
     args = parser.parse_args(argv)
     load_dotenv()
     if args.command == "run":
@@ -330,4 +345,9 @@ def main(argv: list[str] | None = None) -> None:
         from pm_agent import board
 
         raise SystemExit(board.cli(args.run_id, args.points, args.out))
+    if args.command == "demo":
+        from pm_agent import demo
+
+        setup_tracing()
+        raise SystemExit(demo.cli(args.host, args.port))
     print(f"{args.command}: not implemented")

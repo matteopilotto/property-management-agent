@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>pm-agent: case console</title>
+<style>
+:root { --ink: #16181d; --muted: #6b7280; --line: #e3e5ea; --bg: #f6f7f9;
+  --green: #0a7a36; --green-bg: #dff5e6; --amber: #8a5a00; --amber-bg: #fff1c2;
+  --red: #b00020; --red-bg: #fde7ea; --blue: #1d4ed8; --blue-bg: #e3ebff;
+  --violet: #6d28d9; --violet-bg: #efe7ff; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); height: 100vh;
+  display: flex; flex-direction: column;
+  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+header { background: #fff; border-bottom: 1px solid var(--line); padding: 12px 20px; }
+h1 { font-size: 20px; margin: 0 0 10px; }
+h1 small { font-weight: 400; color: var(--muted); font-size: 14px; margin-left: 8px; }
+.bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; }
+.bar .group { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.bar .sep { width: 1px; background: var(--line); margin: 0 6px; }
+.group-title { font-size: 12px; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--muted); margin-right: 2px; }
+.preset { border: 1px solid var(--line); border-radius: 10px; padding: 6px 10px;
+  background: #fff; max-width: 280px; }
+.preset .top { display: flex; align-items: center; gap: 6px; }
+.preset .blurb { font-size: 12px; color: var(--muted); margin: 3px 0 5px; }
+.preset .id { font-family: ui-monospace, Menlo, monospace; font-weight: 700; }
+button { font: inherit; font-size: 13px; border: 1px solid var(--line); background: #fff;
+  border-radius: 7px; padding: 3px 10px; cursor: pointer; }
+button:hover { border-color: var(--ink); }
+button.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
+button:disabled { opacity: .45; cursor: default; }
+.tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 1px 7px;
+  border-radius: 10px; text-transform: uppercase; letter-spacing: .04em; }
+.tag.Good { background: var(--green-bg); color: var(--green); }
+.tag.Good-safety { background: var(--green-bg); color: var(--green); }
+.tag.Attack { background: var(--violet-bg); color: var(--violet); }
+.tag.Miss { background: var(--red-bg); color: var(--red); }
+.tag.Caught { background: var(--amber-bg); color: var(--amber); }
+.toggle { display: inline-flex; border: 1px solid var(--line); border-radius: 7px;
+  overflow: hidden; }
+.toggle button { border: 0; border-radius: 0; }
+.toggle button.on { background: var(--ink); color: #fff; }
+
+#arch { display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 10px 20px; background: #fff; border-bottom: 1px solid var(--line);
+  flex-wrap: wrap; }
+.node { border: 2px solid var(--line); border-radius: 9px; padding: 5px 12px;
+  font-size: 13px; font-weight: 600; background: #fff; transition: all .25s; }
+.node small { display: block; font-weight: 400; color: var(--muted); font-size: 11px; }
+.arrow { color: var(--muted); }
+.stack { display: flex; flex-direction: column; gap: 4px; }
+.node.active { border-color: var(--blue); background: var(--blue-bg);
+  box-shadow: 0 0 0 4px rgba(29, 78, 216, .15); }
+.node.ok { border-color: var(--green); background: var(--green-bg); }
+.node.held { border-color: var(--amber); background: var(--amber-bg); }
+.node.blocked { border-color: var(--red); background: var(--red-bg); }
+
+main { display: grid; grid-template-columns: 30% 40% 30%; flex: 1; min-height: 0; }
+section { overflow-y: auto; padding: 14px 18px; border-right: 1px solid var(--line); }
+section:last-child { border-right: 0; }
+section > h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--muted); margin: 0 0 10px; display: flex; justify-content: space-between;
+  align-items: center; }
+.empty { color: var(--muted); font-style: italic; }
+.card { background: #fff; border: 1px solid var(--line); border-radius: 10px;
+  padding: 10px 12px; margin-bottom: 10px; }
+.card h3 { font-size: 15px; margin: 0 0 6px; }
+dl.kv { display: grid; grid-template-columns: max-content 1fr; gap: 2px 10px; margin: 0;
+  font-size: 13px; }
+dl.kv dt { color: var(--muted); }
+dl.kv dd { margin: 0; }
+.ev { border-left: 3px solid var(--line); padding: 4px 0 6px 10px; margin: 0 0 8px; }
+.ev .meta { font-size: 12px; color: var(--muted); }
+.ev .meta b { color: var(--ink); }
+.ev .body { white-space: pre-wrap; font-size: 13px; max-height: 9em; overflow: hidden;
+  position: relative; cursor: pointer; }
+.ev .body.open { max-height: none; }
+.ev.unseen { opacity: .45; }
+.ev.new { border-left-color: var(--violet); }
+.cut { margin: 12px 0; padding: 6px 10px; border: 2px dashed var(--ink); border-radius: 8px;
+  font-size: 12px; font-weight: 700; text-align: center; }
+details.later > summary { cursor: pointer; color: var(--muted); font-size: 13px;
+  margin-bottom: 8px; }
+
+.step { background: #fff; border: 1px solid var(--line); border-radius: 10px;
+  margin-bottom: 8px; padding: 8px 12px; animation: in .25s ease-out; }
+@keyframes in { from { opacity: 0; transform: translateY(6px); } }
+.step.lookup { background: transparent; border-style: dashed; padding: 5px 12px;
+  font-size: 13px; color: var(--muted); }
+.step .head { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.step .tool { font-family: ui-monospace, Menlo, monospace; font-weight: 700;
+  color: var(--ink); }
+.step .kind { font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--muted); }
+.verdict { margin-left: auto; font-size: 12px; font-weight: 700; padding: 2px 9px;
+  border-radius: 10px; }
+.verdict.pending { background: var(--bg); color: var(--muted); }
+.verdict.approved { background: var(--green-bg); color: var(--green); }
+.verdict.held { background: var(--amber-bg); color: var(--amber); }
+.verdict.blocked { background: var(--red-bg); color: var(--red); }
+.verdict.duplicate { background: #eee; color: #555; }
+.why { margin-top: 6px; font-size: 13px; border-radius: 7px; padding: 6px 9px; }
+.why.held { background: var(--amber-bg); }
+.why.blocked { background: var(--red-bg); }
+.why.observe { background: var(--violet-bg); }
+.email { margin-top: 6px; border: 1px solid var(--line); border-radius: 8px;
+  font-size: 13px; overflow: hidden; }
+.email .hdr { background: var(--bg); padding: 5px 9px; }
+.email .msg { padding: 7px 9px; white-space: pre-wrap; }
+.args { margin-top: 6px; }
+.raw summary { cursor: pointer; font-size: 12px; color: var(--muted); margin-top: 4px; }
+pre { white-space: pre-wrap; word-break: break-word; font-size: 12px; background: var(--bg);
+  border-radius: 7px; padding: 8px; margin: 4px 0 0; max-height: 260px; overflow: auto; }
+.lookup-sum { color: var(--ink); }
+.note { font-size: 13px; white-space: pre-wrap; }
+
+.move { font-size: 30px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
+.move.act { color: var(--blue); }
+.move.ask { color: var(--green); }
+.move.wait { color: var(--amber); }
+.move.escalate { color: var(--violet); }
+.score { display: flex; gap: 10px; align-items: center; font-size: 14px; flex-wrap: wrap; }
+.pill { font-weight: 700; padding: 3px 10px; border-radius: 12px; }
+.pill.pass { background: var(--green-bg); color: var(--green); }
+.pill.fail { background: var(--red-bg); color: var(--red); }
+ul.tight { margin: 4px 0 8px; padding-left: 18px; font-size: 13px; }
+.k { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase;
+  letter-spacing: .05em; margin-top: 8px; }
+.stats { font-size: 12px; color: var(--muted); }
+.status { font-size: 12px; font-weight: 600; color: var(--muted); }
+.spin { display: inline-block; width: 10px; height: 10px; border: 2px solid var(--line);
+  border-top-color: var(--blue); border-radius: 50%; animation: spin .8s linear infinite;
+  vertical-align: -1px; margin-right: 5px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+a { color: var(--blue); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Letting agency back office <small>the agent handles one case at its decision point; every action passes the action gateway</small></h1>
+  <div class="bar">
+    <div class="group" id="presets"><span class="group-title">Cases</span></div>
+    <div class="sep"></div>
+    <div class="group" id="probes">
+      <span class="group-title">Gateway probes</span>
+      <span class="toggle" id="gw">
+        <button class="on" data-mode="enforce">enforce</button>
+        <button data-mode="observe">observe</button>
+      </span>
+    </div>
+  </div>
+</header>
+
+<div id="arch">
+  <div class="node" id="n-case">Case<small>events up to the decision point</small></div>
+  <span class="arrow">→</span>
+  <div class="node" id="n-agent">Agent<small>Claude in ADK</small></div>
+  <span class="arrow">→</span>
+  <div class="stack">
+    <div class="node" id="n-lookup">Lookups<small>read only</small></div>
+    <div class="node" id="n-action">Actions<small>proposed</small></div>
+  </div>
+  <span class="arrow">→</span>
+  <div class="node" id="n-gateway">Action gateway<small>R1–R6, move check</small></div>
+  <span class="arrow">→</span>
+  <div class="stack">
+    <div class="node" id="n-ledger">Ledger<small>recorded</small></div>
+    <div class="node" id="n-pm">Property manager<small>held &amp; escalated</small></div>
+  </div>
+</div>
+
+<main>
+  <section id="case-pane"><h2>Case</h2><div class="empty">Pick a case or a probe above.</div></section>
+  <section id="run-pane"><h2><span>Run</span><span id="run-ctl"></span></h2><div id="steps"></div></section>
+  <section id="decision-pane"><h2>Decision</h2><div id="decision"></div></section>
+</main>
+
+<script>
+const READ_TOOLS = new Set(["get_case_overview", "get_events", "search_events",
+  "read_attachment", "list_files", "read_file"]);
+const REPLAY_GAP_S = 1.5;
+const VERDICT = { recorded: "approved", held_for_property_manager: "held",
+  blocked: "blocked", duplicate: "duplicate" };
+const VERDICT_TEXT = { approved: "approved", held: "held for property manager",
+  blocked: "blocked", duplicate: "duplicate" };
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g,
+  (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+const labelClass = (l) => l.replace(/[^A-Za-z]+/g, "-");
+
+let gatewayMode = "enforce";
+let session = 0;          // bumps on every new run, so a stale stream stops rendering
+let skip = false;
+let rows = {};
+let tokens = { input: 0, output: 0 };
+let caseData = null;
+
+// --- architecture diagram ---------------------------------------------------
+function resetArch() {
+  document.querySelectorAll(".node").forEach((n) => (n.className = "node"));
+}
+function light(id, cls) {
+  const n = $(id);
+  n.classList.remove("active", "ok", "held", "blocked");
+  n.classList.add(cls);
+}
+function pulse(id) {
+  light(id, "active");
+  setTimeout(() => $(id).classList.remove("active"), 900);
+}
+
+// --- header -----------------------------------------------------------------
+async function loadPresets() {
+  const data = await (await fetch("/api/presets")).json();
+  for (const p of data.presets) {
+    const el = document.createElement("div");
+    el.className = "preset";
+    el.innerHTML = `<div class="top"><span class="tag ${labelClass(p.label)}">${esc(p.label)}</span>
+      <span class="id">${esc(p.id)}</span></div><div class="blurb">${esc(p.blurb)}</div>`;
+    const buttons = document.createElement("div");
+    if (p.mode === "live") buttons.append(button("Run live", () => run(p.id, "live"), true));
+    buttons.append(button("Replay", () => run(p.id, "replay"), p.mode !== "live"));
+    el.append(buttons);
+    $("presets").append(el);
+  }
+  for (const p of data.probes) {
+    const el = document.createElement("div");
+    el.className = "preset";
+    el.innerHTML = `<div class="top"><span class="tag Caught">${esc(p.id)}</span>
+      <span class="id">${esc(p.point)}</span></div><div class="blurb">${esc(p.title)}</div>`;
+    const b = document.createElement("div");
+    b.append(button("Send to gateway", () => probe(p.id), true));
+    el.append(b);
+    $("probes").append(el);
+  }
+  document.querySelectorAll("#gw button").forEach((b) => (b.onclick = () => {
+    gatewayMode = b.dataset.mode;
+    document.querySelectorAll("#gw button").forEach((x) => x.classList.toggle("on", x === b));
+  }));
+}
+function button(text, onclick, primary) {
+  const b = document.createElement("button");
+  b.textContent = text;
+  if (primary) b.className = "primary";
+  b.onclick = onclick;
+  return b;
+}
+
+// --- case pane --------------------------------------------------------------
+function renderCase(c) {
+  caseData = c;
+  const seen = c.events.filter((e) => e.visible);
+  const later = c.events.filter((e) => !e.visible);
+  const details = Object.entries(c.details)
+    .map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("");
+  $("case-pane").innerHTML = `<h2><span>Case ${esc(c.id)}</span></h2>
+    <div class="card"><h3>${esc(c.title)}</h3><dl class="kv">${details}</dl></div>
+    <div class="card"><div class="k">Initial request</div><div class="note">${esc(c.initial_request)}</div></div>
+    ${seen.map((e) => eventHtml(e)).join("")}
+    <div class="cut">Decision point: the agent sees only the ${seen.length} events above</div>
+    ${later.length ? `<details class="later" id="later"><summary>${later.length} later events, hidden from the agent</summary>
+      ${later.map((e) => eventHtml(e, true)).join("")}</details>` : ""}
+    <div id="outcome"></div>`;
+  document.querySelectorAll(".ev .body").forEach((b) => (b.onclick = () => b.classList.toggle("open")));
+  document.querySelector(".ev.new")?.scrollIntoView({ block: "center" });
+  light("n-case", "ok");
+}
+function eventHtml(e, unseen) {
+  const synthetic = caseData.pressure && e.visible &&
+    e.number === Math.max(...caseData.events.map((x) => x.number));
+  return `<div class="ev ${unseen ? "unseen" : ""} ${synthetic ? "new" : ""}">
+    <div class="meta"><b>#${e.number}</b> ${esc(e.timestamp)} · ${esc(e.channel)} ·
+      <b>${esc(e.from)}</b> → ${esc(e.to)}${synthetic ? " · <b>pressure event</b>" : ""}</div>
+    <div class="body">${esc(e.body)}</div></div>`;
+}
+function revealCase(c) {
+  const later = $("later");
+  if (later) later.open = true;
+  const label = c.label;
+  $("outcome").innerHTML = `<div class="card"><div class="k">What the agency should do (label)</div>
+    <div><b>${esc(label.expected_move)}</b>${label.acceptable_moves.length ?
+      ` (also acceptable: ${esc(label.acceptable_moves.join(", "))})` : ""}</div>
+    <div class="note">${esc(label.rationale)}</div>
+    ${c.outcome ? `<div class="k">Recorded outcome</div><div class="note">${esc(c.outcome)}</div>` : ""}</div>`;
+}
+
+// --- run pane ---------------------------------------------------------------
+function resetRun(title) {
+  session += 1;
+  skip = false;
+  rows = {};
+  tokens = { input: 0, output: 0 };
+  $("steps").innerHTML = "";
+  $("decision").innerHTML = "";
+  $("run-ctl").innerHTML = title;
+  resetArch();
+  return session;
+}
+function addCall(call) {
+  const lookup = READ_TOOLS.has(call.name);
+  const el = document.createElement("div");
+  el.className = `step ${lookup ? "lookup" : "action"}`;
+  el.innerHTML = lookup
+    ? `<div class="head"><span class="kind">lookup</span><span class="tool">${esc(call.name)}</span>
+       <span>${esc(argLine(call.args))}</span><span class="lookup-sum"></span></div>`
+    : `<div class="head"><span class="kind">${call.name === "submit_decision" ? "decision" : "action"}</span>
+       <span class="tool">${esc(call.name)}</span><span class="verdict pending">at the gateway…</span></div>
+       ${actionBody(call.name, call.args)}`;
+  $("steps").append(el);
+  el.scrollIntoView({ block: "end", behavior: "smooth" });
+  rows[call.id] = { el, call };
+  light("n-agent", "active");
+  if (lookup) pulse("n-lookup");
+  else { pulse("n-action"); light("n-gateway", "active"); }
+}
+function argLine(args) {
+  const parts = Object.entries(args || {}).map(([k, v]) => `${k}=${JSON.stringify(v)}`);
+  return parts.length ? `(${parts.join(", ")})` : "";
+}
+function actionBody(name, a) {
+  a = a || {};
+  if (name === "send_message") {
+    return `<div class="email"><div class="hdr"><b>To:</b> ${esc(a.to)} · <b>Purpose:</b> ${esc(a.purpose)}<br>
+      <b>Subject:</b> ${esc(a.subject)}</div><div class="msg">${esc(a.body)}</div></div>`;
+  }
+  if (name === "escalate") {
+    const h = a.handover_note || {};
+    return `<div class="args"><div class="note"><b>Reason:</b> ${esc(a.reason)}</div>
+      <details class="raw"><summary>handover note</summary>${handoverHtml(h)}</details></div>`;
+  }
+  if (name === "submit_decision") {
+    return `<div class="args note">next_move <b>${esc(a.next_move)}</b>: ${esc(a.summary)}</div>`;
+  }
+  const kv = Object.entries(a).map(([k, v]) =>
+    `<dt>${esc(k)}</dt><dd>${esc(typeof v === "object" ? JSON.stringify(v) : v)}</dd>`).join("");
+  return `<dl class="kv args">${kv}</dl>`;
+}
+function handoverHtml(h) {
+  return `<dl class="kv" style="margin-top:6px"><dt>Known</dt><dd>${esc(h.known)}</dd>
+    <dt>Conflicts</dt><dd>${esc(h.conflicts)}</dd><dt>Done</dt><dd>${esc(h.done)}</dd>
+    <dt>Needed</dt><dd>${esc(h.needed)}</dd></dl>`;
+}
+function addResponse(resp) {
+  const row = rows[resp.id];
+  if (!row) return;
+  const r = resp.response || {};
+  if (READ_TOOLS.has(resp.name)) {
+    row.el.querySelector(".lookup-sum").textContent = "→ " + lookupSummary(resp.name, r, resp);
+    return;
+  }
+  setVerdict(row.el, VERDICT[r.status] || "approved", r.status === "recorded" ? null : r,
+    resp.name);
+}
+function setVerdict(el, verdict, detail, tool, observed) {
+  const badge = el.querySelector(".verdict");
+  badge.className = `verdict ${verdict}`;
+  badge.textContent = VERDICT_TEXT[verdict];
+  if (detail && detail.reason) {
+    el.insertAdjacentHTML("beforeend", `<div class="why ${verdict}"><b>${esc(detail.rule || "")}</b>
+      ${esc(detail.reason)}${detail.how_to_fix ? `<br><b>How to fix:</b> ${esc(detail.how_to_fix)}` : ""}</div>`);
+  }
+  if (observed) el.insertAdjacentHTML("beforeend", `<div class="why observe">${observed}</div>`);
+  if (verdict === "approved") {
+    light("n-gateway", "ok"); pulse("n-ledger");
+    if (tool === "escalate") light("n-pm", "held");
+  } else if (verdict === "held") {
+    light("n-gateway", "held"); light("n-pm", "held"); light("n-ledger", "held");
+  } else if (verdict === "blocked") {
+    light("n-gateway", "blocked");
+  }
+}
+function lookupSummary(name, r, resp) {
+  if (r.error) return r.error;
+  if (name === "get_case_overview") return `${r.event_count} events, ${(r.attachments || []).length} attachments`;
+  if (r.events) return `${r.events.length} event${r.events.length === 1 ? "" : "s"}` +
+    (r.events.length ? ` (#${r.events.map((e) => e.number).join(", #")})` : "");
+  if (resp.parts || r.document) return "document passed to the model";
+  if (r.files) return `${r.files.length} files`;
+  if (r.text) return `${r.text.length} characters`;
+  return "done";
+}
+function addEvent(ev) {
+  for (const part of ev.content?.parts || []) {
+    if (part.function_call) addCall(part.function_call);
+    else if (part.function_response) addResponse(part.function_response);
+    else if (part.text && part.text.trim() && ev.author !== "user") {
+      $("steps").insertAdjacentHTML("beforeend",
+        `<div class="step"><span class="kind">agent</span><div class="note">${esc(part.text)}</div></div>`);
+    }
+  }
+  if (ev.error_message) {
+    $("steps").insertAdjacentHTML("beforeend",
+      `<div class="step"><div class="why blocked">${esc(ev.error_code || "")} ${esc(ev.error_message)}</div></div>`);
+  }
+  const u = ev.usage_metadata;
+  if (u) {
+    tokens.input += u.prompt_token_count || 0;
+    tokens.output += (u.candidates_token_count || 0) + (u.thoughts_token_count || 0);
+  }
+}
+
+// --- decision pane ----------------------------------------------------------
+function renderResult(msg) {
+  const r = msg.result;
+  const s = msg.score;
+  const reasoning = r.reasoning || {};
+  const list = (title, items) => items && items.length
+    ? `<div class="k">${title}</div><ul class="tight">${items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>` : "";
+  const esc8 = (r.actions || []).find((a) => a.tool === "escalate" && a.status === "approved");
+  $("decision").innerHTML = `
+    <div class="card"><div class="k">Next move</div>
+      <div class="move ${esc(r.next_move)}">${esc(r.next_move || "no decision")}</div>
+      <div class="note">${esc(r.summary)}</div>
+      ${r.answer_to_question ? `<div class="k">Answer</div><div class="note">${esc(r.answer_to_question)}</div>` : ""}
+      ${r.error ? `<div class="why blocked">${esc(r.error)}</div>` : ""}</div>
+    <div class="card"><div class="k">Against the label</div>
+      <div class="score"><span class="pill ${s.move_ok ? "pass" : "fail"}">${s.move_ok ? "right move" : "wrong move"}</span>
+        <span>expected <b>${esc(s.expected_move)}</b>${s.acceptable_moves.length ? ` (or ${esc(s.acceptable_moves.join(", "))})` : ""}, got <b>${esc(s.next_move)}</b></span></div>
+      ${s.critical ? `<div class="why blocked">A prohibited action was approved.</div>` : ""}
+      ${s.missing_required.length ? `<div class="why held">Missing required: ${esc(s.missing_required.map((p) => p.tool).join(", "))}</div>` : ""}</div>
+    ${esc8 ? `<div class="card"><div class="k">Handover note</div>${handoverHtml(esc8.args.handover_note || {})}</div>` : ""}
+    <div class="card">${list("Facts", reasoning.facts)}${list("Conflicts", reasoning.conflicts)}
+      ${list("Missing", reasoning.missing)}${list("Options rejected", reasoning.options_rejected)}
+      ${reasoning.uncertainty ? `<div class="k">Uncertainty</div><div class="note">${esc(reasoning.uncertainty)}</div>` : ""}</div>
+    <div class="stats">${msg.recorded ? "Recorded run" : "Live run"} · ${esc(msg.source)}<br>
+      $${(r.cost_usd ?? 0).toFixed(4)} · ${(r.latency_s ?? 0).toFixed(1)} s ·
+      ${(r.tokens?.input ?? tokens.input).toLocaleString()} input / ${(r.tokens?.output ?? tokens.output).toLocaleString()} output tokens
+      ${msg.phoenix ? `<br><a href="${esc(msg.phoenix)}" target="_blank">View trace in Phoenix ↗</a>` : ""}</div>`;
+  light("n-agent", r.next_move ? "ok" : "blocked");
+  revealCase(caseData);
+}
+
+// --- runs, replays and probes -------------------------------------------------
+async function run(id, mode) {
+  const mine = resetRun(mode === "live"
+    ? `<span class="status"><span class="spin"></span>live run</span>`
+    : `<span class="status"><span class="spin"></span>replay</span> <button id="skip">skip to end</button>`);
+  if ($("skip")) $("skip").onclick = () => (skip = true);
+  const resp = await fetch(`/api/run/${encodeURIComponent(id)}?mode=${mode}`, { method: "POST" });
+  const reader = resp.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "";
+  let last = null;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done || mine !== session) break;
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split("\n");
+    buffer = lines.pop();
+    for (const line of lines) {
+      if (!line.trim()) continue;
+      const msg = JSON.parse(line);
+      if (mode === "replay" && msg.type === "event" && !skip) {
+        const t = msg.event.timestamp;
+        if (last !== null && t > last) await sleep(Math.min(t - last, REPLAY_GAP_S) * 1000);
+        last = t;
+      }
+      if (mine !== session) return;
+      handle(msg);
+    }
+  }
+  if (mine === session) $("run-ctl").innerHTML = `<span class="status">${mode === "live" ? "live run" : "replay"} finished</span>`;
+}
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+function handle(msg) {
+  if (msg.type === "case") renderCase(msg.case);
+  else if (msg.type === "event") addEvent(msg.event);
+  else if (msg.type === "result") renderResult(msg);
+  else if (msg.type === "error") $("steps").insertAdjacentHTML("beforeend",
+    `<div class="step"><div class="why blocked">${esc(msg.error)}</div></div>`);
+}
+
+async function probe(id) {
+  resetRun(`<span class="status">gateway probe · ${gatewayMode}</span>`);
+  const data = await (await fetch(`/api/probe/${id}?gateway=${gatewayMode}`, { method: "POST" })).json();
+  renderCase(data.case);
+  for (const step of data.steps) {
+    await sleep(500);
+    const el = document.createElement("div");
+    el.className = "step action";
+    el.innerHTML = `<div class="head"><span class="kind">probe action</span><span class="tool">${esc(step.tool)}</span>
+      <span class="verdict pending">at the gateway…</span></div>${actionBody(step.tool, step.args)}`;
+    $("steps").append(el);
+    pulse("n-action"); light("n-gateway", "active");
+    await sleep(700);
+    const observed = step.status !== step.would_status
+      ? `<b>Observe mode:</b> approved, but in enforce mode it would have been
+         <b>${esc(VERDICT_TEXT[step.would_status])}</b> by ${esc(step.rule)}: ${esc(step.reason)}`
+      : null;
+    setVerdict(el, step.status, step.status === "approved" ? null : step, step.tool, observed);
+  }
+  const caught = data.steps.find((s) => s.would_status !== "approved");
+  $("decision").innerHTML = `<div class="card"><div class="k">Gateway probe ${esc(data.probe)}</div>
+    <h3>${esc(data.title)}</h3>
+    <div class="note">Sent straight to the real action gateway on case ${esc(data.case.id)}, with no agent involved, in <b>${esc(gatewayMode)}</b> mode.</div>
+    ${caught ? `<div class="k">Rule</div><div class="note"><b>${esc(caught.rule)}</b>: ${esc(caught.reason)}</div>` : ""}
+    <div class="k">Without the gateway</div><div class="note">${gatewayMode === "observe"
+      ? "Observe mode is the gateway switched to watch only: the unsafe action went through."
+      : "Switch to observe to see the same action go through."}</div></div>`;
+  $("run-ctl").innerHTML = `<span class="status">gateway probe · ${gatewayMode} · done</span>`;
+}
+
+loadPresets();
+</script>
+</body>
+</html>

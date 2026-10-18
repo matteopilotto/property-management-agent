@@ -69,6 +69,10 @@ _Avoid_: Ground truth, label, expected answer
 A concrete side effect the system proposes, such as sending a message, booking a contractor or escalating to the property manager.
 _Avoid_: Tool call, step, task
 
+**Lookup**:
+A read-only look at the case, such as reading its events or an attachment. A lookup changes nothing, so it does not pass through the action gateway.
+_Avoid_: Tool call, query, read action
+
 **Action Gateway**:
 The single checkpoint every action passes through, which approves, blocks or holds it for human approval according to agency policy.
 _Avoid_: Guard, gate, filter, middleware
@@ -82,6 +86,14 @@ _Avoid_: Summary, escalation message
 **Holdout**:
 The ten public cases listed in `docs/holdout.md`, kept unseen during building and opened only for the dress rehearsal.
 _Avoid_: Test set, validation set
+
+**Replay**:
+Showing a recorded run of the system step by step, exactly as it happened.
+_Avoid_: Mock, simulation, example run
+
+**Gateway Probe**:
+An action a person submits straight to the action gateway, without the system proposing it, to show how agency policy responds.
+_Avoid_: Test action, fake action
 
 **Reality Test**:
 The unseen escalation cases released after the code freeze, run unattended by the frozen system.

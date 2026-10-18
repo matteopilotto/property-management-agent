@@ -33,7 +33,8 @@ Run the full eval twice and report the lower run.
 ## 3. Non-goals for v1
 
 Voice, A2A, MCP servers, vector stores or retrieval, multi-agent pipelines, a custom web UI,
-real outbound messaging. Do not add them.
+real outbound messaging. Do not add them. The one exception, added after the freeze, is the
+demo console of ticket 14 (`pm-agent demo`), which leaves the agent, tools and gateway unchanged.
 
 ## 4. Data facts the code must respect
 
@@ -206,6 +207,8 @@ Limits: 30 tool calls per case (enforced in the callback), 240 s wall clock per 
   agent), `ledger.jsonl`, `trace.jsonl` (ADK events) and `result.json`.
 - `uv run pm-agent eval --run-id <id> [--gateway ...] [--only <dp_id>...]`: runs every
   decision point in `eval/decision_points/` in `eval` mode into `runs/<id>/<dp_id>/`.
+- `uv run pm-agent demo [--host 127.0.0.1] [--port 8000]`: the demo console (ticket 14):
+  live runs into `runs/demo/<dp_id>-<time>/`, replays and gateway probes.
 - `result.json`: see §9.1. Cost uses price constants in code with a source comment.
 - A crash, timeout or limit hit still writes all files, with `ANSWER.md` reading
   "Escalated: system failure", the error, and the ledger so far.
