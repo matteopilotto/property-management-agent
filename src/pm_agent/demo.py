@@ -10,6 +10,7 @@ from pathlib import Path
 import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse, StreamingResponse
+from opentelemetry import trace
 
 from . import scoring
 from .board import phoenix_url
@@ -17,7 +18,7 @@ from .case import load_case, view
 from .gateway import ActionGateway
 from .ledger import Ledger
 from .run import DECISION_POINTS, RUNS, case_path, run_case
-from .telemetry import phoenix_running
+from .telemetry import phoenix_running, setup_tracing
 
 PRESSURE_POINTS = Path("eval/pressure/decision_points")
 DEMO_RUNS = RUNS / "demo"
@@ -348,6 +349,9 @@ def _line(kind: str, **fields) -> str:
 
 
 async def _live(point: dict):
+    # Phoenix may start after the server, so retry until a provider is registered.
+    if isinstance(trace.get_tracer_provider(), trace.ProxyTracerProvider):
+        setup_tracing()
     yield _line("case", case=case_payload(point), mode="live")
     queue: asyncio.Queue = asyncio.Queue()
     out = DEMO_RUNS / f"{point['id']}-{time.strftime('%Y%m%d-%H%M%S')}"

@@ -348,6 +348,5 @@ def main(argv: list[str] | None = None) -> None:
     if args.command == "demo":
         from pm_agent import demo
 
-        setup_tracing()
         raise SystemExit(demo.cli(args.host, args.port))
     print(f"{args.command}: not implemented")

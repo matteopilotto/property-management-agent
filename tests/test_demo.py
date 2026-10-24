@@ -21,6 +21,7 @@ def client(tmp_path, monkeypatch):
     monkeypatch.setattr(demo, "DEMO_RUNS", tmp_path / "demo")
     stub_agent = root_agent.clone(update={"model": CaseStub()})
     monkeypatch.setattr(demo, "run_case", functools.partial(run_case, agent=stub_agent))
+    monkeypatch.setattr(demo, "setup_tracing", lambda: None)
     return TestClient(demo.app)
 
 
@@ -94,6 +95,17 @@ def test_a_live_run_streams_its_events_and_replays_the_same_way(client):
         "submit_decision",
     ]
     assert live[-1]["recorded"] is False and replay[-1]["recorded"] is True
+
+
+def test_each_live_run_retries_tracing_while_none_is_registered(client, monkeypatch):
+    """Phoenix may come up after the demo server; the next live run picks it up."""
+    attempts = []
+    monkeypatch.setattr(demo, "setup_tracing", lambda: attempts.append(1))
+
+    client.post("/api/run/PM-004-a?mode=live")
+    client.post("/api/run/PM-004-a?mode=live")
+
+    assert len(attempts) == 2
 
 
 def test_a_replay_without_a_recording_reports_it(client):
