@@ -179,8 +179,8 @@ Full numbers, disclosures and the bugs the eval caught are in
 
 ## Branches and tags
 
-- `capstone`: this project.
-- `main`: the untouched starting repo.
+- `main`: this project.
+- `starting-repo`: the untouched starting repo.
 - `reality-test`, `reconstruction`: the unseen cases and other teams' answers, kept apart so
   they could not leak into the build.
 - Tags: `freeze` is the code that ran the holdout and Reality Test. `results` is the committed

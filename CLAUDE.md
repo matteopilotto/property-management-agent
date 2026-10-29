@@ -21,9 +21,9 @@ commands here in that same commit):
 
 ## Git workflow
 
-- Branch off `capstone` as `<type>/<short-kebab-summary>` using Conventional Commit types
+- Branch off `main` as `<type>/<short-kebab-summary>` using Conventional Commit types
   (`feat/`, `fix/`, `docs/`, `refactor/`, `perf/`, `test/`, `chore/`), and merge back
-  into `capstone`. `main` stays the untouched starting repo.
+  into `main`. `starting-repo` stays the untouched starting repo.
 - One task, one commit, immediately: implement, pass the gates, commit with a
   Conventional Commit message, then start the next task. An interrupted session then
   leaves finished work committed, and the message is written while the reasoning is fresh.
@@ -33,7 +33,7 @@ commands here in that same commit):
   sending.
 - Run every gate before opening a PR and before ending a session.
 - API keys live in the gitignored `.env`; code and docs refer to them by variable name.
-- Build only from material on `main`. The `reality-test` and `reconstruction` branches and
+- Build only from material on `starting-repo`. The `reality-test` and `reconstruction` branches and
   the local-only `teams/` clones hold the unseen cases and other teams' answers; open them
   only after the user says the code is frozen.
 - Property Management cases listed in `docs/holdout.md` are the holdout: build, design and

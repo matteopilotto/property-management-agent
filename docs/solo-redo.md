@@ -7,7 +7,7 @@ The official rules assume a team of 2–5 on a fixed day. Team size, registratio
 1. Pick a track.
 2. Read [`rules.md`](rules.md), then [`hacker-guide.md`](hacker-guide.md), then the [public cases README](../HackatonPublicCases/README.md).
 3. Skim [`kickoff-transcript.md`](kickoff-transcript.md). It's an automatic transcript, and "Core 30" means 16:30.
-4. Create your working branch from `main`, e.g. `git switch -c solution`.
+4. Create your working branch from `starting-repo`, e.g. `git switch -c solution`.
 
 ## 2. The clock
 

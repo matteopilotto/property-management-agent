@@ -1,6 +1,6 @@
 # Real-World Agents Hackathon: starting repo
 
-> This was the README of `main`, the untouched starting repo. The project built on it is described in the [root README](../README.md).
+> This was the README of `starting-repo`, the untouched starting repo. The project built on it is described in the [root README](../README.md).
 
 This is the material participants had when building began at 10:00 on Saturday 10 October 2026, at the Dwelly London AI Hackathon ("AI Transformation of Services"). It is reconstructed so the hackathon can be redone solo.
 
@@ -55,5 +55,5 @@ Claude-based judging agents score submissions against the framework, and human j
 
 ## Branches
 
-- `main` is your starting point. Develop on your own branch from here.
+- `starting-repo` is your starting point. Develop on your own branch from here.
 - `reality-test` holds the unseen cases and material for evaluating afterwards. **Don't open it until your code is frozen.** [`docs/solo-redo.md`](solo-redo.md) explains how to pull in only the cases at "16:30".
