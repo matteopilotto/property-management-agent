@@ -187,3 +187,21 @@ Full numbers, disclosures and the bugs the eval caught are in
 The unseen Reality Test cases and other teams' answers were kept off these branches until the
 code was frozen, so they could not leak into the build. After the freeze, only the agent's
 answers were committed, in `ANSWERS/`, each with the case text exactly as the agent saw it.
+
+## Data and licence
+
+The code, eval, reports and the agent's answers are released under the Apache License 2.0,
+see [LICENSE](LICENSE).
+
+The hackathon material belongs to Dwelly, the organiser, and to the event's speakers, not to
+me. It is included only so the results can be reproduced. The organisers describe the cases as
+synthetic: made-up but realistic. The material is:
+
+- the 200 practice cases in [HackatonPublicCases/](HackatonPublicCases/);
+- the Reality Test case text in `ANSWERS/*/input.md`, and wherever the agent quotes it;
+- the rules, hacker guide and kickoff transcript in [docs/](docs/), and
+  [submission-template/](submission-template/);
+- the ElevenLabs guide in [docs/elevenlabs-guide.md](docs/elevenlabs-guide.md), which is
+  ElevenLabs'.
+
+The Apache licence does not cover any of this material.
