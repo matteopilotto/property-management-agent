@@ -181,7 +181,9 @@ Full numbers, disclosures and the bugs the eval caught are in
 
 - `main`: this project.
 - `starting-repo`: the untouched starting repo.
-- `reality-test`, `reconstruction`: the unseen cases and other teams' answers, kept apart so
-  they could not leak into the build.
 - Tags: `freeze` is the code that ran the holdout and Reality Test. `results` is the committed
   `ANSWERS/`.
+
+The unseen Reality Test cases and other teams' answers were kept off these branches until the
+code was frozen, so they could not leak into the build. After the freeze, only the agent's
+answers were committed, in `ANSWERS/`, each with the case text exactly as the agent saw it.

@@ -33,9 +33,9 @@ commands here in that same commit):
   sending.
 - Run every gate before opening a PR and before ending a session.
 - API keys live in the gitignored `.env`; code and docs refer to them by variable name.
-- Build only from material on `starting-repo`. The `reality-test` and `reconstruction` branches and
-  the local-only `teams/` clones hold the unseen cases and other teams' answers; open them
-  only after the user says the code is frozen.
+- Build only from material on `starting-repo`. The unseen cases and other teams' answers live on
+  the `reality-test` and `reconstruction` branches of the private `dwelly-hackathon` repo and
+  in the local-only `teams/` clones; open them only after the user says the code is frozen.
 - Property Management cases listed in `docs/holdout.md` are the holdout: build, design and
   debug against the other 40, and open these only to run the dress rehearsal.
 
